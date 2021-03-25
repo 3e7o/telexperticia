@@ -67,11 +67,18 @@ class MedicalBoardController extends Controller
 
         $validated = $request->validated();
 
+        $doctorsSelected = explode(',', $validated['doctors_id'][0]);
+
+        $someDoctorIsNotAvailable = $this->validateDoctorsAvailable($validated, $doctorsSelected);
+        if ($someDoctorIsNotAvailable['areNotAvailabe']) {
+            return back()
+                ->with(compact('doctorsSelected'))
+                ->withInput()
+                ->withError("El Doctor {$someDoctorIsNotAvailable['name']} no esta disponible para el horario de esta junta.");
+        }
+
         $medicalBoard = MedicalBoard::create($validated);
-
-        $doctors_id = explode(',', $validated['doctors_id'][0]);
-
-        $medicalBoard->doctorsSupervisors()->sync($doctors_id);
+        $medicalBoard->doctorsSupervisors()->sync($doctorsSelected);
 
         return redirect()
             ->route('medical-boards.edit', $medicalBoard)
@@ -128,11 +135,20 @@ class MedicalBoardController extends Controller
 
         $validated = $request->validated();
 
+        $doctorsSelected = explode(',', $validated['doctors_id'][0]);
+
+        $someDoctorIsNotAvailable = $this->validateDoctorsAvailable($validated, $doctorsSelected, $medicalBoard->id);
+
+        if ($someDoctorIsNotAvailable['areNotAvailabe']) {
+            return back()
+                ->with(compact('doctorsSelected'))
+                ->withInput()
+                ->withError("El Doctor {$someDoctorIsNotAvailable['name']} no esta disponible para el horario de esta junta.");
+        }
+
         $medicalBoard->update($validated);
 
-        $doctors_id = explode(',', $validated['doctors_id'][0]);
-
-        $medicalBoard->doctorsSupervisors()->sync($doctors_id);
+        $medicalBoard->doctorsSupervisors()->sync($doctorsSelected);
 
         return redirect()
             ->route('medical-boards.edit', $medicalBoard)
@@ -153,5 +169,13 @@ class MedicalBoardController extends Controller
         return redirect()
             ->route('medical-boards.index')
             ->withSuccess(__('crud.common.removed'));
+    }
+    protected function validateDoctorsAvailable($validated, $doctorsSelected, $medicalBoardId = null)
+    {
+        $doctors_id = array_merge([$validated['doctor_id']], $doctorsSelected);
+
+        $date = $validated['date'];
+
+        return MedicalBoard::areDoctorsAvailable($doctors_id, $date, $medicalBoardId);
     }
 }

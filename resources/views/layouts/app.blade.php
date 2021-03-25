@@ -49,6 +49,13 @@
     </script>
     @endif
 
+    @if (session()->has('error'))
+    <script>
+        const notyf = new Notyf({dismissible: true, duration: 10000})
+        notyf.error('{{ session('error') }}')
+    </script>
+    @endif
+
     <script>
         /* Simple function to retrieve data url from file */
         function fileToDataUrl(event, callback) {

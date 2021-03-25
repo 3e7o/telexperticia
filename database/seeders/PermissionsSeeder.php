@@ -67,7 +67,7 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'view users', 'description' => 'Ve en detalle cada  usuario']);
         Permission::create(['name' => 'create users', 'description' => 'Podría crear a un usuario']);
         Permission::create(['name' => 'update users', 'description' => 'Podría editar cualquier dato de usuario']);
-        Permission::create(['name' => 'delete users', 'description' => 'Podría eliminar cualquier usuario']);      
+        Permission::create(['name' => 'delete users', 'description' => 'Podría eliminar cualquier usuario']);
 
         // Create admin role and assign all permissions
         $allPermissions = Permission::all();

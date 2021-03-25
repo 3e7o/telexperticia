@@ -41,7 +41,8 @@
     </x-inputs.group>
 
     <div class="col-sm-12 col-lg-12">
+        @php $selected = old('doctors_id', ($editing ? $doctorsSelected : '')) @endphp
+        @php $selected = !$editing && is_array($selected) ? explode(',', $selected[0]) : $doctorsSelected @endphp
         <label class="label label-required" for="doctors">Médicos Participantes</label>
-        <multi-select doctors="{{ json_encode($doctors, true) }}" doctors-selected="{{ json_encode($doctorsSelected) }}"></multi-select>
-    </div>
+        <multi-select doctors="{{ json_encode($doctors, true) }}" doctors-selected="{{ json_encode($selected) }}"></multi-select>    </div>
 </div>

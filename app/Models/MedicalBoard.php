@@ -101,5 +101,35 @@ class MedicalBoard extends Model
                 $query->where('medical_boards.patient_id', $patientId);
             });
     }
+    public static function areDoctorsAvailable ($doctors_id, $date, $medicalBoardId = null)
+    {
+        $doctor = [];
+        $doctor['areNotAvailabe'] = false;
+        foreach ($doctors_id as $doctor_id) {
+            $doctor_temp = Doctor::find($doctor_id);
+            $dates_1 = $doctor_temp->medicalBoardsOwner()
+                ->when($medicalBoardId, function ($query) use ($medicalBoardId) {
+                    $query->where('id', '<>', $medicalBoardId);
+                })
+                ->pluck('date');
+            $dates_2 = $doctor_temp->medicalBoardsSupervisor()
+                ->when($medicalBoardId, function ($query) use ($medicalBoardId) {
+                    $query->where('id', '<>', $medicalBoardId);
+                })
+                ->pluck('date');
+            $dates = $dates_1->merge($dates_2);
+            $date = Carbon::parse($date);
+            foreach ($dates as $start) {
+                $end = (clone $start)->addMinutes(30);
+                if ($date->between($start,$end)) {
+                    $doctor['areNotAvailabe'] = true;
+                    $doctor['name'] = $doctor_temp->fullName;
+                    break;
+                }
+            }
+            if ($doctor['areNotAvailabe']) break;
+        }
+        return $doctor;
+    }
 
 }
