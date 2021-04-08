@@ -28,9 +28,9 @@ class MedicalBoardController extends Controller
             ->select('medical_boards.*')
             ->paginate(7);
 
-          // $medicalBoards = MedicalBoard::search($search)
-          //   ->latest()
-          //   ->paginate(7);
+        $medicalBoards = MedicalBoard::search($search)
+           ->latest()
+           ->paginate(7);
 
 
         return view(

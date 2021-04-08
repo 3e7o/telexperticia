@@ -29,7 +29,7 @@
                             <a class="dropdown-item" href="{{ route('specialties.index') }}">Especialidades</a>
                             @endcan
                             @can('view-any', App\Models\Doctor::class)
-                            <a class="dropdown-item" href="{{ route('doctors.index') }}">Doctores</a>
+                            <a class="dropdown-item" href="{{ route('doctors.index') }}">Médicos</a>
                             @endcan
                             @can('view-any', App\Models\Patient::class)
                             <a class="dropdown-item" href="{{ route('patients.index') }}">Pacientes</a>

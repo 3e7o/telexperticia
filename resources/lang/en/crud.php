@@ -27,11 +27,11 @@ return [
     ],
 
     'doctores' => [
-        'name' => 'Doctores',
-        'index_title' => 'Lista de Doctores',
-        'create_title' => 'Crear Doctor',
-        'edit_title' => 'Editar Doctor',
-        'show_title' => 'Ver Doctor',
+        'name' => '',
+        'index_title' => 'Lista de Médicos',
+        'create_title' => 'Crear Médico',
+        'edit_title' => 'Editar Médico',
+        'show_title' => 'Ver Médico',
         'inputs' => [
             'ci' => 'Cédula de Identidad',
             'name' => 'Nombres',

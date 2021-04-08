@@ -10,6 +10,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\MedicalBoardController;
+use PHPUnit\Framework\MockObject\Rule\Parameters;
 
 /*
 |--------------------------------------------------------------------------

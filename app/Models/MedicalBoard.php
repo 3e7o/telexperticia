@@ -18,8 +18,6 @@ class MedicalBoard extends Model
 
     protected $fillable = ['date', 'status', 'patient_id', 'doctor_id'];
 
-    protected $searchableFields = ['*'];
-
     protected $table = 'medical_boards';
 
     protected $casts = [
@@ -30,6 +28,8 @@ class MedicalBoard extends Model
         'code',
         'identification'
     ];
+
+    protected $searchableFields = ['*'];
 
     protected static function boot() :void
     {

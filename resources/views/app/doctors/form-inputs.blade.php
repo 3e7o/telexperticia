@@ -8,7 +8,7 @@
             value="{{ old('ci', ($editing ? $doctor->ci : '')) }}"
             minlength="5"
             maxlength="255"
-            required
+
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -18,7 +18,7 @@
             label="Nombres"
             value="{{ old('name', ($editing ? $doctor->name : '')) }}"
             maxlength="255"
-            required
+
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -29,7 +29,7 @@
             value="{{ old('first_surname', ($editing ? $doctor->first_surname : '')) }}"
             minlength="3"
             maxlength="255"
-            required
+
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -39,7 +39,7 @@
             label="Apellido Materno"
             value="{{ old('last_surname', ($editing ? $doctor->last_surname : '')) }}"
             maxlength="255"
-            required
+
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -49,7 +49,7 @@
             label="Email"
             value="{{ old('email', ($editing ? $doctor->email : '')) }}"
             maxlength="255"
-            required
+
         ></x-inputs.email>
     </x-inputs.group>
 
@@ -59,12 +59,12 @@
             label="Teléfono"
             value="{{ old('phone', ($editing ? $doctor->phone : '')) }}"
             maxlength="255"
-            required
+
         ></x-inputs.text>
     </x-inputs.group> --}}
 
     <x-inputs.group class="col-sm-12">
-        <x-inputs.select name="specialty_id" label="Especialidad" required>
+        <x-inputs.select name="specialty_id" label="Especialidad" >
             @php $selected = old('specialty_id', ($editing ? $doctor->specialty_id : '')) @endphp
             <option disabled {{ empty($selected) ? 'selected' : '' }}>Seleccione especialidades</option>
             @foreach($specialties as $value => $label)

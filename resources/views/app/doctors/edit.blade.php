@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Editar Medico')
+
 @section('content')
 <div class="container">
     <div class="card">
@@ -16,6 +18,7 @@
                 action="{{ route('doctors.update', $doctor) }}"
                 class="mt-4"
             >
+                @csrf
                 @include('app.doctors.form-inputs')
 
                 <div class="mt-4">

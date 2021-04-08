@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Crear Junta Médica')
+
 @section('content')
 <div class="container">
     <div class="card">
