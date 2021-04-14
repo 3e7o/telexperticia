@@ -1,13 +1,8 @@
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
+
 require('./bootstrap');
 
-window.Vue = require('vue').default;
-
-import vSelect from 'vue-select';
-Vue.component('v-select', vSelect);
-import 'vue-select/dist/vue-select.css';
-
-Vue.component('multi-select', require('./components/MultiSelect.vue').default);
-
-const app = new Vue({
-    el: '#app',
-});

@@ -23,7 +23,7 @@ class UserController extends Controller
 
         $users = User::search($search)
             ->latest()
-            ->paginate(7);
+            ->paginate(0);
 
         return view('app.users.index', compact('users', 'search'));
     }

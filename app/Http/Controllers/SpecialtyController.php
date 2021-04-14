@@ -21,7 +21,7 @@ class SpecialtyController extends Controller
 
         $specialties = Specialty::search($search)
             ->latest()
-            ->paginate(7);
+            ->paginate(0);
 
         return view('app.specialties.index', compact('specialties', 'search'));
     }

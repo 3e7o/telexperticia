@@ -26,7 +26,7 @@ class ReportController extends Controller
             ->groupBy('id')
             ->orderBy('reports.id', 'DESC')
             ->select('reports.*')
-            ->paginate(7);
+            ->paginate(0);
 
         return view('app.reports.index', compact('reports', 'search'));
     }

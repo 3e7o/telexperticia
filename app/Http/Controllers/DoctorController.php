@@ -22,7 +22,7 @@ class DoctorController extends Controller
 
         $doctors = Doctor::search($search)
             ->latest()
-            ->paginate(7);
+            ->paginate(0);
 
         return view('app.doctors.index', compact('doctors', 'search'));
     }

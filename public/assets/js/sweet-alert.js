@@ -49,6 +49,8 @@ $(function() {
         timer: 1500
       })
     } else if (type === 'passing-parameter-execute-cancel') {
+		$('form #btn-ok').click(function(e) {
+        let $form = $(this).closest('form');
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
           confirmButton: 'btn btn-success',
@@ -58,32 +60,35 @@ $(function() {
       })
       
       swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
+        title: '¿Esta seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'advertencia',
         showCancelButton: true,
         confirmButtonClass: 'ml-2',
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
+        confirmButtonText: 'Confirmar',
+        cancelButtonText: 'Cancelar',
         reverseButtons: true
       }).then((result) => {
         if (result.value) {
           swalWithBootstrapButtons.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          )
+            'Eliminado!',
+            'Eliminado con éxito',
+            'success',
+          );
+		  $form.submit();
         } else if (
           // Read more about handling dismissals
           result.dismiss === Swal.DismissReason.cancel
         ) {
           swalWithBootstrapButtons.fire(
-            'Cancelled',
-            'Your imaginary file is safe :)',
-            'error'
-          )
+            'Cancelado'
+          );
+		  
         }
-      })
+		 
+      });
+		});
+	  
     } else if (type === 'message-with-auto-close') {
       let timerInterval
       Swal.fire({

@@ -26,11 +26,11 @@ class MedicalBoardController extends Controller
             ->groupBy('id')
             ->orderBy('medical_boards.id', 'DESC')
             ->select('medical_boards.*')
-            ->paginate(7);
+            ->paginate(0);
 
         $medicalBoards = MedicalBoard::search($search)
            ->latest()
-           ->paginate(7);
+           ->paginate(0);
 
 
         return view(
