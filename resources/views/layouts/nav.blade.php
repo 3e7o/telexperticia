@@ -46,7 +46,7 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             @can('view-any', App\Models\MedicalBoard::class)
-                            <a class="dropdown-item" href="{{ route('medical-boards.index') }}">Juntas Médicas</a>
+                            <a class="dropdown-item" href="{{ route('medical-boards.index') }}">Juntas</a>
                             @endcan
                             @can('view-any', App\Models\Report::class)
                             <a class="dropdown-item" href="{{ route('reports.index') }}">Informes</a>
