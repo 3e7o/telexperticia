@@ -92,7 +92,7 @@ class PatientController extends Controller
         $patient->update($validated);
 
         return redirect()
-            ->route('patients.edit', $patient)
+            ->route('patients.index')
             ->withSuccess(__('crud.common.saved'));
     }
 

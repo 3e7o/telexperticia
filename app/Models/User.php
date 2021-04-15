@@ -69,6 +69,7 @@ class User extends Authenticatable
             ->create([
                 'name' => $user->name,
                 'email' => $user->email,
+                'username' => $user->username,
                 'password' => bcrypt($password)
             ]);
 
@@ -98,6 +99,7 @@ class User extends Authenticatable
         User::where('id', $user->user_id)
             ->update([
                 'name' => $user->name,
+                'username' => $user->username,
                 'email' => $user->email
             ]);
     }

@@ -53,7 +53,7 @@ class DoctorController extends Controller
         $doctor = Doctor::create($validated);
 
         return redirect()
-            ->route('doctors.edit', $doctor)
+            ->route('doctors.index')
             ->withSuccess(__('crud.common.created'));
     }
 

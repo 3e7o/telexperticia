@@ -4,7 +4,6 @@
     <x-inputs.group class="col-sm-12">
         <x-inputs.text
             name="name"
-            label="Especialidad"
             value="{{ old('name', ($editing ? $specialty->name : '')) }}"
             minlength="5"
             maxlength="255"

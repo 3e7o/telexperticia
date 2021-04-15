@@ -9,17 +9,18 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
-		"barryvdh/laravel-dompdf": "^0.9.0",
+        "barryvdh/laravel-dompdf": "^0.9.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
-		"laravel/sanctum": "^2.9",
         "laravel/legacy-factories": "^1.1",
-		"laravel/ui": "^3.0",
-		"laraveles/spanish": "^1.5",
+        "laravel/sanctum": "^2.9",
         "laravel/tinker": "^2.5",
-		"spatie/laravel-permission": "^3.17"
+        "laravel/ui": "^3.0",
+        "laravelcollective/html": "^6.2",
+        "laraveles/spanish": "^1.5",
+        "spatie/laravel-permission": "^3.17"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

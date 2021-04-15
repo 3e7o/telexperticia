@@ -20,12 +20,13 @@ class UserController extends Controller
         $this->authorize('view-any', User::class);
 
         $search = $request->get('search', '');
+        $roles = Role::get();
 
         $users = User::search($search)
             ->latest()
             ->paginate(0);
 
-        return view('app.users.index', compact('users', 'search'));
+        return view('app.users.index', compact('users', 'search','roles'));
     }
 
     /**
@@ -58,7 +59,7 @@ class UserController extends Controller
         $user->syncRoles($request->roles);
 
         return redirect()
-            ->route('users.edit', $user)
+            ->route('users.index')
             ->withSuccess(__('crud.common.created'));
     }
 

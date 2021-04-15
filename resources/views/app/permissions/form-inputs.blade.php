@@ -15,18 +15,23 @@
     </x-inputs.group>
 
     <div class="form-group col-sm-12 mt-4">
-        <h4>Asignar a @lang('crud.roles.name')</h4>
+        <h4 class="card-title">Asignar a @lang('crud.roles.name')</h4>
 
         @foreach ($roles as $role)
         <div>
-            <x-inputs.checkbox
-                id="role{{ $role->id }}"
-                name="roles[]"
-                label="{{ ucfirst($role->name) }}"
-                value="{{ $role->id }}"
-                :checked="isset($permission) ? $role->hasPermissionTo($permission) : false"
-                :add-hidden-value="false"
-            ></x-inputs.checkbox>
+            <div class="form-check">
+                <label class="form-check-label">
+                     <input
+                        id="role{{ $role->id }}"
+                        name="roles[]"
+                        type="checkbox"
+                        value="{{ $role->id }}"
+                        class="form-check-input"
+                        <?php if(isset($permission) and $role->hasPermissionTo($permission)){ echo "checked";}?>
+                    >
+                  {{ ucfirst($role->name) }}
+                </label>
+              </div>
         </div>
         @endforeach
     </div>

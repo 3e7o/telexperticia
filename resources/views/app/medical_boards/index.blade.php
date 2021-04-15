@@ -1,44 +1,23 @@
 @extends('layout.master')
-
 @section('title', 'Juntas Médicas')
 
-@section('content')
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <div style="display: flex; justify-content: space-between;">
-                <h4 class="card-title">
-                    @lang('crud.juntas_medicas.index_title')
-                </h4>
-            </div>
+@push('plugin-styles')
+  <link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
+@endpush
 
-            <div class="searchbar mt-4 mb-5">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form>
-                            <div class="input-group">
-                                <input
-                                    id="indexSearch"
-                                    type="text"
-                                    name="search"
-                                    placeholder="{{ __('crud.common.search') }}"
-                                    value="{{ $search ?? '' }}"
-                                    class="form-control"
-                                    autocomplete="off"
-                                />
-                                <div class="input-group-append">
-                                    <button
-                                        type="submit"
-                                        class="btn btn-primary"
-                                    >
-                                        <i class="icon ion-md-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-6 text-right">
+@section('content')
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+                <div>
+                  <h4 class="mb-3 mb-md-0">@lang('crud.juntas_medicas.index_title')</h4>
+                </div>
                         @can('create', App\Models\MedicalBoard::class)
+                        <div class="d-flex align-items-center flex-wrap text-nowrap">
                         <a
                             href="{{ route('medical-boards.create') }}"
                             class="btn btn-primary"
@@ -46,59 +25,40 @@
                             <i class="icon ion-md-add"></i>
                             @lang('crud.common.create')
                         </a>
+                        </div>
                         @endcan
                     </div>
-                </div>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-borderless table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                Junta Médica
-                            </th>
-                            <th>
-                                Matrícula
-                            </th>
-                            <th>
-                                @lang('crud.juntas_medicas.inputs.patient_id')
-                            </th>
-                            <th>@lang('crud.juntas_medicas.inputs.status')</th>
-                            @can('view', $medicalBoards)
-                            <th class="text-center">
-                                @lang('crud.common.actions')
-                            </th>
-                            @endcan
-                        </tr>
-                    </thead>
+                    <div class="table-responsive">
+                      <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
+                            <thead>
+                                <tr>
+                                    <th>Junta Médica</th>
+                                    <th>Matrícula</th>
+                                    <th>@lang('crud.juntas_medicas.inputs.patient_id')</th>
+                                    <th>@lang('crud.juntas_medicas.inputs.status')</th>
+                                    @can('view', $medicalBoards)
+                                    <th class="text-center">@lang('crud.common.actions')</th>
+                                    @endcan
+                                </tr>
+                            </thead>
                     <tbody>
                         @forelse($medicalBoards as $medicalBoard)
                         <tr>
-                            <td>
-                                {{ $medicalBoard->code }}
-                            </td>
-                            <td>
-                                {{ optional($medicalBoard->patient->user)->username ?? '-'
-                                }}
-                            </td>
-                            <td>
-                                {{ optional($medicalBoard->patient)->fullName ?? '-'
-                                }}
-                            </td>
-                            <td>
-                                {{ $medicalBoard->status ?? '-' }}
+                            <td>{{ $medicalBoard->code }}</td>
+                            <td>{{ optional($medicalBoard->patient->user)->username ?? '-'}}</td>
+                            <td>{{ optional($medicalBoard->patient)->fullName ?? '-'}}</td>
+                            <td>{{ $medicalBoard->status ?? '-' }}
                                 @if ($medicalBoard->status === 'Programado')
                                     <a
                                         href="{{ $medicalBoard->meet }}"
                                         target="_blank"
                                     >
-                                        <button
-                                            type="button"
-                                            class="btn btn-outline-primary ml-1"
-                                        >
-                                            <i class="icon ion-md-videocam"></i>
-                                        </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-primary btn-icon"
+                                    >
+                                        <i data-feather="video"></i>
+                                    </button>
                                     </a>
                                 @endif
                             </td>
@@ -114,25 +74,34 @@
                                         >
                                             <button
                                                 type="button"
-                                                class="btn btn-outline-success ml-1"
+                                                class="btn btn-primary btn-icon"
                                             >
-                                                <i class="icon ion-md-eye"></i>
+                                                <i data-feather="eye"></i>
                                             </button>
                                         </a>
                                     @endcan
+                                </div>
+
+                                <div
+                                role="group"
+                                aria-label="Row Actions"
+                                class="btn-group"
+                                >
                                     @if ($medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
                                         @can('update', $medicalBoard)
                                             <a
                                                 href="{{ route('medical-boards.edit', $medicalBoard) }}"
                                             >
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-outline-info ml-1"
-                                                >
-                                                    <i class="icon ion-md-create"></i>
-                                                </button>
+                                            <button
+                                                type="button"
+                                                class="btn btn-info btn-icon"
+                                            >
+                                                <i data-feather="edit"></i>
+                                            </button>
                                             </a>
-                                        @endcan @can('delete', $medicalBoard)
+                                        @endcan
+                                    </div>
+                                        @can('delete', $medicalBoard)
                                             {{-- <form
                                                 action="{{ route('medical-boards.destroy', $medicalBoard) }}"
                                                 method="POST"
@@ -148,27 +117,34 @@
                                             </form> --}}
                                         @endcan
                                     @endif
-                                </div>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="3">
-                                @lang('crud.common.no_items_found')
-                            </td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="3">
-                                {!! $medicalBoards->render() !!}
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+                                    </div>
+                                </td>
+
+                            </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="2">
+                                        @lang('crud.common.no_items_found')
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
+          </div>
         </div>
-    </div>
-</div>
-@endsection
+        </div>
+        @endsection
+    @push('plugin-scripts')
+    <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/promise-polyfill/polyfill.min.js') }}"></script>
+    @endpush
+    @push('custom-scripts')
+    <script src="{{ asset('assets/js/data-table.js') }}"></script>
+    <script src="{{ asset('assets/js/sweet-alert.js') }}"></script>
+    @endpush
+

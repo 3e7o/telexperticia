@@ -15,8 +15,9 @@
         <x-inputs.text
             name="username"
             label="Usuario"
-            value="{{ old('username', ($editing ? (optional($user->patient)->matricula) : '')) }}"
+            value="{{ old('username', ($editing ? $user->username ?? (optional($user->patient)->matricula) : '')) }}"
             maxlength="255"
+            required
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -34,25 +35,26 @@
         <x-inputs.password
             name="password"
             label="Contraseña"
+            placeholder="************"
             maxlength="255"
             :required="!$editing"
         ></x-inputs.password>
     </x-inputs.group>
 
-    <div class="form-group col-sm-12 mt-4">
-        <h4>Asignar @lang('crud.roles.name')</h4>
 
-        @foreach ($roles as $role)
-        <div>
-            <x-inputs.checkbox
+    <div class="form-group col-sm-12">
+        <h4 class="card-title">@lang('crud.roles.name')</h4>
+         <select name="roles[]" class="js-example-basic-multiple w-100" multiple="multiple">
+            @foreach ($roles as $role)
+            <div>
+            <option
                 id="role{{ $role->id }}"
-                name="roles[]"
-                label="{{ ucfirst($role->name) }}"
                 value="{{ $role->id }}"
-                :checked="isset($user) ? $user->hasRole($role) : false"
-                :add-hidden-value="false"
-            ></x-inputs.checkbox>
+                <?php if(isset($user) and $user->hasRole($role)){ echo "selected='selected'";}?>
+            >{{ ucfirst($role->name) }}
+            </option>
+            </div>
+            @endforeach
+          </select>
         </div>
-        @endforeach
-    </div>
 </div>

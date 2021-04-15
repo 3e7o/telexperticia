@@ -1,62 +1,32 @@
 @extends('layout.master')
+@section('title', 'Informes')
 
-@section('title', 'Informe')
+@push('plugin-styles')
+  <link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
+@endpush
 
 @section('content')
-<div class="container">
-    <div class="card">
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
         <div class="card-body">
-            <div style="display: flex; justify-content: space-between;">
-                <h4 class="card-title">@lang('crud.informes.index_title')</h4>
-            </div>
-            <div class="searchbar mt-4 mb-5">
-                <div class="row">
-                    <div class="col-md-6">
-                        <form>
-                            <div class="input-group">
-                                <input
-                                    id="indexSearch"
-                                    type="text"
-                                    name="search"
-                                    placeholder="{{ __('crud.common.search') }}"
-                                    value="{{ $search ?? '' }}"
-                                    class="form-control"
-                                    autocomplete="off"
-                                />
-                                <div class="input-group-append">
-                                    <button
-                                        type="submit"
-                                        class="btn btn-primary"
-                                    >
-                                        <i class="icon ion-md-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+            <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+                <div>
+                  <h4 class="mb-3 mb-md-0">@lang('crud.doctores.index_title')</h4>
                 </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-borderless table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                @lang('crud.informes.inputs.medical_board_id')
-                            </th>
-                            <th>
-                                Paciente
-                            </th>
-                            <th>
-                                Especialidad
-                            </th>
-                            <th>
-                                Estado
-                            </th>
-                            <th class="text-center">
-                                @lang('crud.common.actions')
-                            </th>
-                        </tr>
-                    </thead>
+                <div class="table-responsive">
+                    <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
+                        <thead>
+                            <tr>
+                                <th>@lang('crud.informes.inputs.medical_board_id')</th>
+                                <th>Paciente</th>
+                                <th>Especialidad</th>
+                                <th>Estado</th>
+                                <th class="text-center">@lang('crud.common.actions')</th>
+                            </tr>
+                        </thead>
                     <tbody>
                         @forelse($reports as $report)
                         <tr>
@@ -84,34 +54,49 @@
                                     >
                                         <button
                                             type="button"
-                                            class="btn btn-outline-success ml-1"
+                                            class="btn btn-primary btn-icon"
                                         >
-                                            <i class="icon ion-md-eye"></i>
+                                            <i data-feather="eye"></i>
                                         </button>
                                     </a>
-                                    @endcan @can('update', $report)
+                                    @endcan
+                                    </div>
+
+                                    <div
+                                    role="group"
+                                    aria-label="Row Actions"
+                                    class="btn-group"
+                                    >
+                                    @can('update', $report)
                                         @if ($report->medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
                                             <a
                                                 href="{{ route('reports.edit', $report) }}"
                                             >
                                                 <button
                                                     type="button"
-                                                    class="btn btn-outline-info ml-1"
+                                                    class="btn btn-info btn-icon"
                                                 >
-                                                    <i class="icon ion-md-create"></i>
+                                                    <i data-feather="edit"></i>
                                                 </button>
                                             </a>
                                         @endif
-                                    @endcan @can('view', $report)
+                                    @endcan
+                                    </div>
+                                    <div
+                                    role="group"
+                                    aria-label="Row Actions"
+                                    class="btn-group"
+                                    >
+                                    @can('view', $report)
                                         <a
                                             href="{{ route('reports.download', $report) }}"
                                             target="_blank"
                                         >
                                             <button
                                                 type="button"
-                                                class="btn btn-outline-secondary ml-1"
+                                                class="btn btn-light btn-icon"
                                             >
-                                                <i class="icon ion-md-archive"></i>
+                                                <i data-feather="download"></i>
                                             </button>
                                         </a>
                                     @endcan @can('delete', $report)
@@ -133,23 +118,32 @@
                                     @endcan
                                 </div>
                             </td>
+
                         </tr>
                         @empty
-                        <tr>
-                            <td colspan="2">
-                                @lang('crud.common.no_items_found')
-                            </td>
-                        </tr>
-                        @endforelse
+                            <tr>
+                                <td colspan="2">
+                                    @lang('crud.common.no_items_found')
+                                </td>
+                            </tr>
+                            @endforelse
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2">{!! $reports->render() !!}</td>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>
+
+      </div>
     </div>
-</div>
-@endsection
+    </div>
+    @endsection
+@push('plugin-scripts')
+<script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/promise-polyfill/polyfill.min.js') }}"></script>
+@endpush
+@push('custom-scripts')
+<script src="{{ asset('assets/js/data-table.js') }}"></script>
+<script src="{{ asset('assets/js/sweet-alert.js') }}"></script>
+@endpush
+

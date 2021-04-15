@@ -1,5 +1,5 @@
 @extends('layout.master')
-
+@section('title', 'Especialidades')
 
 @push('plugin-styles')
   <link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
@@ -33,6 +33,7 @@
                 <thead>
                     <tr>
                         <th>@lang('crud.especialidades.inputs.name')</th>
+                        <th>@lang('crud.especialidades.inputs.date')</th>
                         <th class="text-center">@lang('crud.common.actions')</th>
                     </tr>
                 </thead>
@@ -40,6 +41,7 @@
                     @forelse($specialties as $specialty)
                     <tr>
                         <td>{{ $specialty->name ?? '-' }}</td>
+                        <td>{{ $specialty->created_at->format('d-m-Y') ?? '-' }}</td>
                         <td class="text-center" style="width: 250px;">
                             <div
                             role="group"
@@ -47,14 +49,35 @@
                             class="btn-group"
                             >
                                 @can('update', $specialty)
-                                        <a
-                                            href="{{ route('specialties.edit', $specialty) }}"
-                                        >
+                                        <a>
                                             <button
                                                 type="button"
-                                                class="btn btn-primary btn-icon">
+                                                class="btn btn-primary btn-icon"
+                                                data-toggle="modal"
+                                                data-target="#ID{{$specialty->id}}"
+                                                data-whatever="@mdo">
                                                 <i data-feather="edit"></i>
                                             </button>
+                                                <div class="modal fade" id="ID{{$specialty->id}}" tabindex="-1" role="dialog" aria-labelledby="ID{{$specialty->id}}Label" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="ID{{$specialty->id}}Label">@lang('crud.especialidades.edit_title')</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <x-form method="PUT" action="{{ route('specialties.update', $specialty) }}">
+                                                                @include('app.specialties.form-inputs')
+                                                        </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary">@lang('crud.common.update')</button>
+                                                            </div>
+                                                        </x-form>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                         </a>
                                     @endcan
                             </div>
@@ -79,6 +102,7 @@
 
 
                         </td>
+
                     </tr>
                     @empty
                         <tr>

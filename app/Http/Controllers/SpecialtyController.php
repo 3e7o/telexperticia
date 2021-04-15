@@ -50,7 +50,7 @@ class SpecialtyController extends Controller
         $specialty = Specialty::create($validated);
 
         return redirect()
-            ->route('specialties.edit', $specialty)
+            ->route('specialties.index')
             ->withSuccess(__('crud.common.created'));
     }
 
@@ -94,7 +94,7 @@ class SpecialtyController extends Controller
         $specialty->update($validated);
 
         return redirect()
-            ->route('specialties.edit', $specialty)
+            ->route('specialties.index')
             ->withSuccess(__('crud.common.saved'));
     }
 
