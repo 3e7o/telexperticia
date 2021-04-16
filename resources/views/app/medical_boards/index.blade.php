@@ -32,7 +32,7 @@
                       <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
                             <thead>
                                 <tr>
-                                    <th>Junta Médica</th>
+                                    <th aria-sort="descending">Junta Médica</th>
                                     <th>Matrícula</th>
                                     <th>@lang('crud.juntas_medicas.inputs.patient_id')</th>
                                     <th>@lang('crud.juntas_medicas.inputs.status')</th>

@@ -29,6 +29,7 @@ class MedicalBoardUpdateRequest extends FormRequest
             'doctor_id' => ['required', 'exists:doctors,id'],
             'doctors_id' => ['required'],
             'status' => ['required', 'in:Programado,Realizado,Cancelado'],
+            'open_zoom' => ['required', 'in:1,0'],
         ];
     }
 }

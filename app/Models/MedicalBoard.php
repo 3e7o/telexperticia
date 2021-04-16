@@ -16,9 +16,12 @@ class MedicalBoard extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = ['date', 'status', 'patient_id', 'doctor_id'];
 
     protected $table = 'medical_boards';
+
+    protected $fillable = ['date', 'status', 'patient_id', 'doctor_id', 'open_zoom'];
+
+    protected $searchableFields = [];
 
     protected $casts = [
         'date' => 'datetime',
@@ -28,8 +31,6 @@ class MedicalBoard extends Model
         'code',
         'identification'
     ];
-
-    protected $searchableFields = ['*'];
 
     protected static function boot() :void
     {
@@ -50,6 +51,12 @@ class MedicalBoard extends Model
             $self->report->delete();
         });
     }
+
+    public function zoom()
+    {
+        return $this->morphOne('App\Models\Zoom_meeting', 'meeting');
+    }
+
 
     public function patient()
     {

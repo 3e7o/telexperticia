@@ -8,19 +8,19 @@
         </a><img src="{{ asset('logo.png') }}" alt="" width="60" height="60">
         <ul class="navbar-nav">
           <li class="nav-item dropdown nav-profile">
-            <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="{{ url('https://via.placeholder.com/30x30') }}" alt="profile">
+            <a class="feather feather-user" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="user"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="profileDropdown">
               <div class="dropdown-header d-flex flex-column align-items-center">
                 <div class="info text-center">
-                  <p class="name font-weight-bold mb-0"> {{ Auth::user()->name }}</p>
+                  <p class="name font-weight-bold mb-0">{{ Auth::user()->name }}</p>
+                  <p class="email text-muted mb-3">{{ Auth::user()->email }}</p>
                 </div>
               </div>
               <div class="dropdown-body">
                 <ul class="profile-nav p-0 pt-3">
                   <li class="nav-item">
-                    <a class="nav-link" href="{{ route('logout') }}"
+                    <a class="nav-link"  href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -99,7 +99,7 @@
           @endif
 @if (Auth::user()->can('view-any', Spatie\Permission\Models\Role::class) ||
     Auth::user()->can('view-any', Spatie\Permission\Models\Permission::class))
-        <li class="nav-item {{ active_class(['permissions', 'roles', 'users']) }}">
+        <li class="nav-item {{ active_class(['permissions', 'roles', 'users', 'zoom']) }}">
             <a href="#" class="nav-link">
               <i class="link-icon" data-feather="mail"></i>
               <span class="menu-title">Roles y Permisos</span>
@@ -117,7 +117,7 @@
                 @can('view-any', Spatie\Permission\Models\Permission::class)
                 <li class="nav-item"><a class="nav-link {{ active_class(['permissions']) }}" href="{{ route('permissions.index') }}">Permisos</a></li>
                 <li class="category-heading">Other<li>
-                <li class="nav-item"><a class="nav-link {{ active_class(['apps/calendar']) }}" href="{{ url('/apps/calendar') }}">Calendar</a></li>
+                <li class="nav-item"><a class="nav-link {{ active_class(['zoom']) }}" href="{{ route('zoom') }}">Configuración Zoom</a></li>
                 @endcan
               </ul>
             </div>

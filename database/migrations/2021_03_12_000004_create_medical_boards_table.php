@@ -20,6 +20,7 @@ class CreateMedicalBoardsTable extends Migration
             $table->string('meet');
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('doctor_id');
+            $table->boolean('open_zoom')->default('0');
             $table->timestamps();
         });
     }

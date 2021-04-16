@@ -8,9 +8,21 @@ use App\Models\MedicalBoard;
 use Illuminate\Http\Request;
 use App\Http\Requests\MedicalBoardStoreRequest;
 use App\Http\Requests\MedicalBoardUpdateRequest;
+use App\Policies\MedicalBoardPolicy;
+use Carbon\Carbon;
 
 class MedicalBoardController extends Controller
 {
+    protected $zoom_user;
+    private $generalsetting;
+
+    public function __construct()
+    {
+        $zoom = new \MacsiDigital\Zoom\Support\Entry;
+        $this->zoom_user = new \MacsiDigital\Zoom\User($zoom);
+        $this->generalsetting = \App\Models\GeneralSetting::first();
+    }
+
     /**
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
@@ -54,6 +66,8 @@ class MedicalBoardController extends Controller
 
         $doctorsSelected = [];
 
+        $zoom = $this->zoom_user->find($this->generalsetting->zoom_email);
+
         return view('app.medical_boards.create', compact('patients', 'doctors', 'doctorsSelected'));
     }
 
@@ -64,6 +78,8 @@ class MedicalBoardController extends Controller
     public function store(MedicalBoardStoreRequest $request)
     {
         $this->authorize('create', MedicalBoard::class);
+
+        $open_zoom = (isset($request->open_zoom) == '1' ? '1' : '0');
 
         $validated = $request->validated();
 
@@ -80,6 +96,38 @@ class MedicalBoardController extends Controller
         $medicalBoard = MedicalBoard::create($validated);
         $medicalBoard->doctorsSupervisors()->sync($doctorsSelected);
 
+        $zoom_data = $medicalBoard->zoom;
+        if($open_zoom=='1'){
+            $startTime = $medicalBoard->date;
+            $date = Carbon::parse($startTime)->format('Y-m-d');
+            $time = Carbon::parse($startTime)->format('H:i');
+            $datetime = $date.'T'.$time.'Z';
+
+            $zoom = $this->zoom_user->find($this->generalsetting->zoom_email);
+            if(!$zoom_data){
+                $meeting = $zoom->meetings()->create(array(
+                    'topic'         => $request->name,
+                    'start_time'    => $datetime,
+                    'duration'      => $request->zoom_duration,
+                    'timezone'      => env('APP_TIMEZONE')
+                ));
+                if($meeting){
+                    $meetingId = $meeting->id;
+                    $medicalBoard->zoom()->create(array(
+                        'zoom_id'       => $meetingId,
+                        'start_time'    => date('Y-m-d H:i', strtotime($medicalBoard->date)),
+                        'duration'      => $request->zoom_duration,
+                        'password'      => $meeting->password,
+                        'timezone'      => $meeting->timezone,
+                        'duration'      => $request->zoom_duration,
+                        "start_url"     => $meeting->start_url,
+                        "join_url"      => $meeting->join_url,
+                    ));
+                }
+            }
+        }
+        /// end zoom ///
+
         return redirect()
             ->route('medical-boards.edit', $medicalBoard)
             ->withSuccess(__('crud.common.created'));
@@ -94,11 +142,13 @@ class MedicalBoardController extends Controller
     {
         $this->authorize('view', $medicalBoard);
 
+        $zoom_data = $medicalBoard->zoom;
+
         $doctorsSupervisors = $medicalBoard->doctorsSupervisors->map( function ($doctor) {
             return $doctor->fullName;
         })->implode(', ') . '.';
 
-        return view('app.medical_boards.show', compact('medicalBoard', 'doctorsSupervisors'));
+        return view('app.medical_boards.show', compact('medicalBoard', 'doctorsSupervisors','zoom_data'));
     }
 
     /**
@@ -110,6 +160,10 @@ class MedicalBoardController extends Controller
     {
         $this->authorize('update', $medicalBoard);
 
+        $zoom = $this->zoom_user->find($this->generalsetting->zoom_email);
+
+        $zoom_data = $medicalBoard->zoom;
+
         $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
 
         $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
@@ -118,7 +172,7 @@ class MedicalBoardController extends Controller
 
         return view(
             'app.medical_boards.edit',
-            compact('medicalBoard', 'patients', 'doctors', 'doctorsSelected')
+            compact('medicalBoard', 'patients', 'doctors', 'doctorsSelected','zoom','zoom_data')
         );
     }
 
@@ -132,6 +186,8 @@ class MedicalBoardController extends Controller
         MedicalBoard $medicalBoard
     ) {
         $this->authorize('update', $medicalBoard);
+
+        $open_zoom = (isset($request->open_zoom) == '1' ? '1' : '0');
 
         $validated = $request->validated();
 
@@ -150,6 +206,64 @@ class MedicalBoardController extends Controller
 
         $medicalBoard->doctorsSupervisors()->sync($doctorsSelected);
 
+                     /// zoom ///
+                $zoom_data = $medicalBoard->zoom;
+                if($open_zoom=='1'){
+                    $startTime = $medicalBoard->date;
+                    $date = Carbon::parse($startTime)->format('Y-m-d');
+                    $time = Carbon::parse($startTime)->format('H:i:s');
+                    $datetime = $date.'T'.$time.'Z';
+
+                    $zoom = $this->zoom_user->find($this->generalsetting->zoom_email);
+                    if($zoom_data){
+                        $zoomMeeting = $zoom->meetings()->find($zoom_data->zoom_id);
+
+                        $meeting = $zoomMeeting->update(array(
+                            'topic'         => $request->name,
+                            'start_time'    => $datetime,
+                            'duration'      => $request->zoom_duration,
+                            'timezone'      => env('APP_TIMEZONE')
+                        ));
+                        if($zoomMeeting){
+                            $medicalBoard->zoom()->update(array(
+                                'start_time' => $meeting->start_time,
+                                'duration'   => $request->zoom_duration,
+                            ));
+                        }
+                    }else{
+                        $meeting = $zoom->meetings()->create(array(
+                            'topic'         => $request->name,
+                            'start_time'    => $datetime,
+                            'duration'      => $request->zoom_duration,
+                            'timezone'      => env('APP_TIMEZONE')
+                        ));
+                        if($meeting){
+                            $meetingId = $meeting->id;
+                            $medicalBoard->zoom()->create(array(
+                                'zoom_id'       => $meetingId,
+                                'start_time'    => date('Y-m-d H:i', strtotime($request->zoom_start_time)),
+                                'duration'      => $request->zoom_duration,
+                                'password'      => $meeting->password,
+                                'timezone'      => $meeting->timezone,
+                                'duration'      => $request->zoom_duration,
+                                "start_url"     => $meeting->start_url,
+                                "join_url"      => $meeting->join_url,
+                            ));
+                        }
+                    }
+                }else{
+                    if($zoom_data){
+                        $medicalBoard->zoom()->delete();
+                        //$zoomMeeting = $this->zoom_user->find($zoom_data->zoom_id);
+                        $zoom = $this->zoom_user->find($this->generalsetting->zoom_email);
+                        $zoomMeeting = $zoom->meetings()->find($zoom_data->zoom_id);
+                        if($zoomMeeting){
+                        $zoomMeeting->delete();
+                        }
+                    }
+                }
+        /// end zoom ///
+
         return redirect()
             ->route('medical-boards.edit', $medicalBoard)
             ->withSuccess(__('crud.common.saved'));
@@ -163,6 +277,19 @@ class MedicalBoardController extends Controller
     public function destroy(Request $request, MedicalBoard $medicalBoard)
     {
         $this->authorize('delete', $medicalBoard);
+
+        $medicalBoard_id=$medicalBoard->id;
+        $zoom_data = $medicalBoard->zoom;
+        if($zoom_data){
+                $medicalBoard->zoom()->delete();
+                $zoom = $this->zoom_user->find($this->generalsetting->zoom_email);
+                $zoomMeeting = $zoom->meetings()->find($zoom_data->zoom_id);
+                if($zoomMeeting){
+                   $zoomMeeting->delete();
+                }
+            }
+        MedicalBoard::where('id', $medicalBoard_id)->delete();
+
 
         $medicalBoard->delete();
 

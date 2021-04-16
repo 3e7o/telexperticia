@@ -19,6 +19,7 @@
                 class="mt-4"
             >
                 @include('app.medical_boards.form-inputs')
+                </div>
 
                 <div class="mt-4">
                     <a

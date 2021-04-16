@@ -10,7 +10,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\MedicalBoardController;
-use PHPUnit\Framework\MockObject\Rule\Parameters;
+use App\Http\Controllers\GeneralSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +44,8 @@ Route::prefix('/')
         Route::get('reports/{report}/download', [ReportController::class, 'download'])->name('reports.download');
         Route::get('reports/{report}/approve', [ReportController::class, 'approve'])->name('reports.approve');
         Route::resource('users', UserController::class);
+		Route::get('general/', [GeneralSettingController::class, 'general'])->name('general');
+        Route::patch('general/{id}/update', [GeneralSettingController::class, 'update_general'])->name('general.update');
+		Route::get('zoom/', [GeneralSettingController::class, 'zoom'])->name('zoom');
+        Route::patch('zoom/{id}/update', [GeneralSettingController::class, 'update_zoom'])->name('zoom.update');
     });

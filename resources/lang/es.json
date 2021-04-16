@@ -70,5 +70,10 @@
     "create users": "Crear usuarios",
     "update users": "Actualizar usuarios",
     "delete users": "Eliminar usuarios",
+    "delete users": "Eliminar usuarios",
+    "Zoom Config": "Configuración Zoom",
+    "Save": "Guardar",
+    "Zoom Duration": "Duración de reunión",
+    "Zoom Password": "Password de reunión",
     "doctors":"medicos"
 }

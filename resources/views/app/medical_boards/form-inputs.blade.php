@@ -45,4 +45,11 @@
         @php $selected = !$editing && is_array($selected) ? explode(',', $selected[0]) : $doctorsSelected @endphp
         <label class="label label-required" for="doctors">Médicos Participantes</label>
         <multi-select doctors="{{ json_encode($doctors, true) }}" doctors-selected="{{ json_encode($selected) }}"></multi-select>    </div>
-</div>
+
+        <x-inputs.group class="col-sm-12 col-lg-6">
+            <x-inputs.select name="open_zoom" label="Reunion Zoom" required>
+                @php $selected = old('open_zoom', ($editing ? $medicalBoard->open_zoom : '')) @endphp
+                <option value="1" {{ $selected == 'Si' ? 'selected' : '' }} >Si</option>
+                <option value="0" {{ $selected == 'No' ? 'selected' : '' }} >No</option>
+            </x-inputs.select>
+        </x-inputs.group>
