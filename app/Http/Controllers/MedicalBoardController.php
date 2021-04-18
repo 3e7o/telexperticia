@@ -31,8 +31,6 @@ class MedicalBoardController extends Controller
     {
         $this->authorize('view-any', MedicalBoard::class);
 
-        $search = $request->get('search', '');
-
         $medicalBoards = MedicalBoard::query()
             ->itIsAuthorized()
             ->groupBy('id')
@@ -40,14 +38,10 @@ class MedicalBoardController extends Controller
             ->select('medical_boards.*')
             ->paginate(0);
 
-        $medicalBoards = MedicalBoard::search($search)
-           ->latest()
-           ->paginate(0);
-
 
         return view(
             'app.medical_boards.index',
-            compact('medicalBoards', 'search')
+            compact('medicalBoards')
         );
     }
 
@@ -83,7 +77,7 @@ class MedicalBoardController extends Controller
 
         $validated = $request->validated();
 
-        $doctorsSelected = explode(',', $validated['doctors_id'][0]);
+        $doctorsSelected = $request->doctors_id;
 
         $someDoctorIsNotAvailable = $this->validateDoctorsAvailable($validated, $doctorsSelected);
         if ($someDoctorIsNotAvailable['areNotAvailabe']) {
@@ -191,7 +185,7 @@ class MedicalBoardController extends Controller
 
         $validated = $request->validated();
 
-        $doctorsSelected = explode(',', $validated['doctors_id'][0]);
+        $doctorsSelected = $request->doctors_id;
 
         $someDoctorIsNotAvailable = $this->validateDoctorsAvailable($validated, $doctorsSelected, $medicalBoard->id);
 

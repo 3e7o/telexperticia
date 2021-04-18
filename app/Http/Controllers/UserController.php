@@ -19,14 +19,11 @@ class UserController extends Controller
     {
         $this->authorize('view-any', User::class);
 
-        $search = $request->get('search', '');
         $roles = Role::get();
 
-        $users = User::search($search)
-            ->latest()
-            ->paginate(0);
+        $users = User::get();
 
-        return view('app.users.index', compact('users', 'search','roles'));
+        return view('app.users.index', compact('users','roles'));
     }
 
     /**

@@ -18,13 +18,9 @@ class DoctorController extends Controller
     {
         $this->authorize('view-any', Doctor::class);
 
-        $search = $request->get('search', '');
+        $doctors = Doctor::get();
 
-        $doctors = Doctor::search($search)
-            ->latest()
-            ->paginate(0);
-
-        return view('app.doctors.index', compact('doctors', 'search'));
+        return view('app.doctors.index', compact('doctors'));
     }
 
     /**

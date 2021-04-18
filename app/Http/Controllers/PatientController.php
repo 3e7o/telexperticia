@@ -17,13 +17,9 @@ class PatientController extends Controller
     {
         $this->authorize('view-any', Patient::class);
 
-        $search = $request->get('search', '');
+        $patients = Patient::get();
 
-        $patients = Patient::search($search)
-            ->latest()
-            ->paginate(0);
-
-        return view('app.patients.index', compact('patients', 'search'));
+        return view('app.patients.index', compact('patients'));
     }
 
     /**

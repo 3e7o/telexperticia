@@ -8,14 +8,14 @@
       <div class="card">
         <div class="row">
           <div class="col-md-4 pr-md-0">
-            <div class="auth-left-wrapper" style="background-image: url({{ url('https://via.placeholder.com/219x452') }})">
+            <div class="auth-left-wrapper" style="background-image: url({{ asset('assets/images/portada1.jpg') }})">
 
             </div>
           </div>
           <div class="col-md-8 pl-md-0">
             <div class="auth-form-wrapper px-4 py-5">
-              <a href="#" class="noble-ui-logo d-block mb-2">Noble<span>UI</span></a>
-              <h5 class="text-muted font-weight-normal mb-4">Welcome back! Log in to your account.</h5>
+              <a href="#" class="noble-ui-logo d-block mb-2">COSSMIL<span>Telexperticia</span></a>
+              <h5 class="text-muted font-weight-normal mb-4">¡Bienvenido de nuevo! Ingrese a su cuenta.</h5>
               <form method="POST" action="{{ route('login') }}" class="forms-sample">
                 @csrf
                 <div class="form-group">
@@ -28,7 +28,7 @@
                             @endif
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
+                  <label for="exampleInputPassword1">Contraseña</label>
                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')

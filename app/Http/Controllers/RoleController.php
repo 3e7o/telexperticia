@@ -16,13 +16,10 @@ class RoleController extends Controller {
     public function index(Request $request)
     {
         $this->authorize('list', Role::class);
-
-        $search = $request->get('search', '');
-        $roles = Role::where('name', 'like', "%{$search}%")->paginate(0);
+        $roles = Role::get();
 
         return view('app.roles.index')
-            ->with('roles', $roles)
-            ->with('search', $search);
+            ->with('roles', $roles);
     }
 
     /**

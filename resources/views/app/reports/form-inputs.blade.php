@@ -13,6 +13,7 @@
 
     <x-inputs.group class="col-sm-12">
         <x-inputs.textarea
+            style="resize: vertical;"
             name="record"
             label="Antecedentes"
             required
@@ -23,6 +24,7 @@
 
     <x-inputs.group class="col-sm-12">
         <x-inputs.textarea
+            style="resize: vertical;"
             name="evaluation"
             label="Evaluación"
             required
@@ -33,6 +35,7 @@
 
     <x-inputs.group class="col-sm-12">
         <x-inputs.textarea
+            style="resize: vertical;"
             name="diagnosis"
             label="Diagnóstico"
             required
@@ -43,6 +46,7 @@
 
     <x-inputs.group class="col-sm-12">
         <x-inputs.textarea
+            style="resize: vertical;"
             name="recommendations"
             label="Recomendaciones"
             required

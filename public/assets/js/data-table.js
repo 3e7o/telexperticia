@@ -5,12 +5,15 @@ $(function() {
     $('#dataTableExample').DataTable({
       "aLengthMenu": [
         [10, 30, 50, -1],
-        [10, 30, 50, "All"]
+        [10, 30, 50, "Todos"]
       ],
+	  "order": [[ 0, "desc" ]],
       "iDisplayLength": 10,
+	  "responsive": true,
       "language": {
-        search: ""
+		url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
       }
+
     });
     $('#dataTableExample').each(function() {
       var datatable = $(this);

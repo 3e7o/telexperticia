@@ -25,10 +25,10 @@ class ReportStoreRequest extends FormRequest
     {
         return [
             'medical_board_id' => ['required', 'exists:medical_boards,id'],
-            'record' => ['required', 'max:255', 'string'],
-            'evaluation' => ['required', 'max:255', 'string'],
-            'diagnosis' => ['required', 'max:255', 'string'],
-            'recommendations' => ['required', 'max:255', 'string'],
+            'record' => ['required', 'string'],
+            'evaluation' => ['required', 'string'],
+            'diagnosis' => ['required', 'string'],
+            'recommendations' => ['required', 'string'],
         ];
     }
 }

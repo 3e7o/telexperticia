@@ -19,8 +19,6 @@ class ReportController extends Controller
     {
         $this->authorize('view-any', Report::class);
 
-        $search = $request->get('search', '');
-
         $reports = Report::query()
             ->itIsAuthorized()
             ->groupBy('id')
@@ -28,7 +26,7 @@ class ReportController extends Controller
             ->select('reports.*')
             ->paginate(0);
 
-        return view('app.reports.index', compact('reports', 'search'));
+        return view('app.reports.index', compact('reports'));
     }
 
     /**
@@ -102,8 +100,11 @@ class ReportController extends Controller
         $this->authorize('update', $report);
 
         $medicalBoards = MedicalBoard::pluck('id', 'id');
+        $doctorsSupervisors = $report->medicalBoard->doctorsSupervisors->map( function ($doctor) {
+            return $doctor->fullName;
+        })->implode(', ') . '.';
 
-        return view('app.reports.edit', compact('report', 'medicalBoards'));
+        return view('app.reports.edit', compact('report', 'medicalBoards','doctorsSupervisors'));
     }
 
     /**

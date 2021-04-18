@@ -1,15 +1,20 @@
-@extends('layout.master')
+@extends('layout.master2')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
+<div class="page-content d-flex align-items-center justify-content-center">
 
-                <div class="card-body">
-                    {{ __('Please confirm your password before continuing.') }}
+  <div class="row w-100 mx-0 auth-page">
+    <div class="col-md-8 col-xl-6 mx-auto">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-4 pr-md-0">
+            <div class="auth-left-wrapper" style="background-image: url({{ asset('assets/images/portada1.jpg') }})">
 
+            </div>
+          </div>
+          <div class="col-md-8 pl-md-0">
+            <div class="auth-form-wrapper px-4 py-5">
+              <a href="#" class="noble-ui-logo d-block mb-2">{{ __('Please confirm your password before continuing.') }}</a>
                     <form method="POST" action="{{ route('password.confirm') }}">
                         @csrf
 
@@ -43,7 +48,10 @@
                     </form>
                 </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-@endsection
+
+  </div>
+  @endsection

@@ -17,13 +17,9 @@ class SpecialtyController extends Controller
     {
         $this->authorize('view-any', Specialty::class);
 
-        $search = $request->get('search', '');
+        $specialties = Specialty::get();
 
-        $specialties = Specialty::search($search)
-            ->latest()
-            ->paginate(0);
-
-        return view('app.specialties.index', compact('specialties', 'search'));
+        return view('app.specialties.index', compact('specialties'));
     }
 
     /**

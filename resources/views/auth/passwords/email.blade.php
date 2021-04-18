@@ -1,12 +1,21 @@
-@extends('layout.master')
+@extends('layout.master2')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<div class="page-content d-flex align-items-center justify-content-center">
 
+  <div class="row w-100 mx-0 auth-page">
+    <div class="col-md-8 col-xl-6 mx-auto">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-4 pr-md-0">
+            <div class="auth-left-wrapper" style="background-image: url({{ asset('assets/images/portada1.jpg') }})">
+
+            </div>
+          </div>
+          <div class="col-md-8 pl-md-0">
+            <div class="auth-form-wrapper px-4 py-5">
+              <a href="#" class="noble-ui-logo d-block mb-2">{{ __('Reset Password') }}</a>
+              <h5 class="text-muted font-weight-normal mb-4">Ingrese su correo electronico.</h5>
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -42,6 +51,11 @@
                 </div>
             </div>
         </div>
+      </div>
     </div>
+  </div>
+</div>
+
 </div>
 @endsection
+

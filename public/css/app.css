@@ -2120,6 +2120,7 @@ h3,
 h4,
 h5,
 h6 {
+  color: #4E5BF2;
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
@@ -2413,6 +2414,7 @@ h6,
 .h4,
 .h5,
 .h6 {
+  color: #4E5BF2;
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
@@ -2440,11 +2442,14 @@ h4,
 
 h5,
 .h5 {
+
+	
   font-size: 1.25rem;
 }
 
 h6,
 .h6 {
+  color: #4E5BF2;
   font-size: 1rem;
 }
 
@@ -22961,6 +22966,7 @@ h6,
 .h4,
 .h5,
 .h6 {
+  color: #4E5BF2;
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 0;
@@ -22998,6 +23004,7 @@ h5,
 
 h6,
 .h6 {
+  color: #4E5BF2;
   font-size: .9375rem;
 }
 

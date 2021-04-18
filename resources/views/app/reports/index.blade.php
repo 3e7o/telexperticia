@@ -10,132 +10,132 @@
 
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-                <div>
-                  <h4 class="mb-3 mb-md-0">@lang('crud.doctores.index_title')</h4>
-                </div>
-                <div class="table-responsive">
-                    <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
-                        <thead>
-                            <tr>
-                                <th>@lang('crud.informes.inputs.medical_board_id')</th>
-                                <th>Paciente</th>
-                                <th>Especialidad</th>
-                                <th>Estado</th>
-                                <th class="text-center">@lang('crud.common.actions')</th>
-                            </tr>
-                        </thead>
-                    <tbody>
-                        @forelse($reports as $report)
-                        <tr>
-                            <td>
-                                {{ optional($report->medicalBoard)->code ?? '-' }}
-                            </td>
-                            <td>
-                                {{ optional($report->medicalBoard->patient)->fullName ?? '-' }}
-                            </td>
-                            <td>
-                                {{ optional($report->medicalBoard->doctorOwner->specialty)->name ?? '-' }}
-                            </td>
-                            <td>
-                                {{ $report->approved }}
-                            </td>
-                            <td class="text-center" style="width: 134px;">
-                                <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
-                                >
-                                    @can('view', $report)
-                                    <a
-                                        href="{{ route('reports.show', $report) }}"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary btn-icon"
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+                    <div>
+                    <h4 class="mb-3 mb-md-0">@lang('crud.informes.index_title')</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
+                            <thead>
+                                <tr>
+                                    <th>@lang('crud.informes.inputs.medical_board_id')</th>
+                                    <th>Paciente</th>
+                                    <th>Especialidad</th>
+                                    <th>Estado</th>
+                                    <th class="text-center">@lang('crud.common.actions')</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($reports as $report)
+                                <tr>
+                                    <td>
+                                        {{ optional($report->medicalBoard)->code ?? '-' }}
+                                    </td>
+                                    <td>
+                                        {{ optional($report->medicalBoard->patient)->fullName ?? '-' }}
+                                    </td>
+                                    <td>
+                                        {{ optional($report->medicalBoard->doctorOwner->specialty)->name ?? '-' }}
+                                    </td>
+                                    <td>
+                                        {{ $report->approved }}
+                                    </td>
+                                    <td class="text-center" style="width: 134px;">
+                                        <div
+                                            role="group"
+                                            aria-label="Row Actions"
+                                            class="btn-group"
                                         >
-                                            <i data-feather="eye"></i>
-                                        </button>
-                                    </a>
-                                    @endcan
-                                    </div>
-
-                                    <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
-                                    >
-                                    @can('update', $report)
-                                        @if ($report->medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
+                                            @can('view', $report)
                                             <a
-                                                href="{{ route('reports.edit', $report) }}"
+                                                href="{{ route('reports.show', $report) }}"
                                             >
                                                 <button
                                                     type="button"
-                                                    class="btn btn-info btn-icon"
+                                                    class="btn btn-primary btn-icon"
                                                 >
-                                                    <i data-feather="edit"></i>
+                                                    <i data-feather="eye"></i>
                                                 </button>
                                             </a>
-                                        @endif
-                                    @endcan
-                                    </div>
-                                    <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
-                                    >
-                                    @can('view', $report)
-                                        <a
-                                            href="{{ route('reports.download', $report) }}"
-                                            target="_blank"
-                                        >
-                                            <button
-                                                type="button"
-                                                class="btn btn-light btn-icon"
+                                            @endcan
+                                            </div>
+
+                                            <div
+                                            role="group"
+                                            aria-label="Row Actions"
+                                            class="btn-group"
                                             >
-                                                <i data-feather="download"></i>
-                                            </button>
-                                        </a>
-                                    @endcan @can('delete', $report)
+                                            @can('update', $report)
+                                                @if ($report->medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
+                                                    <a
+                                                        href="{{ route('reports.edit', $report) }}"
+                                                    >
+                                                        <button
+                                                            type="button"
+                                                            class="btn btn-info btn-icon"
+                                                        >
+                                                            <i data-feather="edit"></i>
+                                                        </button>
+                                                    </a>
+                                                @endif
+                                            @endcan
+                                            </div>
+                                            <div
+                                            role="group"
+                                            aria-label="Row Actions"
+                                            class="btn-group"
+                                            >
+                                            @can('view', $report)
+                                                <a
+                                                    href="{{ route('reports.download', $report) }}"
+                                                    target="_blank"
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-light btn-icon"
+                                                    >
+                                                        <i data-feather="download"></i>
+                                                    </button>
+                                                </a>
+                                            @endcan @can('delete', $report)
 
-                                    {{-- <form
-                                        action="{{ route('reports.destroy', $report) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
-                                    >
-                                        @csrf @method('DELETE')
-                                        <button
-                                            type="submit"
-                                            class="btn btn-outline-danger ml-1"
-                                        >
-                                            <i class="icon ion-md-trash"></i>
-                                        </button>
-                                    </form> --}}
+                                            {{-- <form
+                                                action="{{ route('reports.destroy', $report) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
+                                            >
+                                                @csrf @method('DELETE')
+                                                <button
+                                                    type="submit"
+                                                    class="btn btn-outline-danger ml-1"
+                                                >
+                                                    <i class="icon ion-md-trash"></i>
+                                                </button>
+                                            </form> --}}
 
-                                    @endcan
-                                </div>
-                            </td>
+                                            @endcan
+                                        </div>
+                                    </td>
 
-                        </tr>
-                        @empty
-                            <tr>
-                                <td colspan="2">
-                                    @lang('crud.common.no_items_found')
-                                </td>
-                            </tr>
-                            @endforelse
-                    </tbody>
-                </table>
+                                </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="2">
+                                            @lang('crud.common.no_items_found')
+                                        </td>
+                                    </tr>
+                                    @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-
-      </div>
     </div>
-    </div>
-    @endsection
+</div>
+@endsection
 @push('plugin-scripts')
 <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
