@@ -38,6 +38,9 @@
 
 @php $editing = isset($zoom_data); @endphp
 
+@php
+if($zoom_data){
+@endphp
                 <x-inputs.group class="col-sm-12 col-lg-6">
                     <x-inputs.select name="zoom_duration" label="Duración">
                         @php $selected = old('zoom_duration', ($editing ? $zoom_data->duration : '')) @endphp
@@ -47,10 +50,6 @@
                         <option value="60" {{ $selected == '60 min' ? 'selected' : '' }} >1 hr</option>
                     </x-inputs.select>
                 </x-inputs.group>
-
-@php
-if($zoom_data){
-@endphp
 
                 <x-inputs.group class="col-sm-12 col-lg-6" >
                     <x-inputs.text

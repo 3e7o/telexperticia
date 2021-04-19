@@ -53,6 +53,7 @@ class MedicalBoardController extends Controller
     public function create(Request $request)
     {
         $this->authorize('create', MedicalBoard::class);
+        $open_zoom = $request->open_zoom;
 
         $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
 
@@ -60,7 +61,10 @@ class MedicalBoardController extends Controller
 
         $doctorsSelected = [];
 
+        if($open_zoom=='1'){
+
         $zoom = $this->zoom_user->find($this->generalsetting->zoom_email);
+        }
 
         return view('app.medical_boards.create', compact('patients', 'doctors', 'doctorsSelected'));
     }
@@ -73,9 +77,9 @@ class MedicalBoardController extends Controller
     {
         $this->authorize('create', MedicalBoard::class);
 
-        $open_zoom = (isset($request->open_zoom) == '1' ? '1' : '0');
-
         $validated = $request->validated();
+
+        $open_zoom = $request->open_zoom;
 
         $doctorsSelected = $request->doctors_id;
 
@@ -181,9 +185,9 @@ class MedicalBoardController extends Controller
     ) {
         $this->authorize('update', $medicalBoard);
 
-        $open_zoom = (isset($request->open_zoom) == '1' ? '1' : '0');
-
         $validated = $request->validated();
+
+        $open_zoom = $request->open_zoom;
 
         $doctorsSelected = $request->doctors_id;
 

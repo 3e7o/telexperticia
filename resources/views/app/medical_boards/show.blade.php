@@ -1,6 +1,7 @@
 @extends('layout.master')
 
 @section('title', 'Ver Junta Médica')
+@php $editing = isset($zoom_data); @endphp
 
 @section('content')
 <div class="container">
@@ -13,8 +14,9 @@
                 @lang('crud.juntas_medicas.show_title')
 
                 @if ($medicalBoard->status === 'Programado')
+
                     <a
-                        href="{{ $medicalBoard->meet }}"
+                        href="{{ $zoom_data->start_url }}"
                         target="_blank"
                     >
                         <button
@@ -51,21 +53,14 @@
                     <h5>@lang('crud.juntas_medicas.inputs.status')</h5>
                     <span>{{ $medicalBoard->status ?? '-' }}</span>
                 </div>
-                +                @php
-                if($zoom_data){
-                $zoom_start_time=$zoom_data->start_time;
-                $zoom_duration=$zoom_data->duration;
-                }else{
-                $zoom_start_time=$medicalBoard->date;
-                $zoom_duration="0";
-
-                }
-                @endphp
+@php
+if($zoom_data){
+@endphp
 
                 <div class="mb-4">
                     <h5>{{ __('Zoom Duration') }}</h5>
                     <x-inputs.select name="zoom_duration" selected disabled>
-                        @php $selected = old('zoom_duration', $zoom_duration) @endphp
+                        @php $selected = old('zoom_duration', $zoom_data->duration) @endphp
                         <option {{ $selected == '30 Min' ? 'selected' : '' }} >30 Min</option>
                         <option {{ $selected == '45 Min' ? 'selected' : '' }} >45 Min</option>
                         <option {{ $selected == '1 hr' ? 'selected' : '' }} >1 hr</option>
@@ -88,9 +83,6 @@
                         </div>
                     </div>
                 </div>
-@php
-if($zoom_data){
-@endphp
 
                 @if(((\Carbon\Carbon::parse($zoom_data->start_time))->addMinutes($zoom_data->duration)) > \Carbon\Carbon::now())
                 <div class="col-md-12">
