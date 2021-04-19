@@ -73,16 +73,16 @@ if($zoom_data){
                             </div>
                 </x-inputs.group>
 
-                    @if(((\Carbon\Carbon::parse($zoom_data->start_time))->addMinutes($zoom_data->duration)) > \Carbon\Carbon::now())
+                    @if(((\Carbon\Carbon::parse($zoom_data->start_time))) > \Carbon\Carbon::now())
                     <div class="col-md-12">
                         <div class="alert alert-info" role="alert">
-                            La junta iniciara: {{((\Carbon\Carbon::parse($zoom_data->start_time)))->diffForHumans()}}
+                            La junta iniciara: {{((\Carbon\Carbon::parse($zoom_data->start_time)))->diffForHumans(['parts' => 2,'join' => true, ])}}
                         </div>
                     </div>
                     @else
                     <div class="col-md-12">
                         <div class="alert alert-danger" role="alert">
-                            Expiro :{{((\Carbon\Carbon::parse($zoom_data->start_time))->addMinutes($zoom_data->duration))->diffForHumans()}}
+                       Expiro :{{((\Carbon\Carbon::parse($zoom_data->start_time))->addMinutes($zoom_data->duration))->diffForHumans(['parts' => 2,'join' => true, ])}}
                         </div>
                     </div>
                     @endif

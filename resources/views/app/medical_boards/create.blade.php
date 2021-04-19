@@ -18,8 +18,8 @@
 <div >
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb bg-light">
-        <li class="breadcrumb-item"><a href="{{ route('medical-boards.index') }}">@lang('crud.medical-boards.index_title')</a></li>
-        <li class="breadcrumb-item active" aria-current="page">@lang('crud.medical-boards.create_title')</li>
+        <li class="breadcrumb-item"><a href="{{ route('medical-boards.index') }}">@lang('crud.juntas_medicas.index_title')</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@lang('crud.juntas_medicas.create_title')</li>
     </ol>
   </nav>
 </div>
@@ -28,7 +28,7 @@
     <div class="col-md-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">@lang('crud.medical-boards.create_title')</h4>
+          <h4 class="card-title">@lang('crud.juntas_medicas.create_title')</h4>
             <x-form
                 method="POST"
                 action="{{ route('medical-boards.store') }}"
@@ -36,7 +36,7 @@
             >
                 @csrf
                 @include('app.medical_boards.form-inputs')
-
+                </div>
                 <div class="mt-4">
                     <button type="submit" class="btn btn-primary float-right">
                         <i class="icon ion-md-save"></i>
