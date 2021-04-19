@@ -80,7 +80,7 @@ class PermissionsSeeder extends Seeder
             $user->assignRole($adminRole);
         }
 
-        Role::create(['name' => 'doctor']);
-        Role::create(['name' => 'patient']);
+        Role::create(['name' => 'medico']);
+        Role::create(['name' => 'paciente']);
     }
 }
