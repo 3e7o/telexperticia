@@ -45,9 +45,7 @@ class SpecialtyController extends Controller
 
         $specialty = Specialty::create($validated);
 
-        return redirect()
-            ->route('specialties.index')
-            ->withSuccess(__('crud.common.created'));
+        return redirect()->route('specialties.index')->withSuccess(__('crud.common.created'));
     }
 
     /**
@@ -99,7 +97,7 @@ class SpecialtyController extends Controller
      * @param \App\Models\Specialty $specialty
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Specialty $specialty)
+    public function destroy(Specialty $specialty)
     {
         $this->authorize('delete', $specialty);
 

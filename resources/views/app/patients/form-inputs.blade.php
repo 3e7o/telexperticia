@@ -75,8 +75,13 @@
     <x-inputs.group class="col-sm-12 col-lg-6">
         <x-inputs.select name="gender" label="Género">
             @php $selected = old('gender', ($editing ? $patient->gender : '')) @endphp
-            <option value="Hombre" {{ $selected == 'Hombre' ? 'selected' : '' }} >Hombre</option>
-            <option value="Mujer" {{ $selected == 'Mujer' ? 'selected' : '' }} >Mujer</option>
+            @foreach ($genders as  $gender)
+               <?php if(isset($gender)){
+                ?>
+                <option value="{{ ($gender->name) }}" {{ $selected == ($gender->name) ? 'selected' : '' }} >{{ ucfirst($gender->name) }}</option>
+               <?php
+               }?>
+               @endforeach
         </x-inputs.select>
     </x-inputs.group>
 

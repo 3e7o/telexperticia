@@ -22,10 +22,9 @@ class CreatePatientsTable extends Migration
             $table->string('email');
             $table->string('address');
             $table->string('force');
-            $table->enum('gender', ['Hombre', 'Mujer']);
+            $table->string('gender');
             $table->date('birthday');
-            $table->unsignedBigInteger('user_id');
-
+			$table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

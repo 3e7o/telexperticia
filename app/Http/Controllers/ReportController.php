@@ -67,6 +67,7 @@ class ReportController extends Controller
     public function show(Request $request, Report $report)
     {
         $this->authorize('view', $report);
+        $patientId = optional($report->medicalBoard->patient)->id;
 
         $isSupervisor = false;
         $approved = false;
@@ -86,8 +87,18 @@ class ReportController extends Controller
                 ->where('medical_board_id', $medicalBoardId)
                 ->first()->approved;
         }
+        $doctorsSupervisors = $report->medicalBoard->doctorsSupervisors->map( function ($doctor) {
+            return $doctor->fullName;
+        })->implode(', ') . '.';
 
-        return view('app.reports.show', compact('report', 'isSupervisor', 'approved'));
+        $records = Report::query()
+        ->itRecords($patientId)
+        ->groupBy('id')
+        ->orderBy('reports.id', 'DESC')
+        ->select('reports.*')
+        ->paginate(0);
+
+        return view('app.reports.show', compact('report', 'isSupervisor', 'approved','doctorsSupervisors','records'));
     }
 
     /**

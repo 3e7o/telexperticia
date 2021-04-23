@@ -28,6 +28,32 @@ return [
             'date' => 'Fecha Creación',
         ],
     ],
+    'parametros' => [
+        'name' => 'Parametros',
+
+        'index_title' => 'Lista de Parametros',
+        'create_title' => 'Crear Parametros',
+        'edit_title' => 'Editar Parametros',
+        'show_title' => 'Mostrar Parametros',
+        'inputs' => [
+            'name' => 'Parametros',
+            'date' => 'Fecha Creación',
+            'description' => 'Descripción',
+        ],
+    ],
+    'gparametros' => [
+        'name' => 'Grupo de Parametros',
+
+        'index_title' => 'Lista de Grupo Parametros',
+        'create_title' => 'Crear Grupo de Parametros',
+        'edit_title' => 'Editar Grupo de Parametros',
+        'show_title' => 'Mostrar Grupo de Parametros',
+        'inputs' => [
+            'name' => 'Parametros',
+            'date' => 'Fecha Creación',
+            'description' => 'Descripción',
+        ],
+    ],
 
     'doctores' => [
         'name' => '',

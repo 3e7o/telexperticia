@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function isDoctor()
     {
-        return $this->hasRole('Medico');
+        return $this->hasRole('medico');
     }
 
     /**

@@ -48,6 +48,46 @@
                                             aria-label="Row Actions"
                                             class="btn-group"
                                         >
+                                            @if (($report->medicalBoard)->status === 'Programado')
+                                            @php
+                                            if(($report->medicalBoard)->zoom){
+                                            @endphp
+                                                <a
+                                                    href="{{ optional(($report->medicalBoard)->zoom)->start_url ?? '-'}}"
+                                                    target="_blank"
+                                                >
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-outline-primary btn-icon"
+                                                >
+                                                    <i data-feather="video"></i>
+                                                </button>
+                                                </a>
+
+                                            @php
+                                            }else {
+                                            @endphp
+                                                <a
+                                                    href="{{ ($report->medicalBoard)->meet }}"
+                                                    target="_blank"
+                                                >
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-outline-primary btn-icon"
+                                                >
+                                                    <i data-feather="video"></i>
+                                                </button>
+                                                </a>
+                                            @php
+                                            }
+                                            @endphp
+                                            @endif
+                                        </div>
+                                        <div
+                                            role="group"
+                                            aria-label="Row Actions"
+                                            class="btn-group"
+                                        >
                                             @can('view', $report)
                                             <a
                                                 href="{{ route('reports.show', $report) }}"
@@ -60,7 +100,7 @@
                                                 </button>
                                             </a>
                                             @endcan
-                                            </div>
+                                        </div>
 
                                             <div
                                             role="group"
@@ -126,7 +166,7 @@
                                             @lang('crud.common.no_items_found')
                                         </td>
                                     </tr>
-                                    @endforelse
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GeneralSetting;
-use ImageOptimizer;
-use App\Http\Controllers\BusinessSettingsController;
 use App\Traits\EnvironmentScope;
 
 class GeneralSettingController extends Controller

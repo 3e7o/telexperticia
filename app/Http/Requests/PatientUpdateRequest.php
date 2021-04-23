@@ -31,7 +31,7 @@ class PatientUpdateRequest extends FormRequest
             'email' => ['required', 'email'],
             'force' => ['required', 'max:255', 'string'],
             'birthday' => ['required', 'date', 'date'],
-            'gender' => ['required', 'in:Hombre,Mujer'],
+            'gender' => ['required'],
             'address' => ['required', 'max:255', 'string'],
         ];
     }

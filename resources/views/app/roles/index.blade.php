@@ -63,22 +63,19 @@
                                     @endcan
                                 </div>
                                 <div
-                                    role="group"
-                                    aria-label="Row Actions"
-                                    class="btn-group"
+                                role="group"
+                                aria-label="Row Actions"
+                                class="btn-group"
                                 >
-                                    @can('delete', $role)
+                                        @can('delete', $role)
+
+
                                     <form
                                         action="{{ route('roles.destroy', $role) }}"
                                         method="POST"
-                                        onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
                                     >
                                         @csrf @method('DELETE')
-                                        <button
-                                            type="button"
-                                            class="btn btn-danger btn-icon">
-                                            <i data-feather="delete"></i>
-                                        </button>
+                                        <button class="btn btn-danger btn-icon" type="button" onclick="showSwal('passing-parameter-execute-cancel')" id="btn-ok"><i data-feather="x-square"></i></button>
                                     </form>
                                     @endcan
                                 </div>

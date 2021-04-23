@@ -49,13 +49,17 @@
     <a class="nav-link" href="{{ route('home') }}">Dashboard</a>
 </li> --}}
 
-<li class="nav-item {{ active_class(['/']) }}">
-    <a class="nav-link" href="{{ url('/') }}">
+@if (Auth::user()->can('view-any', Spatie\Permission\Models\User::class) ||
+    Auth::user()->can('view-any', Spatie\Permission\Models\Doctor::class) ||
+    Auth::user()->can('view-any', Spatie\Permission\Models\Patient::class))
+
+<li class="nav-item {{ active_class(['home']) }}">
+    <a class="nav-link" href="{{ url('home') }}">
       <i class="link-icon" data-feather="activity"></i>
       <span class="menu-title">Información</span>
     </a>
   </li>
-
+  @endif
 @if (Auth::user()->can('view-any', Spatie\Permission\Models\MedicalBoard::class) ||
     Auth::user()->can('view-any', Spatie\Permission\Models\Report::class))
         <li class="nav-item {{ active_class(['']) }}">

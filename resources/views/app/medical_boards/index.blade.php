@@ -47,44 +47,7 @@
                             <td>{{ $medicalBoard->code }}</td>
                             <td>{{ optional($medicalBoard->patient->user)->username ?? '-'}}</td>
                             <td>{{ optional($medicalBoard->patient)->fullName ?? '-'}}</td>
-                            <td>{{ $medicalBoard->status ?? '-' }}
-                                @if ($medicalBoard->status === 'Programado')
-
-@php
-if($medicalBoard->zoom){
-@endphp
-                                    <a
-                                        href="{{ optional($medicalBoard->zoom)->start_url ?? '-'}}"
-                                        target="_blank"
-                                    >
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline-primary btn-icon"
-                                    >
-                                        <i data-feather="video"></i>
-                                    </button>
-                                    </a>
-
-@php
-}else {
-@endphp
-                    <a
-                        href="{{ $medicalBoard->meet }}"
-                        target="_blank"
-                    >
-                    <button
-                        type="button"
-                        class="btn btn-outline-primary btn-icon"
-                    >
-                        <i data-feather="video"></i>
-                    </button>
-                    </a>
-@php
-}
-@endphp
-
-                                @endif
-                            </td>
+                            <td>{{ $medicalBoard->status ?? '-' }}</td>
                             <td class="text-center" style="width: 134px;">
                                 <div
                                     role="group"

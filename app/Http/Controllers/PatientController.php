@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\GroupParameter;
+use App\Models\Parameter;
 use Illuminate\Http\Request;
 use App\Http\Requests\PatientStoreRequest;
 use App\Http\Requests\PatientUpdateRequest;
@@ -29,8 +31,8 @@ class PatientController extends Controller
     public function create(Request $request)
     {
         $this->authorize('create', Patient::class);
-
-        return view('app.patients.create');
+        $genders = Parameter::select('name')->where("group_id","=",2)->get();
+        return view('app.patients.create',compact('genders'));
     }
 
     /**
@@ -70,8 +72,9 @@ class PatientController extends Controller
     public function edit(Request $request, Patient $patient)
     {
         $this->authorize('update', $patient);
+        $genders = Parameter::select('name')->where("group_id","=",2)->get();
 
-        return view('app.patients.edit', compact('patient'));
+        return view('app.patients.edit', compact('patient', 'genders'));
     }
 
     /**
@@ -87,9 +90,7 @@ class PatientController extends Controller
 
         $patient->update($validated);
 
-        return redirect()
-            ->route('patients.index')
-            ->withSuccess(__('crud.common.saved'));
+        return redirect()->route('patients.index')->withSuccess(__('crud.common.saved'));
     }
 
     /**

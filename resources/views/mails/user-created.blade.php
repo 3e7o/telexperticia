@@ -7,7 +7,7 @@
 </head>
 <body>
 <p>Hola! estimado {{ $name }}.</p>
-<p>Su usuario de tipo "{{ $userType }}" ha sido creado correctamente en nuestra plataforma.</p>
+<p>Su usuario de tipo "{{ $userType }}" ha sido creado correctamente para el sistema de Telexperticia.</p>
 <ul>
     <li>Ingreso: <a href="{{ Config::get('app.url')  }}/login">Click aquí</a></li>
     <li>Correo: {{ $email }}</li>

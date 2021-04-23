@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\MedicalBoard;
 
 class HomeController extends Controller
 {
@@ -23,6 +23,29 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $this->authorize('view-any', MedicalBoard::class);
+        $event = [];
+        $medicalBoards = MedicalBoard::query()
+            ->itIsAuthorized()
+            ->select('medical_boards.*')
+            ->get();
+        foreach($medicalBoards as $medicalBoard){
+            $events[] = \Calendar::event(
+                $medicalBoard->code,
+                true,
+                new \DateTime(($medicalBoard->zoom)->start_time),
+                new \DateTime(($medicalBoard->zoom)->start_time.' +1 day'),
+                null,
+                // Add color and link on event
+                [
+                    'locale' => 'es',
+                    'color' => '#f05050',
+                    'url' => "/medical-boards/$medicalBoard->id",
+
+                ]
+            );
+        }
+        $calendar = \Calendar::addEvents($events);
+        return view('home', compact('calendar'));
     }
 }

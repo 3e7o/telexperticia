@@ -11,6 +11,8 @@ use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\MedicalBoardController;
 use App\Http\Controllers\GeneralSettingController;
+use App\Http\Controllers\GroupParameterController;
+use App\Http\Controllers\ParameterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,8 @@ Route::prefix('/')
     ->middleware('auth')
     ->group(function () {
         Route::resource('roles', RoleController::class);
+        Route::resource('gparameters', GroupParameterController::class);
+        Route::resource('parameters', ParameterController::class);
         Route::resource('permissions', PermissionController::class);
         Route::resource('specialties', SpecialtyController::class);
         Route::resource('doctors', DoctorController::class);

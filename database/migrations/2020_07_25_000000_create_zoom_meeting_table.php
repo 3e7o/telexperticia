@@ -20,7 +20,7 @@ class CreateZoomMeetingTable extends Migration
             $table->string('zoom_id');
             $table->string('password');
             $table->dateTime('start_time');
-            $table->integer('duration');
+            $table->integer('duration')->nullable();
             $table->string('timezone');
             $table->longText('start_url');
             $table->string('join_url');

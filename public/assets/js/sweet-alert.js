@@ -58,7 +58,7 @@ $(function() {
         },
         buttonsStyling: false,
       })
-      
+
       swalWithBootstrapButtons.fire({
         title: '¿Esta seguro?',
         text: "No podrás revertir esto!",
@@ -83,12 +83,12 @@ $(function() {
           swalWithBootstrapButtons.fire(
             'Cancelado'
           );
-		  
+
         }
-		 
+
       });
 		});
-	  
+
     } else if (type === 'message-with-auto-close') {
       let timerInterval
       Swal.fire({
@@ -166,7 +166,7 @@ $(function() {
         showConfirmButton: false,
         timer: 1113000
       });
-      
+
       Toast.fire({
         icon: 'success',
         title: 'Signed in successfully'

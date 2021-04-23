@@ -99,6 +99,23 @@
                                     </a>
                                     @endcan
                                     </div>
+                                    <div
+                                    role="group"
+                                    aria-label="Row Actions"
+                                    class="btn-group"
+                                    >
+                                            @can('delete', $permission)
+
+
+                                        <form
+                                            action="{{ route('permissions.destroy', $permission) }}"
+                                            method="POST"
+                                        >
+                                            @csrf @method('DELETE')
+                                            <button class="btn btn-danger btn-icon" type="button" onclick="showSwal('passing-parameter-execute-cancel')" id="btn-ok"><i data-feather="x-square"></i></button>
+                                        </form>
+                                        @endcan
+                                    </div>
                                 </div>
                             </td>
                         </tr>

@@ -67,6 +67,16 @@ class Report extends Model
             });
     }
 
+    public function scopeItRecords(Builder $query, $patientId)
+    {
+
+        return $query
+            ->join('medical_boards', 'reports.medical_board_id', '=', 'medical_boards.id')
+            ->when(isset($patientId), function ($query) use ($patientId) {
+                $query->where('medical_boards.patient_id', $patientId);
+            });
+    }
+
     public function getApprovedAttribute()
     {
         $medicalBoardId = $this->medicalBoard->id;
