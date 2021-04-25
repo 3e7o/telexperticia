@@ -13,6 +13,7 @@ use App\Http\Controllers\MedicalBoardController;
 use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\GroupParameterController;
 use App\Http\Controllers\ParameterController;
+use App\Http\Controllers\RecordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,7 @@ Route::prefix('/')
     ->middleware('auth')
     ->group(function () {
         Route::resource('roles', RoleController::class);
+        Route::resource('records', RecordController::class);
         Route::resource('gparameters', GroupParameterController::class);
         Route::resource('parameters', ParameterController::class);
         Route::resource('permissions', PermissionController::class);

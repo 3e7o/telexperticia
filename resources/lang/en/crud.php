@@ -55,6 +55,20 @@ return [
         ],
     ],
 
+    'antecedentes' => [
+        'name' => 'Antecedentes',
+
+        'index_title' => 'Lista de Antecedentes',
+        'create_title' => 'Crear Antecedente',
+        'edit_title' => 'Editar Antecedente',
+        'show_title' => 'Mostrar Antecedente',
+        'inputs' => [
+            'name' => 'Antecedente',
+            'date' => 'Fecha Creación',
+            'description' => 'Descripción',
+        ],
+    ],
+
     'doctores' => [
         'name' => '',
         'index_title' => 'Lista de Médicos',

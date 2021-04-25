@@ -19,7 +19,7 @@ class CreateParametersTable extends Migration
             $table->text('name')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(1);
-            $table->unsignedBigInteger('id_user_create');
+            $table->unsignedBigInteger('id_user_create')->nullable();
             $table->unsignedBigInteger('id_user_update')->nullable();
             $table->timestamps();
         });
@@ -29,8 +29,8 @@ class CreateParametersTable extends Migration
             $table->unsignedBigInteger('group_id');
             $table->text('name')->nullable();
             $table->text('description')->nullable();
-            $table->boolean('status');
-            $table->unsignedBigInteger('id_user_create');
+            $table->boolean('status')->default(1);
+            $table->unsignedBigInteger('id_user_create')->nullable();
             $table->unsignedBigInteger('id_user_update')->nullable();
             $table->timestamps();
 
