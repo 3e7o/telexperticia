@@ -7,6 +7,7 @@ use App\Models\Specialty;
 use Illuminate\Http\Request;
 use App\Http\Requests\DoctorStoreRequest;
 use App\Http\Requests\DoctorUpdateRequest;
+use Illuminate\Support\Facades\Storage;
 
 class DoctorController extends Controller
 {
@@ -48,9 +49,13 @@ class DoctorController extends Controller
 
         $doctor = Doctor::create($validated);
 
-        return redirect()
-            ->route('doctors.index')
-            ->withSuccess(__('crud.common.created'));
+        if ($request->hasFile('signature')){
+            $url=Storage::disk('public')->put('signatures', $request->file("signature"));
+            $doctor->signature = $url;
+        }
+        $doctor->save();
+
+        return redirect()->route('doctors.index')->withSuccess(__('crud.common.created'));
     }
 
     /**

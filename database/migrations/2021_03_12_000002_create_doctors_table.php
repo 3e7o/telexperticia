@@ -20,6 +20,7 @@ class CreateDoctorsTable extends Migration
             $table->string('first_surname');
             $table->string('last_surname');
             $table->string('email');
+            $table->string('signature', 100)->nullable();
 			$table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('specialty_id');
             $table->timestamps();

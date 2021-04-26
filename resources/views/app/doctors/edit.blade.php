@@ -31,6 +31,7 @@
           <h4 class="card-title">@lang('crud.doctores.edit_title')</h4>
             <x-form
                 method="PUT"
+                enctype="multipart/form-data"
                 action="{{ route('doctors.update', $doctor) }}"
                 class="mt-4"
             >

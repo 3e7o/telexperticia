@@ -20,6 +20,7 @@ class Doctor extends Model
         'email',
         'user_id',
         'specialty_id',
+        'signature',
     ];
 
     public $appends = [

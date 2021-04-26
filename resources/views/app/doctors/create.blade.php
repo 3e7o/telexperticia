@@ -11,7 +11,6 @@
   <link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
-
 @endpush
 
 @section('content')
@@ -29,6 +28,7 @@
         <div class="card-body">
           <h4 class="card-title">@lang('crud.doctores.create_title')</h4>
             <x-form
+                enctype="multipart/form-data"
                 method="POST"
                 action="{{ route('doctors.store') }}"
                 class="mt-4"

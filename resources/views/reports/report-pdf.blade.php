@@ -123,7 +123,7 @@ body,td,th {
     <div class="box-firms">
       <div class="center">
             <div class="content">
-                <img src="{{ url('assets/images/placeholder.jpg') }}" alt="..." width="150" height="50" class="card-img-top">
+                <img src="{{ url(Storage::url($doctorOwner->signature)) }}" alt="..." width="150" height="50" class="card-img-top">
                 <hr style="width: 40%">
                 Médico Tratante Encargado <br>
                 Dr.: {{ $doctorOwner->name }} {{ $doctorOwner->first_surname }} {{ $doctorOwner->last_surname }} <br>
@@ -141,12 +141,14 @@ body,td,th {
                     <td>
                         <div class="content">
                             <div class="firm">
-                                    <img src="{{ url('assets/images/placeholder.jpg') }}" alt="..." width="150" height="50" class="card-img-top">
+                                    @isset($doctorsSupervisors[$i])
+                                    <img src="{{ url(Storage::url($doctorsSupervisors[$i]->signature)) }}" alt="..." width="150" height="50" class="card-img-top">
                                     <hr style="width: 90%">
                                     Médico Participante <br>
                                     Dr.: {{ $doctorsSupervisors[$i]->name }} {{ $doctorsSupervisors[0]->first_surname }} {{ $doctorsSupervisors[$i]->last_surname }} <br>
                                     Especialidad: {{ $doctorsSupervisors[$i]->specialty->name }} <br>
                                     @php $i++; @endphp
+                                    @endisset
                             </div>
                         </div>
                     </td>
@@ -154,7 +156,7 @@ body,td,th {
                     <div class="content">
                         <div class="firm">
                                 @isset($doctorsSupervisors[$i])
-                                <img src="{{ url('assets/images/placeholder.jpg') }}" alt="..." width="150" height="50" class="card-img-top">
+                                <img src="{{ url(Storage::url($doctorsSupervisors[$i]->signature)) }}" alt="..." width="150" height="50" class="card-img-top">
                                 <hr style="width: 90%">
                                 Médico Participante <br>
                                 Dr.: {{ $doctorsSupervisors[$i]->name }} {{ $doctorsSupervisors[$i]->first_surname }} {{ $doctorsSupervisors[$i]->last_surname }} <br>
