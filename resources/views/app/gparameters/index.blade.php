@@ -5,7 +5,33 @@
   <link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endpush
+<style>
+    /* clase para ocultar el div al inicio */
 
+    .oculto {
+    display:none;
+    margin-left:2em;
+    margin-right:8em;
+    }
+
+
+    </style>
+    <script type="text/javascript">
+        <!--
+        /*****************************Ocultar div**************************/
+
+        var visto = null;
+        function ver(num) {
+
+        obj = document.getElementById(num);
+        obj.style.display = (obj==visto) ? 'none' : 'block';
+        if (visto != null)
+        visto.style.display = 'none';
+        visto = (obj==visto) ? null : obj;
+        }
+
+        -->
+        </script>
 @section('content')
 
 <div class="row">
@@ -31,15 +57,15 @@
           <div class="table-responsive">
             <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
                 <thead>
-                    <tr>
+                    <tr class="oculto">
                         <th>@lang('crud.gparametros.inputs.name')</th>
-                        <th>@lang('crud.gparametros.inputs.date')</th>
+                        <th>@lang('crud.gparametros.inputs.description')</th>
                         <th class="text-center">@lang('crud.common.actions')</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($gparameters as $gparameter)
-                    <tr>
+                    <tr class="oculto">
                         <td>{{ $gparameter->name ?? '-' }}</td>
                         <td>{{ $gparameter->description ?? '-' }}</td>
                         <td class="text-center" style="width: 250px;">

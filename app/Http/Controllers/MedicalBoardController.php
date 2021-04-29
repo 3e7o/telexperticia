@@ -36,9 +36,10 @@ class MedicalBoardController extends Controller
             ->groupBy('id')
             ->orderBy('medical_boards.id', 'DESC')
             ->select('medical_boards.*')
+            //->where('status', '<>', 'Realizado')
             ->paginate(0);
 
-
+        $this->activity_log("Listar Juntas Medicas", "medical_boards.index");
         return view(
             'app.medical_boards.index',
             compact('medicalBoards')
@@ -65,7 +66,7 @@ class MedicalBoardController extends Controller
 
         $zoom = $this->zoom_user->find($this->generalsetting->zoom_email);
         }
-
+        $this->activity_log("Formulario Junta Medica", "medical_boards.create");
         return view('app.medical_boards.create', compact('patients', 'doctors', 'doctorsSelected'));
     }
 
@@ -75,7 +76,7 @@ class MedicalBoardController extends Controller
      */
     public function store(MedicalBoardStoreRequest $request)
     {
-        $this->authorize('create', MedicalBoard::class);
+        $this->authorize('store', MedicalBoard::class);
 
         $validated = $request->validated();
 
@@ -125,7 +126,7 @@ class MedicalBoardController extends Controller
             }
         }
         /// end zoom ///
-
+        $this->activity_log("Almacenar Junta Medica", "medical_boards.store");
         return redirect()
             ->route('medical-boards.edit', $medicalBoard)
             ->withSuccess(__('crud.common.created'));
@@ -145,7 +146,7 @@ class MedicalBoardController extends Controller
         $doctorsSupervisors = $medicalBoard->doctorsSupervisors->map( function ($doctor) {
             return $doctor->fullName;
         })->implode(', ') . '.';
-
+        $this->activity_log("Ver Junta Medica", "medical_boards.show");
         return view('app.medical_boards.show', compact('medicalBoard', 'doctorsSupervisors','zoom_data'));
     }
 
@@ -167,7 +168,7 @@ class MedicalBoardController extends Controller
         $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
 
         $doctorsSelected = $medicalBoard->doctorsSupervisors->pluck('id')->toArray();
-
+        $this->activity_log("Editar Junta Medica", "medical_boards.edit");
         return view(
             'app.medical_boards.edit',
             compact('medicalBoard', 'patients', 'doctors', 'doctorsSelected','zoom','zoom_data')
@@ -199,7 +200,6 @@ class MedicalBoardController extends Controller
                 ->withInput()
                 ->withError("El Doctor {$someDoctorIsNotAvailable['name']} no esta disponible para el horario de esta junta.");
         }
-
         $medicalBoard->update($validated);
 
         $medicalBoard->doctorsSupervisors()->sync($doctorsSelected);
@@ -261,7 +261,7 @@ class MedicalBoardController extends Controller
                     }
                 }
         /// end zoom ///
-
+        $this->activity_log("Actulizar Junta Medica", "medical_boards.update");
         return redirect()
             ->route('medical-boards.edit', $medicalBoard)
             ->withSuccess(__('crud.common.saved'));
@@ -302,5 +302,9 @@ class MedicalBoardController extends Controller
         $date = $validated['date'];
 
         return MedicalBoard::areDoctorsAvailable($doctors_id, $date, $medicalBoardId);
+    }
+    public function activity_log($log_details, $fn){
+        $ac = new ActiveController();
+        $ac->saveLogData(auth()->user()->id, $log_details, 'MedicalBoardController', $fn);
     }
 }

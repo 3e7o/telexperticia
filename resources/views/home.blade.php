@@ -12,15 +12,11 @@
       <div class="col-md-3 d-none d-md-block">
         <div class="card">
           <div class="card-body">
-            <h6 class="card-title mb-4">Full calendar</h6>
+            <h6 class="card-title mb-4">Calendario Juntas Medicas</h6>
             <div id='external-events' class='external-events'>
               <div id='external-events-listing'>
-                <h6 class="mb-2 text-muted">Draggable Events</h6>
-                <div class='fc-event'>Birth Day</div>
-                <div class='fc-event'>New Project</div>
-                <div class='fc-event'>Anniversary</div>
-                <div class='fc-event'>Clent Meeting</div>
-                <div class='fc-event'>Office Trip</div>
+                <h6 class="mb-2 text-muted">Eventos</h6>
+                <div class='fc-event'>Juntas Programadas</div>
               </div>
             </div>
           </div>

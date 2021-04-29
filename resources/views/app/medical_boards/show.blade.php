@@ -3,32 +3,33 @@
 @section('title', 'Ver Junta Médica')
 @php $editing = isset($zoom_data); @endphp
 
+@push('plugin-styles')
+  <link href="{{ asset('assets/plugins/select2/select2.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugins/dropzone/dropzone.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugins/dropify/css/dropify.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
+
+  <link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
+
+@endpush
+
 @section('content')
-<div class="container">
-    <div class="card">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-light">
+      <li class="breadcrumb-item"><a href="{{ route('medical-boards.index') }}">@lang('crud.juntas_medicas.index_title')</a></li>
+      <li class="breadcrumb-item active" aria-current="page">@lang('crud.juntas_medicas.show_title')</li>
+    </ol>
+</nav>
+<br>
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+      <div class="card">
         <div class="card-body">
-            <h4 class="card-title">
-                <a href="{{ route('medical-boards.index') }}" class="mr-4"
-                    ><i class="icon ion-md-arrow-back"></i
-                ></a>
-                @lang('crud.juntas_medicas.show_title')
-
-                @if ($medicalBoard->status === 'Programado')
-
-                    <a
-                        href="{{ $zoom_data->start_url }}"
-                        target="_blank"
-                    >
-                        <button
-                            type="button"
-                            class="btn btn-outline-primary ml-4"
-                        >
-                            <i class="icon ion-md-videocam"></i>
-                        </button>
-                    </a>
-                @endif
-            </h4>
-
+            <h4 class="card-title">@lang('crud.juntas_medicas.edit_title')</h4>
             <div class="mt-4">
                 <div class="mb-4">
                     <h5>@lang('crud.juntas_medicas.inputs.date')</h5>
@@ -53,6 +54,7 @@
                     <h5>@lang('crud.juntas_medicas.inputs.status')</h5>
                     <span>{{ $medicalBoard->status ?? '-' }}</span>
                 </div>
+@if ($medicalBoard->status === 'Programado')
 @php
 if($zoom_data){
 @endphp
@@ -100,26 +102,8 @@ if($zoom_data){
 @php
 }
 @endphp
-
-            </div>
-
-            <div class="mt-4">
-                <a
-                    href="{{ route('medical-boards.index') }}"
-                    class="btn btn-light"
-                >
-                    <i class="icon ion-md-return-left"></i>
-                    @lang('crud.common.back')
-                </a>
-
-                @can('create', App\Models\MedicalBoard::class)
-                <a
-                    href="{{ route('medical-boards.create') }}"
-                    class="btn btn-light"
-                >
-                    <i class="icon ion-md-add"></i> @lang('crud.common.create')
-                </a>
-                @endcan
+@endif
+</div>
             </div>
         </div>
     </div>

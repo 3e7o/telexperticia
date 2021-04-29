@@ -41,10 +41,15 @@ class GeneralSettingController extends Controller
         $this->setEnv('APP_TIMEZONE', "$request->timezone");
 
         if($generalsetting->save()){
-            return redirect()->route('zoom')->with('success','GeneralSetting has been updated successfully');
+            $this->activity_log("API Zoom Actualizada", "zoom.zoom_config");
+            return redirect()->route('zoom')->with('success','Ajustes fueron actualizados');
         }
         else{
-            return back()->withErrors(['Something went wrong!'])->withInput();
+            return back()->withErrors(['Existio un error!'])->withInput();
         }
+    }
+    public function activity_log($log_details, $fn){
+        $ac = new ActiveController();
+        $ac->saveLogData(auth()->user()->id, $log_details, 'GeneralSettingController', $fn);
     }
 }

@@ -34,19 +34,17 @@
                                 <tr>
                                     <th aria-sort="descending">Junta Médica</th>
                                     <th>Matrícula</th>
-                                    <th>@lang('crud.juntas_medicas.inputs.patient_id')</th>
                                     <th>@lang('crud.juntas_medicas.inputs.status')</th>
-                                    @can('view', $medicalBoards)
+
                                     <th class="text-center">@lang('crud.common.actions')</th>
-                                    @endcan
+
                                 </tr>
                             </thead>
                     <tbody>
                         @forelse($medicalBoards as $medicalBoard)
-                        <tr>
+                        <tr @php if($medicalBoard->status=='Programado'){ echo "class='table-info'";}@endphp>
                             <td>{{ $medicalBoard->code }}</td>
                             <td>{{ optional($medicalBoard->patient->user)->username ?? '-'}}</td>
-                            <td>{{ optional($medicalBoard->patient)->fullName ?? '-'}}</td>
                             <td>{{ $medicalBoard->status ?? '-' }}</td>
                             <td class="text-center" style="width: 134px;">
                                 <div

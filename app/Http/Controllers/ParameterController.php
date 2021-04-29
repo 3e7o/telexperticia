@@ -13,6 +13,7 @@ class ParameterController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', Parameter::class);
         $parameters = Parameter::get();
 
         return view('app.parameters.index', compact('parameters'));
@@ -98,5 +99,9 @@ class ParameterController extends Controller
 
         return redirect()->route('parameters.index')
             ->with('success', 'Product deleted successfully');
+    }
+    public function activity_log($log_details, $fn){
+        $ac = new ActiveController();
+        $ac->saveLogData(auth()->user()->id, $log_details, 'ParameterController', $fn);
     }
 }

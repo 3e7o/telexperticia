@@ -3,6 +3,7 @@
 <div class="row">
     <x-inputs.group class="form-group col-sm-6">
         <x-inputs.datetime
+            class="form-group"
             name="date"
             label="Fecha"
             value="{{ old('date', ($editing ? optional($medicalBoard->date)->format('Y-m-d\TH:i') : '')) }}"
@@ -13,6 +14,7 @@
 
     <x-inputs.group class="form-group col-sm-6">
         <x-inputs.select name="patient_id" label="Paciente" required>
+
             @php $selected = old('patient_id', ($editing ? $medicalBoard->patient_id : '')) @endphp
             <option disabled {{ empty($selected) ? 'selected' : '' }}>Por favor seleccione un paciente</option>
             @foreach($patients as $value => $label)

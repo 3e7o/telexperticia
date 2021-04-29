@@ -8,7 +8,8 @@ use App\Models\Parameter;
 use Illuminate\Http\Request;
 use App\Http\Requests\PatientStoreRequest;
 use App\Http\Requests\PatientUpdateRequest;
-
+use App\Models\User;
+use Illuminate\Support\Str;
 class PatientController extends Controller
 {
     /**
@@ -46,10 +47,10 @@ class PatientController extends Controller
         $validated = $request->validated();
 
         $patient = Patient::create($validated);
-
-        return redirect()
-            ->route('patients.edit', $patient)
-            ->withSuccess(__('crud.common.created'));
+        $username=$patient->birthday->format('ymd').Str::substr($patient->first_surname, 0, 1).Str::substr($patient->last_surname, 0, 1).Str::substr($patient->name, 0, 1);
+        $user=User::find($patient->user_id);
+        $user->update(['username'=>$username]);
+        return redirect()->route('patients.edit', $patient)->withSuccess(__('crud.common.created'));
     }
 
     /**
@@ -107,5 +108,9 @@ class PatientController extends Controller
         return redirect()
             ->route('patients.index')
             ->withSuccess(__('crud.common.removed'));
+    }
+    public function activity_log($log_details, $fn){
+        $ac = new ActiveController();
+        $ac->saveLogData(auth()->user()->id, $log_details, 'PatientController', $fn);
     }
 }

@@ -4,12 +4,13 @@
 
 
 @section('content')
-<nav class="page-breadcrumb">
-    <ol class="breadcrumb">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-light">
       <li class="breadcrumb-item"><a href="{{ route('reports.index') }}">@lang('crud.informes.index_title')</a></li>
       <li class="breadcrumb-item active" aria-current="page">@lang('crud.informes.edit_title')</li>
     </ol>
 </nav>
+<br>
 <div class="profile-page tx-13">
   <div class="row profile-body">
     <!-- left wrapper start -->
@@ -73,8 +74,6 @@
           </div>
         </div>
       </div>
-      <!-- middle wrapper end -->
-      <!-- right wrapper start -->
       <div class="d-none d-xl-block col-xl-3 right-wrapper">
         <div class="row">
           <div class="col-md-12 grid-margin">
@@ -82,24 +81,34 @@
               <div class="card-body">
                 <h6 class="card-title">Historial</h6>
                 <div class="example">
-                    <ul class="nav nav-tabs">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                      </li>
-                    </ul>
+                    @foreach($records as $record)
+                    @if (($record->medicalBoard)->id != ($report->medicalBoard)->id)
+                    <div class="list-group">
+                        <a href="#" data-toggle="modal" data-target="#ID{{ ($record->medicalBoard)->id }}" class="list-group-item list-group-item-action">{{ optional($record->medicalBoard)->identification ?? '-' }}</a>
+                    </div>
+                      <div class="modal fade" id="ID{{ ($record->medicalBoard)->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="ID{{ ($record->medicalBoard)->id }}Title">@lang('crud.informes.inputs.medical_board_id')</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                                <div class="modal-body">
+                                    @include('app.reports.record')
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    @endif
+                    @endforeach
+                      </div>
                   </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- right wrapper end -->
     </div>
   </div>
   @endsection

@@ -25,7 +25,7 @@ class ReportController extends Controller
             ->orderBy('reports.id', 'DESC')
             ->select('reports.*')
             ->paginate(0);
-
+        $this->activity_log("Lista de informes medicos", "reports.index");
         return view('app.reports.index', compact('reports'));
     }
 
@@ -38,7 +38,7 @@ class ReportController extends Controller
         $this->authorize('create', Report::class);
 
         $medicalBoards = MedicalBoard::pluck('id', 'id');
-
+        $this->activity_log("Formulario de informe medico", "reports.create");
         return view('app.reports.create', compact('medicalBoards'));
     }
 
@@ -53,7 +53,7 @@ class ReportController extends Controller
         $validated = $request->validated();
 
         $report = Report::create($validated);
-
+        $this->activity_log("Almacenar informe medico", "reports.store");
         return redirect()
             ->route('reports.edit', $report)
             ->withSuccess(__('crud.common.created'));
@@ -97,7 +97,7 @@ class ReportController extends Controller
         ->orderBy('reports.id', 'DESC')
         ->select('reports.*')
         ->paginate(0);
-
+        $this->activity_log("Visualizar informe medico", "reports.show");
         return view('app.reports.show', compact('report', 'isSupervisor', 'approved','doctorsSupervisors','records'));
     }
 
@@ -114,8 +114,15 @@ class ReportController extends Controller
         $doctorsSupervisors = $report->medicalBoard->doctorsSupervisors->map( function ($doctor) {
             return $doctor->fullName;
         })->implode(', ') . '.';
-
-        return view('app.reports.edit', compact('report', 'medicalBoards','doctorsSupervisors'));
+        $patientId = optional($report->medicalBoard->patient)->id;
+        $records = Report::query()
+        ->itRecords($patientId)
+        ->groupBy('id')
+        ->orderBy('reports.id', 'DESC')
+        ->select('reports.*')
+        ->paginate(0);
+        $this->activity_log("Editar informe medico", "reports.edit");
+        return view('app.reports.edit', compact('report', 'medicalBoards','doctorsSupervisors','records'));
     }
 
     /**
@@ -130,7 +137,7 @@ class ReportController extends Controller
         $validated = $request->validated();
 
         $report->update($validated);
-
+        $this->activity_log("Actualizar informe medico", "reports.update");
         return redirect()
             ->route('reports.edit', $report)
             ->withSuccess(__('crud.common.saved'));
@@ -161,7 +168,7 @@ class ReportController extends Controller
         $doctorOwner = $medicalBoard->doctorOwner;
         $doctorsSupervisors = $medicalBoard->doctorsSupervisors;
         $fileName = 'Informe - ' . $medicalBoard->code . '.pdf';
-
+        $this->activity_log("Descargar informe medico", "reports.download");
         return \PDF::loadView('reports.report-pdf', compact('report', 'medicalBoard', 'patient', 'doctorOwner', 'doctorsSupervisors'))
             ->setPaper('a4')
             ->stream($fileName);
@@ -179,7 +186,11 @@ class ReportController extends Controller
             ->update([
                 'approved' => true
             ]);
-
+            $this->activity_log("Aprobar informe medico", "reports.approve");
         return back();
+    }
+    public function activity_log($log_details, $fn){
+        $ac = new ActiveController();
+        $ac->saveLogData(auth()->user()->id, $log_details, 'ReportController', $fn);
     }
 }

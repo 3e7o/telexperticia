@@ -116,4 +116,8 @@ class GroupParameterController extends Controller
         return redirect()->route('gparameters.index')
             ->with('success', 'Product deleted successfully');
     }
+    public function activity_log($log_details, $fn){
+        $ac = new ActiveController();
+        $ac->saveLogData(auth()->user()->id, $log_details, 'GroupParameterController', $fn);
+    }
 }

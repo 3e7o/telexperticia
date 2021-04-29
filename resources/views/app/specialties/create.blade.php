@@ -3,12 +3,13 @@
 @section('title', 'Crear Especialidad')
 
 @section('content')
-<nav class="page-breadcrumb">
-    <ol class="breadcrumb">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-light">
       <li class="breadcrumb-item"><a href="{{ route('specialties.index') }}">@lang('crud.especialidades.index_title')</a></li>
       <li class="breadcrumb-item active" aria-current="page">@lang('crud.especialidades.create_title')</li>
     </ol>
 </nav>
+<br>
 <div class="row">
     <div class="col-md-6 offset-3 grid-margin stretch-card">
       <div class="card">

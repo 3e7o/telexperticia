@@ -30,22 +30,47 @@ class HomeController extends Controller
             ->select('medical_boards.*')
             ->get();
         foreach($medicalBoards as $medicalBoard){
-            $events[] = \Calendar::event(
-                $medicalBoard->code,
-                true,
-                new \DateTime(($medicalBoard->zoom)->start_time),
-                new \DateTime(($medicalBoard->zoom)->start_time.' +1 day'),
-                null,
-                // Add color and link on event
-                [
-                    'locale' => 'es',
-                    'color' => '#f05050',
-                    'url' => "/medical-boards/$medicalBoard->id",
+            if(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) > \Carbon\Carbon::now() and $medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
+            {
 
-                ]
-            );
-        }
+                if($medicalBoard->code === $medicalBoard->code){
+                $events[] = \Calendar::event(
+                    $medicalBoard->code,
+                    true,
+                    new \DateTime(($medicalBoard->zoom)->start_time),
+                    new \DateTime(($medicalBoard->zoom)->start_time.' +1 day'),
+                    null,
+                    // Add color and link on event
+                    [
+                        'locale' => 'es',
+                        'color' => '#10B759',
+                        'url' => "/reports/$medicalBoard->id/editar",
+
+                    ]
+                );
+                 }
+            }elseif(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) > \Carbon\Carbon::now()){
+                $events[] = \Calendar::event(
+                    $medicalBoard->code,
+                    true,
+                    new \DateTime(($medicalBoard->zoom)->start_time),
+                    new \DateTime(($medicalBoard->zoom)->start_time.' +1 day'),
+                    null,
+                    // Add color and link on event
+                    [
+                        'locale' => 'es',
+                        'color' => '#10B759',
+                        'url' => "/reports/$medicalBoard->id",
+
+                    ]
+                );
+            }
+         }
         $calendar = \Calendar::addEvents($events);
         return view('home', compact('calendar'));
+    }
+    public function activity_log($log_details, $fn){
+        $ac = new ActiveController();
+        $ac->saveLogData(auth()->user()->id, $log_details, 'HomeController', $fn);
     }
 }

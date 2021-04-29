@@ -17,13 +17,15 @@
 @endpush
 
 @section('content')
-<nav class="page-breadcrumb">
-    <ol class="breadcrumb">
+<div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-light">
       <li class="breadcrumb-item"><a href="{{ route('users.index') }}">@lang('crud.usuarios.index_title')</a></li>
       <li class="breadcrumb-item active" aria-current="page">@lang('crud.usuarios.edit_title')</li>
     </ol>
 </nav>
-
+</div>
+<br>
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
       <div class="card">

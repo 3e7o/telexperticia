@@ -54,7 +54,7 @@ class RecordController extends Controller
      */
     public function store(RecordStoreRequest $request)
     {
-        $this->authorize('create', Record::class);
+        $this->authorize('store', Record::class);
 
         $validated = $request->validated();
 
@@ -95,6 +95,7 @@ class RecordController extends Controller
      */
     public function edit(Request $request, Record $record)
     {
+        $this->authorize('edit', RecordController::class);
         $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
 
         $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
@@ -150,5 +151,9 @@ class RecordController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function activity_log($log_details, $fn){
+        $ac = new ActiveController();
+        $ac->saveLogData(auth()->user()->id, $log_details, 'RecordController', $fn);
     }
 }

@@ -21,7 +21,7 @@
                             <thead>
                                 <tr>
                                     <th>@lang('crud.informes.inputs.medical_board_id')</th>
-                                    <th>Paciente</th>
+                                    <th>Matrícula</th>
                                     <th>Especialidad</th>
                                     <th>Estado</th>
                                     <th class="text-center">@lang('crud.common.actions')</th>
@@ -34,7 +34,7 @@
                                         {{ optional($report->medicalBoard)->code ?? '-' }}
                                     </td>
                                     <td>
-                                        {{ optional($report->medicalBoard->patient)->fullName ?? '-' }}
+                                        {{ optional($report->medicalBoard->patient)->matricula ?? '-' }}
                                     </td>
                                     <td>
                                         {{ optional($report->medicalBoard->doctorOwner->specialty)->name ?? '-' }}

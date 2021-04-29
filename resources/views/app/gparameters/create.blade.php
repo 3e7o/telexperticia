@@ -15,12 +15,15 @@
 @endpush
 
 @section('content')
-<nav class="page-breadcrumb">
-    <ol class="breadcrumb">
+<div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-light">
       <li class="breadcrumb-item"><a href="{{ route('gparameters.index') }}">@lang('crud.gparametros.index_title')</a></li>
       <li class="breadcrumb-item active" aria-current="page">@lang('crud.gparametros.create_title')</li>
     </ol>
 </nav>
+</div>
+
 <div class="row">
     <div class="col-md-6 offset-3 grid-margin stretch-card">
       <div class="card">

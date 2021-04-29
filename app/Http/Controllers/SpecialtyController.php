@@ -107,4 +107,8 @@ class SpecialtyController extends Controller
             ->route('specialties.index')
             ->withSuccess(__('crud.common.removed'));
     }
+    public function activity_log($log_details, $fn){
+        $ac = new ActiveController();
+        $ac->saveLogData(auth()->user()->id, $log_details, 'SpecialtyController', $fn);
+    }
 }

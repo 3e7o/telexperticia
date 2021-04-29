@@ -64,6 +64,6 @@ class Patient extends Model
     }
     public function getMatriculaAttribute()
     {
-        return $this->birthday->format('ymd').Str::substr($this->last_surname, 0, 1).Str::substr($this->last_surname, 0, 1).Str::substr($this->name, 0, 1);
+        return $this->birthday->format('ymd').Str::substr($this->first_surname, 0, 1).Str::substr($this->last_surname, 0, 1).Str::substr($this->name, 0, 1);
     }
 }

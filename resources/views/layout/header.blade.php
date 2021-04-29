@@ -49,9 +49,7 @@
     <a class="nav-link" href="{{ route('home') }}">Dashboard</a>
 </li> --}}
 
-@if (Auth::user()->can('view-any', Spatie\Permission\Models\User::class) ||
-    Auth::user()->can('view-any', Spatie\Permission\Models\Doctor::class) ||
-    Auth::user()->can('view-any', Spatie\Permission\Models\Patient::class))
+@if (Auth::user()->can('view-any', Spatie\Permission\Models\MedicalBoard::class))
 
 <li class="nav-item {{ active_class(['home']) }}">
     <a class="nav-link" href="{{ url('home') }}">
@@ -69,7 +67,12 @@
               <i class="link-arrow"></i>
             </a>
             <div class="submenu">
-
+                <ul class="submenu-item">
+                    @can('view-any', App\Models\MedicalBoard::class)
+                    <li class="category-heading">Historia Clinica<li>
+                    <li class="nav-item"><a class="nav-link {{ active_class(['records']) }}" href="{{ route('records.create') }}">Antecedentes</a></li>
+                    @endcan
+                  </ul>
             </div>
           </li>
 @endif
@@ -89,7 +92,7 @@
                 <li class="category-heading">Programar Junta</li>
                 <li class="nav-item"><a class="nav-link {{ active_class(['medical-boards']) }}" href="{{ route('medical-boards.index') }}">Juntas Médicas</a></li>
                 @endcan
-                @can('view-any', App\Models\Report::class)
+                @can('view-any', App\Models\Role::class)
                 <li class="category-heading">Lista de Informes<li>
                 <li class="nav-item"><a class="nav-link {{ active_class(['reports']) }}" href="{{ route('reports.index') }}">Informes</a></li>
                 @endcan
@@ -140,6 +143,16 @@
                 @endcan
                 @can('view-any', Spatie\Permission\Models\Role::class)
                 <li class="nav-item"><a class="nav-link {{ active_class(['zoom']) }}" href="{{ route('zoom') }}">API Zoom</a></li>
+                @endcan
+                @can('view-any', Spatie\Permission\Models\Role::class)
+                <li class="nav-item"><a class="nav-link {{ active_class(['activeLog']) }}" href="{{ route('activeLog') }}">Registro de Actividades</a></li>
+                @endcan
+                <li class="category-heading">Parametros<li>
+                @can('view-any', Spatie\Permission\Models\Role::class)
+                <li class="nav-item"><a class="nav-link {{ active_class(['gparameters']) }}" href="{{ route('gparameters.index') }}">Grupos de Parametros</a></li>
+                @endcan
+                @can('view-any', Spatie\Permission\Models\Role::class)
+                <li class="nav-item"><a class="nav-link {{ active_class(['parameters']) }}" href="{{ route('parameters.index') }}">Contenido de Parametros</a></li>
                 @endcan
                 <li class="category-heading">Roles y permisos<li>
                 @can('view-any', Spatie\Permission\Models\Role::class)

@@ -4,12 +4,13 @@
 
 
 @section('content')
-<nav class="page-breadcrumb">
-    <ol class="breadcrumb">
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-light">
       <li class="breadcrumb-item"><a href="{{ route('reports.index') }}">@lang('crud.informes.index_title')</a></li>
       <li class="breadcrumb-item active" aria-current="page">@lang('crud.informes.show_title')</li>
     </ol>
 </nav>
+<br>
 <div class="profile-page tx-13">
   <div class="row profile-body">
     <!-- left wrapper start -->

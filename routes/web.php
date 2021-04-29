@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiveController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -54,4 +55,5 @@ Route::prefix('/')
         Route::patch('general/{id}/update', [GeneralSettingController::class, 'update_general'])->name('general.update');
 		Route::get('zoom/', [GeneralSettingController::class, 'zoom'])->name('zoom');
         Route::patch('zoom/{id}/update', [GeneralSettingController::class, 'update_zoom'])->name('zoom.update');
+        Route::get('activeLog', [ActiveController::class, 'getActiveLog'])->name('activeLog');
     });

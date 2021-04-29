@@ -20,7 +20,7 @@ class DoctorController extends Controller
         $this->authorize('view-any', Doctor::class);
 
         $doctors = Doctor::get();
-
+        $this->activity_log("Vista de lista de medicos", "doctors.index");
         return view('app.doctors.index', compact('doctors'));
     }
 
@@ -33,7 +33,7 @@ class DoctorController extends Controller
         $this->authorize('create', Doctor::class);
 
         $specialties = Specialty::pluck('name', 'id');
-
+        $this->activity_log("Formulario creear usuario medico", "doctors.create");
         return view('app.doctors.create', compact('specialties'));
     }
 
@@ -54,7 +54,7 @@ class DoctorController extends Controller
             $doctor->signature = $url;
         }
         $doctor->save();
-
+        $this->activity_log("Almacenar usuario medico", "doctors.store");
         return redirect()->route('doctors.index')->withSuccess(__('crud.common.created'));
     }
 
@@ -66,7 +66,7 @@ class DoctorController extends Controller
     public function show(Request $request, Doctor $doctor)
     {
         $this->authorize('view', $doctor);
-
+        $this->activity_log("Visualizar usuario medico", "doctors.show");
         return view('app.doctors.show', compact('doctor'));
     }
 
@@ -80,7 +80,7 @@ class DoctorController extends Controller
         $this->authorize('update', $doctor);
 
         $specialties = Specialty::pluck('name', 'id');
-
+        $this->activity_log("Editar usuario medico", "doctors.edit");
         return view('app.doctors.edit', compact('doctor', 'specialties'));
     }
 
@@ -96,7 +96,7 @@ class DoctorController extends Controller
         $validated = $request->validated();
 
         $doctor->update($validated);
-
+        $this->activity_log("Actualizar usuario medico", "doctors.update");
         return redirect()
             ->route('doctors.edit', $doctor)
             ->withSuccess(__('crud.common.saved'));
@@ -116,5 +116,9 @@ class DoctorController extends Controller
         return redirect()
             ->route('doctors.index')
             ->withSuccess(__('crud.common.removed'));
+    }
+    public function activity_log($log_details, $fn){
+        $ac = new ActiveController();
+        $ac->saveLogData(auth()->user()->id, $log_details, 'DoctorController', $fn);
     }
 }
