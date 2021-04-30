@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "351b98d268dadd70e4cc8d8223cf9c7e",
+    "content-hash": "f8a51cf97dc58df6ece177646056b85f",
     "packages": [
         {
             "name": "acaronlex/laravel-calendar",
@@ -56,6 +56,59 @@
                 "source": "https://github.com/acaronlex/laravel-calendar/tree/1.3"
             },
             "time": "2021-01-18T21:34:10+00:00"
+        },
+        {
+            "name": "arielmejiadev/larapex-charts",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ArielMejiaDev/larapex-charts.git",
+                "reference": "7de57e5aed5b0851cf6043376addc838ef5123dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ArielMejiaDev/larapex-charts/zipball/7de57e5aed5b0851cf6043376addc838ef5123dd",
+                "reference": "7de57e5aed5b0851cf6043376addc838ef5123dd",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ArielMejiaDev\\LarapexCharts\\LarapexChartsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LarapexChart": "ArielMejiaDev\\LarapexCharts\\Facades\\LarapexChart"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ArielMejiaDev\\LarapexCharts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ArielMejiaDev",
+                    "email": "arielmejiadev@gmail.com"
+                }
+            ],
+            "description": "Package to provide easy api to build apex charts on Laravel",
+            "support": {
+                "issues": "https://github.com/ArielMejiaDev/larapex-charts/issues",
+                "source": "https://github.com/ArielMejiaDev/larapex-charts/tree/2.1.0"
+            },
+            "time": "2021-02-14T19:12:26+00:00"
         },
         {
             "name": "asm89/stack-cors",

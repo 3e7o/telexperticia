@@ -108,6 +108,7 @@ class MedicalBoard extends Model
                 $query->where('medical_boards.patient_id', $patientId);
             });
     }
+
     public static function areDoctorsAvailable ($doctors_id, $date, $medicalBoardId = null)
     {
         $doctor = [];

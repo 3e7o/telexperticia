@@ -39,6 +39,13 @@ class MedicalBoardController extends Controller
             //->where('status', '<>', 'Realizado')
             ->paginate(0);
 
+            foreach($medicalBoards as $medicalBoard){
+                if($medicalBoard->status == 'Programado' and ((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) < \Carbon\Carbon::now())
+                {
+                    $medicalBoard->update(['status'=>'Expirado']);
+                }
+             }
+
         $this->activity_log("Listar Juntas Medicas", "medical_boards.index");
         return view(
             'app.medical_boards.index',
@@ -118,7 +125,6 @@ class MedicalBoardController extends Controller
                         'duration'      => $request->zoom_duration,
                         'password'      => $meeting->password,
                         'timezone'      => $meeting->timezone,
-                        'duration'      => $request->zoom_duration,
                         "start_url"     => $meeting->start_url,
                         "join_url"      => $meeting->join_url,
                     ));
@@ -243,7 +249,6 @@ class MedicalBoardController extends Controller
                                 'duration'      => $request->zoom_duration,
                                 'password'      => $meeting->password,
                                 'timezone'      => $meeting->timezone,
-                                'duration'      => $request->zoom_duration,
                                 "start_url"     => $meeting->start_url,
                                 "join_url"      => $meeting->join_url,
                             ));

@@ -13,18 +13,6 @@ $(function() {
       "language": {
 		url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Spanish.json'
       }
-	  "rowDefs": [
-	{
-		"targets": [ 2 ],
-		"visible": false,
-		"searchable": false
-	},
-	{
-		"targets": [ 3 ],
-		"visible": false
-	}
-	]
-
     });
     $('#dataTableExample').each(function() {
       var datatable = $(this);

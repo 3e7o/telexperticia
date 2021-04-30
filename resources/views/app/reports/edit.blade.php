@@ -54,7 +54,19 @@
         <div class="col-md-12 grid-margin">
           <div class="card rounded">
             <div class="card-body">
+                <a
+                href="{{ route('reports.download', $report) }}"
+                target="_blank"
+                >
+                    <button
+                        type="button"
+                        class="float-right btn btn-light btn-icon"
+                    >
+                        <i data-feather="download"></i>
+                    </button>
+                </a>
             <h6 class="card-title mb-0">Informe de Junta Médica</h6>
+
             <x-form
                 method="PUT"
                 action="{{ route('reports.update', $report) }}"

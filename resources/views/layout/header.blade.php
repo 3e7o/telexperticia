@@ -1,15 +1,22 @@
 <div class="horizontal-menu">
 <!-- Logo - Usuario -->
   <nav class="navbar top-navbar">
+
     <div class="container">
       <div class="navbar-content">
         <a href="#" class="navbar-brand">
           COSSMIL
         </a><img src="{{ asset('logo.png') }}" alt="" width="60" height="60">
+
         <ul class="navbar-nav">
+
           <li class="nav-item dropdown nav-profile">
+            <span class="navbar-text">
+                {{ Auth::user()->name }}
+            </span>
             <a class="feather feather-user" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="more-horizontal"></i>
             </a>
+
             <div class="dropdown-menu" aria-labelledby="profileDropdown">
               <div class="dropdown-header d-flex flex-column align-items-center">
                 <div class="info text-center">
@@ -17,6 +24,7 @@
                   <p class="email text-muted mb-3">{{ Auth::user()->email }}</p>
                 </div>
               </div>
+
               <div class="dropdown-body">
                 <ul class="profile-nav p-0 pt-3">
                   <li class="nav-item">
@@ -34,6 +42,7 @@
             </div>
           </li>
         </ul>
+
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
           <i data-feather="menu"></i>
         </button>
@@ -53,8 +62,8 @@
 
 <li class="nav-item {{ active_class(['home']) }}">
     <a class="nav-link" href="{{ url('home') }}">
-      <i class="link-icon" data-feather="activity"></i>
-      <span class="menu-title">Información</span>
+      <i class="link-icon" data-feather="calendar"></i>
+      <span class="menu-title">Calendario</span>
     </a>
   </li>
   @endif
@@ -143,6 +152,9 @@
                 @endcan
                 @can('view-any', Spatie\Permission\Models\Role::class)
                 <li class="nav-item"><a class="nav-link {{ active_class(['zoom']) }}" href="{{ route('zoom') }}">API Zoom</a></li>
+                @endcan
+                @can('view-any', Spatie\Permission\Models\Role::class)
+                <li class="nav-item"><a class="nav-link {{ active_class(['stats']) }}" href="{{ route('stats') }}">Informacón del Sistema</a></li>
                 @endcan
                 @can('view-any', Spatie\Permission\Models\Role::class)
                 <li class="nav-item"><a class="nav-link {{ active_class(['activeLog']) }}" href="{{ route('activeLog') }}">Registro de Actividades</a></li>

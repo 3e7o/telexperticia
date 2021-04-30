@@ -55,6 +55,40 @@
           <div class="card rounded">
             <div class="card-body">
                 <h6 class="card-title mb-0">@lang('crud.informes.show_title')
+                    @if (($report->medicalBoard)->status === 'Programado')
+                    @php
+                    if(($report->medicalBoard)->zoom){
+                    @endphp
+                        <a
+                            href="{{ optional(($report->medicalBoard)->zoom)->start_url ?? '-'}}"
+                            target="_blank"
+                        >
+                        <button
+                            type="button"
+                            class="btn btn-outline-primary btn-icon "
+                        >
+                            <i data-feather="video"></i>
+                        </button>
+                        </a>
+
+                    @php
+                    }else {
+                    @endphp
+                        <a
+                            href="{{ ($report->medicalBoard)->meet }}"
+                            target="_blank"
+                        >
+                        <button
+                            type="button"
+                            class="text-right float-right btn btn-outline-primary btn-icon"
+                        >
+                            <i data-feather="video"></i>
+                        </button>
+                        </a>
+                    @php
+                    }
+                    @endphp
+                    @endif
                     @if ($isSupervisor)
                         @if ($approved)
                             <span class="text-right float-right btn btn-sm btn-info">

@@ -15,6 +15,7 @@ use App\Http\Controllers\GeneralSettingController;
 use App\Http\Controllers\GroupParameterController;
 use App\Http\Controllers\ParameterController;
 use App\Http\Controllers\RecordController;
+use App\Http\Controllers\StatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,8 @@ Route::prefix('/')
         Route::resource('patients', PatientController::class);
         Route::resource('medical-boards', MedicalBoardController::class);
         Route::resource('reports', ReportController::class);
+        Route::get('stats', [StatController::class, 'index'])->name('stats');
+        Route::get('stats/download', [StatController::class, 'download'])->name('stats.download');
         Route::get('reports/{report}/download', [ReportController::class, 'download'])->name('reports.download');
         Route::get('reports/{report}/approve', [ReportController::class, 'approve'])->name('reports.approve');
         Route::resource('users', UserController::class);

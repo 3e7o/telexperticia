@@ -24,41 +24,38 @@ class HomeController extends Controller
     public function index()
     {
         $this->authorize('view-any', MedicalBoard::class);
-        $event = [];
+        $events = [];
         $medicalBoards = MedicalBoard::query()
             ->itIsAuthorized()
             ->select('medical_boards.*')
             ->get();
         foreach($medicalBoards as $medicalBoard){
-            if(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) > \Carbon\Carbon::now() and $medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
+            if(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) > \Carbon\Carbon::now() and $medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id)
             {
 
-                if($medicalBoard->code === $medicalBoard->code){
                 $events[] = \Calendar::event(
                     $medicalBoard->code,
-                    true,
+                    false,
                     new \DateTime(($medicalBoard->zoom)->start_time),
-                    new \DateTime(($medicalBoard->zoom)->start_time.' +1 day'),
-                    null,
+                    new \DateTime(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))->addMinutes(($medicalBoard->zoom)->duration))->format('Y-m-d H:i:s')),
+                    1,
                     // Add color and link on event
                     [
-                        'locale' => 'es',
                         'color' => '#10B759',
                         'url' => "/reports/$medicalBoard->id/editar",
 
                     ]
                 );
-                 }
+
             }elseif(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) > \Carbon\Carbon::now()){
                 $events[] = \Calendar::event(
                     $medicalBoard->code,
-                    true,
+                    false,
                     new \DateTime(($medicalBoard->zoom)->start_time),
-                    new \DateTime(($medicalBoard->zoom)->start_time.' +1 day'),
-                    null,
+                    new \DateTime(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))->addMinutes(($medicalBoard->zoom)->duration))->format('Y-m-d H:i:s')),
+                    2,
                     // Add color and link on event
                     [
-                        'locale' => 'es',
                         'color' => '#10B759',
                         'url' => "/reports/$medicalBoard->id",
 
@@ -66,7 +63,17 @@ class HomeController extends Controller
                 );
             }
          }
-        $calendar = \Calendar::addEvents($events);
+        $calendar = \Calendar::addEvents($events)->setOptions([
+            'locale' => 'es',
+            'firstDay' => 0,
+            'displayEventTime' => true,
+            'selectable' => true,
+            'initialView' => 'dayGridMonth',
+            'headerToolbar' => [
+                'end' => 'today prev,next dayGridMonth timeGridWeek timeGridDay'
+            ]
+        ]);
+
         return view('home', compact('calendar'));
     }
     public function activity_log($log_details, $fn){
