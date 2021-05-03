@@ -20,6 +20,7 @@
                         <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
                             <thead>
                                 <tr>
+                                    <th style="display:none;" aria-sort="descending">Fecha</th>
                                     <th>@lang('crud.informes.inputs.medical_board_id')</th>
                                     <th>Matrícula</th>
                                     <th>Especialidad</th>
@@ -30,6 +31,7 @@
                             <tbody>
                                 @forelse($reports as $report)
                                 <tr>
+                                    <td style="display:none;">{{ ($report->medicalBoard)->date ?? '-' }}</td>
                                     <td>
                                         {{ optional($report->medicalBoard)->code ?? '-' }}
                                     </td>
@@ -108,6 +110,7 @@
                                             class="btn-group"
                                             >
                                             @can('update', $report)
+                                            @if ($report->approved=='No aprobado')
                                                 @if ($report->medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
                                                     <a
                                                         href="{{ route('reports.edit', $report) }}"
@@ -120,6 +123,7 @@
                                                         </button>
                                                     </a>
                                                 @endif
+                                                @endif
                                             @endcan
                                             </div>
                                             <div
@@ -128,17 +132,20 @@
                                             class="btn-group"
                                             >
                                             @can('view', $report)
-                                                <a
-                                                    href="{{ route('reports.download', $report) }}"
-                                                    target="_blank"
+                                            @if ($report->approved=='Aprobado')
+                                            <a
+                                                href="{{ route('reports.download', $report) }}"
+                                                target="_blank"
+                                            >
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-light btn-icon"
                                                 >
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-light btn-icon"
-                                                    >
-                                                        <i data-feather="download"></i>
-                                                    </button>
-                                                </a>
+                                                    <i data-feather="download"></i>
+                                                </button>
+                                            </a>
+                                            @endif
+
                                             @endcan @can('delete', $report)
 
                                             {{-- <form

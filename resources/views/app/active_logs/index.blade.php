@@ -25,15 +25,15 @@
                         <th>Detalle de Actividad</th>
                         <th>Correo</th>
                         <th>Nombre</th>
-                        <th>Fecha de Actividad</th>
+                        <th aria-sort="descending">Fecha de Actividad</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($activityList as $data)
                         <tr>
-                            <td>{{ $data->log_details }}. <strong style="color: mediumvioletred">realizado por: {{ $data->users->username }}</strong></td>
-                            <td>{{ $data->users->email }}</td>
-                            <td>{{ $data->users->name }}</td>
+                            <td>{{ $data->log_details }}. <strong style="color: mediumvioletred">realizado por: {{ optional($data->users)->username }}</strong></td>
+                            <td>{{ optional($data->users)->email }}</td>
+                            <td>{{ optional($data->users)->name }}</td>
                             <td>{{ $data->created_at }}</td>
                         </tr>
                     @endforeach

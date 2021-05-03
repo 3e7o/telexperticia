@@ -33,6 +33,7 @@
                 <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
                     <thead>
                         <tr>
+                            <th style="display:none;" aria-sort="descending">Fecha</th>
                             <th>@lang('crud.doctores.inputs.name')</th>
                             <th>@lang('crud.doctores.inputs.first_surname')</th>
                             <th>@lang('crud.doctores.inputs.specialty_id')</th>
@@ -45,6 +46,7 @@
                     <tbody>
                         @forelse($doctors as $doctor)
                         <tr>
+                            <td style="display:none;">{{ $doctor->created_at ?? '-' }}</td>
                             <td>{{ $doctor->name ?? '-' }}</td>
                             <td>{{ $doctor->first_surname ?? '-' }}</td>
                             <td>{{ optional($doctor->specialty)->name ?? '-' }}</td>

@@ -25,7 +25,7 @@ class MedicalBoardFactory extends Factory
     {
         return [
             'date' => $this->faker->dateTime,
-            'status' => Arr::random(['Programado', 'Realizado', 'Cancelado']),
+            'status' => Arr::random(['Programado', 'Cancelado']),
             'patient_id' => \App\Models\Patient::factory(),
             'doctor_id' => \App\Models\Doctor::factory(),
         ];

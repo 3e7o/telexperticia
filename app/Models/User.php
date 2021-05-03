@@ -87,11 +87,11 @@ class User extends Authenticatable
         $email = $userCreated->email;
         $userType = $this->types[$type];
 
-        Mail::send('mails.user-created', compact('name', 'email', 'password', 'userType'), function($message) use ($email) {
-            $message->from('no-reply@telexperticia.com', 'Administración');
-            $message->subject('Notificación de creación de usuario.');
-            $message->to($email);
-        });
+        //Mail::send('mails.user-created', compact('name', 'email', 'password', 'userType'), function($message) use ($email) {
+       //     $message->from('no-reply@telexperticia.com', 'Administración');
+       //     $message->subject('Notificación de creación de usuario.');
+       //     $message->to($email);
+       // });
     }
 
     public function updateUser($user) : void

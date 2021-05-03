@@ -19,10 +19,11 @@ class ActiveController extends Controller
 
     public function getActiveLog(){
         $this->authorize('getActiveLog', ActiveController::class);
-        $activityList = Active::with('users')->Where('user_id', auth()->user()->id)->orderBy('id','desc')->get();
+
+        $activityList = Active::with('users')->get();
         //dd($activityList);
         //$this->activity_log("Vista de Registro de Actividad", "getActiveLog");
-        return view('app.active_logs.index')->with('activityList', $activityList);
+        return view('app.active_logs.index', compact('activityList'));
     }
 
 

@@ -32,7 +32,8 @@
                       <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
                             <thead>
                                 <tr>
-                                    <th aria-sort="descending">Junta Médica</th>
+                                    <th style="display:none;" aria-sort="descending">Fecha</th>
+                                    <th>Junta Médica</th>
                                     <th>Matrícula</th>
                                     <th>@lang('crud.juntas_medicas.inputs.status')</th>
 
@@ -43,9 +44,11 @@
                     <tbody>
                         @forelse($medicalBoards as $medicalBoard)
                         <tr @php if($medicalBoard->status=='Programado'){ echo "class='table-info'";}@endphp>
+                            <td style="display:none;">{{ $medicalBoard->date ?? '-' }}</td>
                             <td>{{ $medicalBoard->code }}</td>
                             <td>{{ optional($medicalBoard->patient->user)->username ?? '-'}}</td>
                             <td>{{ $medicalBoard->status ?? '-' }}</td>
+
                             <td class="text-center" style="width: 134px;">
                                 <div
                                     role="group"

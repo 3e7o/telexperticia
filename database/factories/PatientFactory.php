@@ -33,6 +33,7 @@ class PatientFactory extends Factory
             'force' => Arr::random(['Ejercito', 'Armada', 'Aerea']),
             'gender' => Arr::random(['Hombre', 'Mujer']),
             'birthday' => $this->faker->date,
+            //'username' => $this->birthday->format('ymd').Str::substr($this->first_surname, 0, 1).Str::substr($this->last_surname, 0, 1).Str::substr($this->name, 0, 1),
         ];
     }
 }

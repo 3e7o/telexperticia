@@ -54,6 +54,7 @@
         <div class="col-md-12 grid-margin">
           <div class="card rounded">
             <div class="card-body">
+                @if ($report->approved=='Aprobado')
                 <a
                 href="{{ route('reports.download', $report) }}"
                 target="_blank"
@@ -65,6 +66,7 @@
                         <i data-feather="download"></i>
                     </button>
                 </a>
+                @endif
             <h6 class="card-title mb-0">Informe de Junta Médica</h6>
 
             <x-form

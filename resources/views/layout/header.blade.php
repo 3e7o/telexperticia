@@ -12,7 +12,7 @@
 
           <li class="nav-item dropdown nav-profile">
             <span class="navbar-text">
-                {{ Auth::user()->name }}
+                {{ Auth::user()->name }}   .
             </span>
             <a class="feather feather-user" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="more-horizontal"></i>
             </a>
@@ -20,7 +20,7 @@
             <div class="dropdown-menu" aria-labelledby="profileDropdown">
               <div class="dropdown-header d-flex flex-column align-items-center">
                 <div class="info text-center">
-                  <p class="name font-weight-bold mb-0">{{ Auth::user()->name }}</p>
+                  <p class="name font-weight-bold mb-0">{{ Auth::user()->name  }}</p>
                   <p class="email text-muted mb-3">{{ Auth::user()->email }}</p>
                 </div>
               </div>
@@ -99,6 +99,7 @@
               <ul class="submenu-item">
                 @can('view-any', App\Models\MedicalBoard::class)
                 <li class="category-heading">Programar Junta</li>
+                <li class="nav-item"><a class="nav-link {{ active_class(['medical-boards/crear']) }}" href="{{ route('medical-boards.create') }}">Nueva Médicas</a></li>
                 <li class="nav-item"><a class="nav-link {{ active_class(['medical-boards']) }}" href="{{ route('medical-boards.index') }}">Juntas Médicas</a></li>
                 @endcan
                 @can('view-any', App\Models\Role::class)

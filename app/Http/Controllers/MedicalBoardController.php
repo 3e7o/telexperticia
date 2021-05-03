@@ -8,8 +8,11 @@ use App\Models\MedicalBoard;
 use Illuminate\Http\Request;
 use App\Http\Requests\MedicalBoardStoreRequest;
 use App\Http\Requests\MedicalBoardUpdateRequest;
+use App\Models\Report;
 use App\Policies\MedicalBoardPolicy;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MedicalBoardController extends Controller
 {
@@ -29,24 +32,35 @@ class MedicalBoardController extends Controller
      */
     public function index(Request $request)
     {
+        $this->activity_log("Listar Juntas Medicas", "medical_boards.index");
         $this->authorize('view-any', MedicalBoard::class);
 
         $medicalBoards = MedicalBoard::query()
             ->itIsAuthorized()
             ->groupBy('id')
             ->orderBy('medical_boards.id', 'DESC')
-            ->select('medical_boards.*')
-            //->where('status', '<>', 'Realizado')
-            ->paginate(0);
+            ->get();
 
             foreach($medicalBoards as $medicalBoard){
-                if($medicalBoard->status == 'Programado' and ((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) < \Carbon\Carbon::now())
+                $medicalBoardId = $medicalBoard->id;
+                $approved = Collect(DB::table('doctor_medical_board')
+                    ->where('medical_board_id', $medicalBoardId)
+                    ->pluck('approved'));
+                $total = $approved->count();
+                $sum = $approved->sum();
+
+                $status = $total === $sum ? 'Aprobado' : 'No aprobado';
+                if($status =='Aprobado')
+                {
+                    $medicalBoard->update(['status'=>'Realizado']);
+                }
+                if((isset(($medicalBoard->zoom)->start_time)) and $medicalBoard->status == 'Programado' and ((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) < \Carbon\Carbon::now())
                 {
                     $medicalBoard->update(['status'=>'Expirado']);
                 }
              }
 
-        $this->activity_log("Listar Juntas Medicas", "medical_boards.index");
+
         return view(
             'app.medical_boards.index',
             compact('medicalBoards')
@@ -310,6 +324,6 @@ class MedicalBoardController extends Controller
     }
     public function activity_log($log_details, $fn){
         $ac = new ActiveController();
-        $ac->saveLogData(auth()->user()->id, $log_details, 'MedicalBoardController', $fn);
+        $ac->saveLogData(Auth::user()->id, $log_details, 'MedicalBoardController', $fn);
     }
 }

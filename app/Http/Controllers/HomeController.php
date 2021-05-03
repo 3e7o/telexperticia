@@ -30,7 +30,7 @@ class HomeController extends Controller
             ->select('medical_boards.*')
             ->get();
         foreach($medicalBoards as $medicalBoard){
-            if(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) > \Carbon\Carbon::now() and $medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id)
+            if((isset(($medicalBoard->zoom)->start_time)) and ((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) > \Carbon\Carbon::now() and $medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id)
             {
 
                 $events[] = \Calendar::event(
@@ -47,7 +47,7 @@ class HomeController extends Controller
                     ]
                 );
 
-            }elseif(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) > \Carbon\Carbon::now()){
+            }elseif((isset(($medicalBoard->zoom)->start_time)) and ((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) > \Carbon\Carbon::now()){
                 $events[] = \Calendar::event(
                     $medicalBoard->code,
                     false,

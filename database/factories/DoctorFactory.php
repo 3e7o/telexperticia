@@ -25,6 +25,7 @@ class DoctorFactory extends Factory
         return [
             'ci' => $this->faker->numberBetween(10000001, 99999999),
             'name' => $this->faker->firstName,
+            //'username' => $this->faker->firstName.$this->faker->lastName,
             'first_surname' => $this->faker->lastName,
             'last_surname' => $this->faker->lastName,
             'email' => $this->faker->email,

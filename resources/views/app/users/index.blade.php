@@ -42,6 +42,7 @@
             <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
                     <thead>
                         <tr>
+                            <th style="display:none;" aria-sort="descending">Fecha</th>
                             <th>@lang('crud.usuarios.inputs.name')</th>
                             <th>@lang('crud.usuarios.inputs.username')</th>
                             <th>@lang('crud.usuarios.inputs.email')</th>
@@ -52,6 +53,7 @@
                     <tbody>
                         @forelse($users as $user)
                         <tr>
+                            <td style="display:none;">{{ $user->created_at ?? '-' }}</td>
                             <td>{{ $user->name ?? '-' }}</td>
                             <td>{{ $user->username ?? '-' }}</td>
                             <td>{{ $user->email}}</td>
