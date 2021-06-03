@@ -13,12 +13,9 @@ class Doctor extends Model
     use Searchable;
 
     protected $fillable = [
-        'ci',
-        'name',
-        'first_surname',
-        'last_surname',
-        'email',
         'user_id',
+        'signature',
+        'regional_id',
         'specialty_id',
         'signature',
     ];

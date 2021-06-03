@@ -20,7 +20,7 @@
                 @csrf
                 <div class="form-group">
                   <label for="username">Usuario</label>
-                  <input id="email" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
+                  <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autocomplete="on" autofocus>
                             @if ($errors->has('username'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('username') }}</strong>

@@ -16,7 +16,8 @@ class CreateSpecialtiesTable extends Migration
         Schema::create('specialties', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-
+            $table->unsignedBigInteger('id_user_create')->nullable();
+            $table->unsignedBigInteger('id_user_update')->nullable();
             $table->timestamps();
         });
     }

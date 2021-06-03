@@ -13,15 +13,13 @@ class Patient extends Model
     use Searchable;
 
     protected $fillable = [
-        'ci',
-        'name',
-        'email',
-        'first_surname',
-        'last_surname',
-        'force',
-        'address',
+        'mat_asegurado',
+        'mat_beneficiario',
         'gender',
         'birthday',
+        'type',
+        'address',
+        'force',
         'user_id',
     ];
 
