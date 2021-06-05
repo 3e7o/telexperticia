@@ -17,18 +17,19 @@ class DatabaseSeeder extends Seeder
         $user = \App\Models\User::factory()
             ->count(1)
             ->create([
+                'username' => 'admin',
                 'email' => 'admin@admin.com',
                 'password' => \Hash::make('admin'),
             ]);
         $this->call(PermissionsSeeder::class);
         $this->call(SpecialtySeeder::class);
-        $this->call(DoctorSeeder::class);
-        $this->call(UserSeeder::class);
-        $this->call(PatientSeeder::class);
+        //$this->call(DoctorSeeder::class);
+        //$this->call(UserSeeder::class);
+        //$this->call(PatientSeeder::class);
         $this->call(GeneralSettingsTableSeeder::class);
         $this->call(GroupParameterSeeder::class);
         $this->call(ParameterSeeder::class);
-        $this->call(MedicalBoardSeeder::class);
-       $this->call(ReportSeeder::class);
+        //$this->call(MedicalBoardSeeder::class);
+       //$this->call(ReportSeeder::class);
     }
 }
