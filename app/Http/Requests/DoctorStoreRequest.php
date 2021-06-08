@@ -24,8 +24,11 @@ class DoctorStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'regional_id' => ['required', 'max:255', 'string'],
-            'signature' => 'nullable',
+            'ci' => ['required', 'max:255', 'string'],
+            'name' => ['required', 'max:255', 'string'],
+            'first_surname' => ['required', 'max:255', 'string'],
+            'last_surname' => ['required', 'max:255', 'string'],
+            'email' => ['required', 'email'],
             'specialty_id' => ['required', 'exists:specialties,id'],
         ];
     }

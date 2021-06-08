@@ -21,16 +21,7 @@ class User extends Authenticatable
     use Searchable;
     use HasApiTokens;
 
-    protected $fillable = [
-        'ci',
-        'name',
-        'first_surname',
-        'last_surname', 
-        'username', 
-        'email',
-        'birthday',
-        'gender', 
-        'password'];
+    protected $fillable = ['name', 'username', 'email', 'password'];
 
     protected $searchableFields = ['*'];
 
@@ -76,10 +67,7 @@ class User extends Authenticatable
         $password = Str::random(8);
         $userCreated = User::factory()
             ->create([
-                'ci' => $user->ci,
                 'name' => $user->name,
-                'first_surname' => $user->first_surname,
-                'last_surname' => $user->last_surname,               
                 'email' => $user->email,
                 'username' => $user->username,
                 'password' => bcrypt($password)

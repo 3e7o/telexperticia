@@ -4,64 +4,11 @@
     <x-inputs.group class="col-sm-12 col-lg-6">
         <x-inputs.text
             name="name"
-            label="Nombres"
+            label="Nombre"
             value="{{ old('name', ($editing ? $user->name : '')) }}"
             maxlength="255"
             required
         ></x-inputs.text>
-    </x-inputs.group>
-
-    <x-inputs.group class="col-sm-12 col-lg-6">
-        <x-inputs.text
-            name="first_surname"
-            label="Apellido Paterno"
-            value="{{ old('name', ($editing ? $user->first_surname : '')) }}"
-            maxlength="255"
-            required
-        ></x-inputs.text>
-    </x-inputs.group>
-
-    <x-inputs.group class="col-sm-12 col-lg-6">
-        <x-inputs.text
-            name="last_surname"
-            label="Apellido Materno"
-            value="{{ old('name', ($editing ? $user->last_surname : '')) }}"
-            maxlength="255"
-            required
-        ></x-inputs.text>
-    </x-inputs.group>
-
-    <x-inputs.group class="col-sm-12 col-lg-6">
-        <x-inputs.text
-            name="ci"
-            label="Carnet de Identidad"
-            value="{{ old('name', ($editing ? $user->ci : '')) }}"
-            maxlength="255"
-            required
-        ></x-inputs.text>
-    </x-inputs.group>
-
-    <x-inputs.group class="col-sm-12 col-lg-6">
-        <x-inputs.select name="gender" label="Género">
-            @php $selected = old('gender', ($editing ? $user->gender : '')) @endphp
-            @foreach ($genders as  $gender)
-               <?php if(isset($gender)){
-                ?>
-                <option value="{{ ($gender->name) }}" {{ $selected == ($gender->name) ? 'selected' : '' }} >{{ ucfirst($gender->name) }}</option>
-               <?php
-               }?>
-               @endforeach
-        </x-inputs.select>
-    </x-inputs.group>
-
-    <x-inputs.group class="col-sm-12 col-lg-6">
-        <x-inputs.date
-            name="birthday"
-            label="Fecha de Nacimiento"
-            value="{{ old('birthday', ($editing ? optional($user->birthday)->format('Y-m-d') : '')) }}"
-            max="255"
-            required
-        ></x-inputs.date>
     </x-inputs.group>
 
     <x-inputs.group class="col-sm-12 col-lg-6">

@@ -38,7 +38,7 @@ class GeneralSettingController extends Controller
 
         $this->setEnv('ZOOM_CLIENT_KEY', "$request->api_key");
         $this->setEnv('ZOOM_CLIENT_SECRET', "$request->api_secret");
-        $this->setEnv('APP_TIMEZONE', "$request->timezone");
+        $this->setEnv('APP_TIMEZONE', "America/La_Paz");
 
         if($generalsetting->save()){
             $this->activity_log("API Zoom Actualizada", "zoom.zoom_config");
