@@ -27,7 +27,9 @@ class User extends Authenticatable
         'first_surname',
         'last_surname', 
         'username', 
-        'email', 
+        'email',
+        'birthday',
+        'gender', 
         'password'];
 
     protected $searchableFields = ['*'];
@@ -56,12 +58,12 @@ class User extends Authenticatable
 
     public function isSuperAdmin()
     {
-        return $this->hasRole('super-admin');
+        return $this->hasRole('Super-admin');
     }
 
     public function isDoctor()
     {
-        return $this->hasRole('medico');
+        return $this->hasRole('Medico');
     }
 
     /**
@@ -74,7 +76,10 @@ class User extends Authenticatable
         $password = Str::random(8);
         $userCreated = User::factory()
             ->create([
+                'ci' => $user->ci,
                 'name' => $user->name,
+                'first_surname' => $user->first_surname,
+                'last_surname' => $user->last_surname,               
                 'email' => $user->email,
                 'username' => $user->username,
                 'password' => bcrypt($password)

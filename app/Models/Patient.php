@@ -15,8 +15,6 @@ class Patient extends Model
     protected $fillable = [
         'mat_asegurado',
         'mat_beneficiario',
-        'gender',
-        'birthday',
         'type',
         'address',
         'force',
@@ -58,7 +56,9 @@ class Patient extends Model
 
     public function getFullNameAttribute()
     {
-        return "{$this->name} {$this->first_surname}";
+        $name = optional($this->user)->name;
+        $first_surname = optional($this->user)->first_surname;
+        return "{$name} {$first_surname}";
     }
     public function getMatriculaAttribute()
     {

@@ -77,9 +77,9 @@ class MedicalBoardController extends Controller
         $this->authorize('create', MedicalBoard::class);
         $open_zoom = $request->open_zoom;
 
-        $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
+        $patients = Patient::select('id', 'user_id')->get()->pluck('fullName', 'id');
 
-        $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
+        $doctors = Doctor::select('id', 'user_id', 'specialty_id')->get()->pluck('fullName', 'id');
 
         $doctorsSelected = [];
 
@@ -183,9 +183,9 @@ class MedicalBoardController extends Controller
 
         $zoom_data = $medicalBoard->zoom;
 
-        $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
+        $patients = Patient::select('id', 'user_id')->get()->pluck('fullName', 'id');
 
-        $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
+        $doctors = Doctor::select('id', 'user_id', 'specialty_id')->get()->pluck('fullName', 'id');
 
         $doctorsSelected = $medicalBoard->doctorsSupervisors->pluck('id')->toArray();
         $this->activity_log("Editar Junta Medica", "medical_boards.edit");
@@ -240,7 +240,7 @@ class MedicalBoardController extends Controller
                             'topic'         => $request->name,
                             'start_time'    => $datetime,
                             'duration'      => $request->zoom_duration,
-                            'timezone'      => env('APP_TIMEZONE')
+                            'timezone'      => env('APP_TIMEZONE'),
                         ));
                         if($zoomMeeting){
                             $medicalBoard->zoom()->update(array(
@@ -253,7 +253,7 @@ class MedicalBoardController extends Controller
                             'topic'         => $request->name,
                             'start_time'    => $datetime,
                             'duration'      => $request->zoom_duration,
-                            'timezone'      => env('APP_TIMEZONE')
+                            'timezone'      => env('APP_TIMEZONE'),
                         ));
                         if($meeting){
                             $meetingId = $meeting->id;

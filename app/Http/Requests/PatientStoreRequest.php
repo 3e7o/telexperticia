@@ -30,8 +30,6 @@ class PatientStoreRequest extends FormRequest
             'last_surname' => ['required', 'max:255', 'string'],
             'email' => ['required', 'email'],
             'force' => ['required', 'max:255', 'string'],
-            'birthday' => ['required', 'date', 'date'],
-            'gender' => ['required'],
             'address' => ['required', 'max:255', 'string'],
         ];
     }

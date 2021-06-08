@@ -1,22 +1,12 @@
 @php $editing = isset($doctor) @endphp
 
 <div class="row">
-    <x-inputs.group class="col-sm-12 col-lg-6">
-        <x-inputs.text
-            name="ci"
-            label="Cédula de Identidad"
-            value="{{ old('ci', ($editing ? $doctor->ci : '')) }}"
-            minlength="5"
-            maxlength="255"
-
-        ></x-inputs.text>
-    </x-inputs.group>
 
     <x-inputs.group class="col-sm-12 col-lg-6">
         <x-inputs.text
             name="name"
             label="Nombres"
-            value="{{ old('name', ($editing ? $doctor->name : '')) }}"
+            value="{{ old('name', ($editing ? optional($doctor->user)->name : '')) }}"
             maxlength="255"
 
         ></x-inputs.text>
@@ -26,7 +16,7 @@
         <x-inputs.text
             name="first_surname"
             label="Apellido Paterno"
-            value="{{ old('first_surname', ($editing ? $doctor->first_surname : '')) }}"
+            value="{{ old('first_surname', ($editing ? optional($doctor->user)->first_surname : '')) }}"
             minlength="3"
             maxlength="255"
 
@@ -37,9 +27,30 @@
         <x-inputs.text
             name="last_surname"
             label="Apellido Materno"
-            value="{{ old('last_surname', ($editing ? $doctor->last_surname : '')) }}"
+            value="{{ old('last_surname', ($editing ? optional($doctor->user)->last_surname : '')) }}"
             maxlength="255"
 
+        ></x-inputs.text>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.text
+            name="ci"
+            label="Cédula de Identidad"
+            value="{{ old('ci', ($editing ? optional($doctor->user)->ci : '')) }}"
+            minlength="5"
+            maxlength="255"
+
+        ></x-inputs.text>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.text
+            name="username"
+            label="Usuario"
+            value="{{ old('username', ($editing ? optional($doctor->user)->username ?? (optional($user->patient)->matricula) : '')) }}"
+            maxlength="255"
+            required
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -47,10 +58,23 @@
         <x-inputs.email
             name="email"
             label="Email"
-            value="{{ old('email', ($editing ? $doctor->email : '')) }}"
+            value="{{ old('email', ($editing ? optional($doctor->user)->email : '')) }}"
             maxlength="255"
 
         ></x-inputs.email>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.select name="regional_id" label="Regional">
+            @php $selected = old('regional_id', ($editing ? $doctor->regional_id : '')) @endphp
+            @foreach ($regionals as  $regional)
+               <?php if(isset($regional)){
+                ?>
+                <option value="{{ ($regional->name) }}" {{ $selected == ($regional->name) ? 'selected' : '' }} >{{ ucfirst($regional->name) }}</option>
+               <?php
+               }?>
+               @endforeach
+        </x-inputs.select>
     </x-inputs.group>
 
     <x-inputs.group class="col-sm-12 col-lg-6">

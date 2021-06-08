@@ -7,6 +7,8 @@ use App\Models\Specialty;
 use Illuminate\Http\Request;
 use App\Http\Requests\DoctorStoreRequest;
 use App\Http\Requests\DoctorUpdateRequest;
+use App\Models\Parameter;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 class DoctorController extends Controller
@@ -31,10 +33,10 @@ class DoctorController extends Controller
     public function create(Request $request)
     {
         $this->authorize('create', Doctor::class);
-
+        $regionals = Parameter::select('name')->where("group_id","=",7)->get();
         $specialties = Specialty::pluck('name', 'id');
         $this->activity_log("Formulario creear usuario medico", "doctors.create");
-        return view('app.doctors.create', compact('specialties'));
+        return view('app.doctors.create', compact('specialties','regionals'));
     }
 
     /**
@@ -80,8 +82,9 @@ class DoctorController extends Controller
         $this->authorize('update', $doctor);
 
         $specialties = Specialty::pluck('name', 'id');
+        $regionals = Parameter::select('name')->where("group_id","=",7)->get();
         $this->activity_log("Editar usuario medico", "doctors.edit");
-        return view('app.doctors.edit', compact('doctor', 'specialties'));
+        return view('app.doctors.edit', compact('doctor', 'specialties','regionals'));
     }
 
     /**
@@ -94,8 +97,12 @@ class DoctorController extends Controller
         $this->authorize('update', $doctor);
 
         $validated = $request->validated();
-
         $doctor->update($validated);
+        if ($request->hasFile('signature')){
+            $url=Storage::disk('public')->put('signatures', $request->file("signature"));
+            $doctor->signature = $url;
+        }
+        $doctor->save();
         $this->activity_log("Actualizar usuario medico", "doctors.update");
         return redirect()
             ->route('doctors.edit', $doctor)

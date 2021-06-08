@@ -47,8 +47,8 @@
                         @forelse($doctors as $doctor)
                         <tr>
                             <td style="display:none;">{{ $doctor->created_at ?? '-' }}</td>
-                            <td>{{ $doctor->name ?? '-' }}</td>
-                            <td>{{ $doctor->first_surname ?? '-' }}</td>
+                            <td>{{ optional($doctor->user)->name ?? '-' }}</td>
+                            <td>{{ optional($doctor->user)->first_surname ?? '-' }}</td>
                             <td>{{ optional($doctor->specialty)->name ?? '-' }}</td>
                             <td>{{ $doctor->created_at->format('d-m-Y') ?? '-' }}</td>
                             <td class="text-center" style="width: 134px;">

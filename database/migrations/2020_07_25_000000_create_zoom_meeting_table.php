@@ -27,7 +27,6 @@ class CreateZoomMeetingTable extends Migration
             $table->longText('ref_text')->nullable();
             $table->boolean('status')->default(0);
             $table->timestamps();
-
             $table->primary(['meeting_id', 'meeting_type'], 'model_has_zoom_meeting_meeting_type_primary');
         });
     }
