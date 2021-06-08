@@ -24,16 +24,10 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'ci' => ['required', 'max:255', 'string'],
             'name' => ['required', 'max:255', 'string'],
-            'first_surname' => ['required', 'max:255', 'string'],
-            'last_surname' => ['required', 'max:255', 'string'],
             'username' => ['required', 'max:255', 'string'],
             'email' => ['required', 'email'],
-            'password' => ['required'],
             'roles' => 'array',
-            'birthday' => ['required', 'date', 'date'],
-            'gender' => ['required'],
             'password' => 'nullable'
         ];
     }

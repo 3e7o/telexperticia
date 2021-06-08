@@ -13,9 +13,14 @@ class Doctor extends Model
     use Searchable;
 
     protected $fillable = [
-        'signature',
-        'regional_id',
+        'ci',
+        'name',
+        'first_surname',
+        'last_surname',
+        'email',
+        'user_id',
         'specialty_id',
+        'signature',
     ];
 
     public $appends = [
@@ -24,6 +29,18 @@ class Doctor extends Model
 
     protected $searchableFields = ['*'];
 
+    protected static function boot() :void
+    {
+        parent::boot();
+
+        self::creating(function ($table) {
+            $table->user_id = (new User())->createUser($table, 'Medico');
+        });
+
+        self::updating(function ($table) {
+            (new User())->updateUser($table);
+        });
+    }
 
     public function user()
     {
@@ -47,8 +64,6 @@ class Doctor extends Model
 
     public function getFullNameAttribute()
     {
-        $name = optional($this->user)->name;
-        $first_surname = optional($this->user)->first_surname;
-        return "{$name} {$first_surname} ({$this->specialty->name})";
+        return "{$this->name} {$this->first_surname} ({$this->specialty->name})";
     }
 }

@@ -13,11 +13,20 @@ class Patient extends Model
     use Searchable;
 
     protected $fillable = [
+        'ci',
+        'name',
+        'email',
+        'first_surname',
+        'last_surname',
+        'gender',
+        'birthday',
         'mat_asegurado',
         'mat_beneficiario',
         'type',
-        'address',
         'force',
+        'address',
+        'gender',
+        'birthday',
         'user_id',
     ];
 
@@ -56,9 +65,7 @@ class Patient extends Model
 
     public function getFullNameAttribute()
     {
-        $name = optional($this->user)->name;
-        $first_surname = optional($this->user)->first_surname;
-        return "{$name} {$first_surname}";
+        return "{$this->name} {$this->first_surname}";
     }
     public function getMatriculaAttribute()
     {

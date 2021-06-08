@@ -23,8 +23,6 @@ class MedicalBoard extends Model
 
     protected $searchableFields = [];
 
-    
-
     protected $casts = [
         'date' => 'datetime',
     ];

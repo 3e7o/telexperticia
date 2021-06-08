@@ -8,7 +8,6 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Models\Parameter;
 
 class UserController extends Controller
 {
@@ -34,10 +33,10 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $this->authorize('create', User::class);
-        $genders = Parameter::select('name')->where("group_id","=",2)->get();
+
         $roles = Role::get();
 
-        return view('app.users.create', compact('roles','genders'));
+        return view('app.users.create', compact('roles'));
     }
 
     /**
@@ -81,10 +80,10 @@ class UserController extends Controller
     public function edit(Request $request, User $user)
     {
         $this->authorize('update', $user);
-        $genders = Parameter::select('name')->where("group_id","=",2)->get();
+
         $roles = Role::get();
 
-        return view('app.users.edit', compact('user', 'roles','genders'));
+        return view('app.users.edit', compact('user', 'roles'));
     }
 
     /**
