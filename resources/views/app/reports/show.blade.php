@@ -91,8 +91,8 @@
                     @endif
                     @if ($isSupervisor)
                         @if ($approved)
-                            <span class="text-right float-right btn btn-sm btn-info">
-                                <i class="btn btn-secondary"></i>
+                            <span class="text-right float-right btn btn-success">
+                              <i data-feather="check-square"></i>
                                 Reporte Aprobado
                             </span>
                         @else

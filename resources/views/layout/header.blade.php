@@ -99,10 +99,12 @@
               <ul class="submenu-item">
                 @can('view-any', App\Models\MedicalBoard::class)
                 <li class="category-heading">Programar Junta</li>
+                @can('create', App\Models\MedicalBoard::class)
                 <li class="nav-item"><a class="nav-link {{ active_class(['medical-boards/crear']) }}" href="{{ route('medical-boards.create') }}">Nueva Médicas</a></li>
+                @endcan
                 <li class="nav-item"><a class="nav-link {{ active_class(['medical-boards']) }}" href="{{ route('medical-boards.index') }}">Juntas Médicas</a></li>
                 @endcan
-                @can('view-any', App\Models\Role::class)
+                @can('view-any', App\Models\MedicalBoard::class)
                 <li class="category-heading">Lista de Informes<li>
                 <li class="nav-item"><a class="nav-link {{ active_class(['reports']) }}" href="{{ route('reports.index') }}">Informes</a></li>
                 @endcan

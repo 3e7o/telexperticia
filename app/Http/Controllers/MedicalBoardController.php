@@ -183,7 +183,7 @@ class MedicalBoardController extends Controller
 
         $zoom_data = $medicalBoard->zoom;
 
-        $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
+        $patients = Patient::select('id', 'name', 'first_surname', 'user_id')->get()->pluck('fullName', 'id');
 
         $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
 
