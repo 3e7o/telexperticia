@@ -28,6 +28,7 @@ class Patient extends Model
         'gender',
         'birthday',
         'user_id',
+        'phone',
     ];
 
     protected $searchableFields = ['*'];
@@ -65,7 +66,8 @@ class Patient extends Model
 
     public function getFullNameAttribute()
     {
-        return "{$this->name} {$this->first_surname}";
+        $matricula=optional($this->user)->username;
+        return "{$this->name} {$this->first_surname} ($matricula)";
     }
     public function getMatriculaAttribute()
     {

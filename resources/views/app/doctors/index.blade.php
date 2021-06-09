@@ -35,8 +35,8 @@
                         <tr>
                             <th style="display:none;" aria-sort="descending">Fecha</th>
                             <th>@lang('crud.doctores.inputs.name')</th>
-                            <th>@lang('crud.doctores.inputs.first_surname')</th>
                             <th>@lang('crud.doctores.inputs.specialty_id')</th>
+                            <th>Regional</th>
                             <th>@lang('crud.doctores.date')</th>
                             <th class="text-center">
                                 @lang('crud.common.actions')
@@ -47,9 +47,9 @@
                         @forelse($doctors as $doctor)
                         <tr>
                             <td style="display:none;">{{ $doctor->created_at ?? '-' }}</td>
-                            <td>{{ $doctor->name ?? '-' }}</td>
-                            <td>{{ $doctor->first_surname ?? '-' }}</td>
+                            <td>{{ $doctor->fullnames ?? '-' }}</td>
                             <td>{{ optional($doctor->specialty)->name ?? '-' }}</td>
+                            <td>{{ $doctor->regional ?? '-' }}</td>
                             <td>{{ $doctor->created_at->format('d-m-Y') ?? '-' }}</td>
                             <td class="text-center" style="width: 134px;">
                                     <div

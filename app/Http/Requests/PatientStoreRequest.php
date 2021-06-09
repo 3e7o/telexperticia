@@ -32,10 +32,11 @@ class PatientStoreRequest extends FormRequest
             'force' => ['required', 'max:255', 'string'],
             'birthday' => ['required', 'date', 'date'],
             'gender' => ['required'],
-            'mat_asegurado'=> ['required'],
-            'mat_beneficiario'=> ['required'],
+            'mat_asegurado'=> 'nullable',
+            'mat_beneficiario'=> 'nullable',
             'type'=> ['required'],
             'address' => ['required', 'max:255', 'string'],
+            'phone' => 'nullable',
         ];
     }
 }

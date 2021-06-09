@@ -72,7 +72,6 @@
             label="Matricula Asegurado"
             value="{{ old('mat_asegurado', ($editing ? $patient->mat_asegurado : '')) }}"
             maxlength="255"
-            required
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -82,7 +81,7 @@
             label="Matricula Beneficiario"
             value="{{ old('mat_beneficiario', ($editing ? $patient->mat_beneficiario : '')) }}"
             maxlength="255"
-            required
+            disabled
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -98,12 +97,25 @@
 
     <x-inputs.group class="col-sm-12 col-lg-6">
         <x-inputs.text
-            name="type"
-            label="Tipo"
-            value="{{ old('type', ($editing ? $patient->type : '')) }}"
+            name="phone"
+            label="Teléfono"
+            value="{{ old('phone', ($editing ? $patient->phone : '')) }}"
             maxlength="255"
             required
         ></x-inputs.text>
+    </x-inputs.group>
+
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.select name="type" label="Tipo de Asegurado">
+            @php $selected = old('type', ($editing ? $patient->type : '')) @endphp
+            @foreach ($tipo_users as  $tipo_user)
+               <?php if(isset($tipo_user)){
+                ?>
+                <option value="{{ ($tipo_user->name) }}" {{ $selected == ($tipo_user->name) ? 'selected' : '' }} >{{ ucfirst($tipo_user->name) }}</option>
+               <?php
+               }?>
+               @endforeach
+        </x-inputs.select>
     </x-inputs.group>
 
     <x-inputs.group class="col-sm-12 col-lg-6">

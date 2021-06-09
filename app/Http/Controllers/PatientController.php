@@ -34,7 +34,8 @@ class PatientController extends Controller
     {
         $this->authorize('create', Patient::class);
         $genders = Parameter::select('name')->where("group_id","=",2)->get();
-        return view('app.patients.create',compact('genders'));
+        $tipo_users = Parameter::select('name')->where("group_id","=",8)->get();
+        return view('app.patients.create',compact('genders','tipo_users'));
     }
 
     /**
@@ -49,6 +50,7 @@ class PatientController extends Controller
 
         $patient = Patient::create($validated);
         $username=$patient->birthday->format('ymd').Str::substr($patient->first_surname, 0, 1).Str::substr($patient->last_surname, 0, 1).Str::substr($patient->name, 0, 1);
+        $patient->update(['mat_beneficiario'=>$username]);
         $user=User::find($patient->user_id);
         $user->update(['username'=>$username]);
         return redirect()->route('patients.edit', $patient)->withSuccess(__('crud.common.created'));
@@ -75,8 +77,8 @@ class PatientController extends Controller
     {
         $this->authorize('update', $patient);
         $genders = Parameter::select('name')->where("group_id","=",2)->get();
-
-        return view('app.patients.edit', compact('patient', 'genders'));
+        $tipo_users = Parameter::select('name')->where("group_id","=",8)->get();
+        return view('app.patients.edit', compact('patient', 'genders','tipo_users'));
     }
 
     /**

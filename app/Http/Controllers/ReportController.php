@@ -90,7 +90,7 @@ class ReportController extends Controller
 
         $records = Report::query()
         ->itRecords($patientId)
-        ->groupBy('id')
+        ->groupBy('reports.id')
         ->orderBy('reports.id', 'DESC')
         ->select('reports.*')
         ->paginate(0);
@@ -114,7 +114,7 @@ class ReportController extends Controller
         $patientId = optional($report->medicalBoard->patient)->id;
         $records = Report::query()
         ->itRecords($patientId)
-        ->groupBy('id')
+        ->groupBy('reports.id')
         ->orderBy('reports.id', 'DESC')
         ->select('reports.*')
         ->paginate(0);

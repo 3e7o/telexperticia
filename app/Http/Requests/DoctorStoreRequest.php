@@ -29,6 +29,7 @@ class DoctorStoreRequest extends FormRequest
             'first_surname' => ['required', 'max:255', 'string'],
             'last_surname' => ['required', 'max:255', 'string'],
             'email' => ['required', 'email'],
+            'regional' => ['required', 'max:255', 'string'],
             'specialty_id' => ['required', 'exists:specialties,id'],
         ];
     }

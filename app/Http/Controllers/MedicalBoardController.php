@@ -77,7 +77,7 @@ class MedicalBoardController extends Controller
         $this->authorize('create', MedicalBoard::class);
         $open_zoom = $request->open_zoom;
 
-        $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
+        $patients = Patient::select('id', 'name', 'first_surname', 'user_id')->get()->pluck('fullName', 'id');
 
         $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
 

@@ -7,6 +7,7 @@ use App\Models\Specialty;
 use Illuminate\Http\Request;
 use App\Http\Requests\DoctorStoreRequest;
 use App\Http\Requests\DoctorUpdateRequest;
+use App\Models\Parameter;
 use Illuminate\Support\Facades\Storage;
 
 class DoctorController extends Controller
@@ -33,8 +34,9 @@ class DoctorController extends Controller
         $this->authorize('create', Doctor::class);
 
         $specialties = Specialty::pluck('name', 'id');
+        $regionals = Parameter::select('name')->where("group_id","=",7)->get();
         $this->activity_log("Formulario creear usuario medico", "doctors.create");
-        return view('app.doctors.create', compact('specialties'));
+        return view('app.doctors.create', compact('specialties','regionals'));
     }
 
     /**
@@ -80,8 +82,9 @@ class DoctorController extends Controller
         $this->authorize('update', $doctor);
 
         $specialties = Specialty::pluck('name', 'id');
+        $regionals = Parameter::select('name')->where("group_id","=",7)->get();
         $this->activity_log("Editar usuario medico", "doctors.edit");
-        return view('app.doctors.edit', compact('doctor', 'specialties'));
+        return view('app.doctors.edit', compact('doctor', 'specialties', 'regionals'));
     }
 
     /**

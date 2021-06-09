@@ -37,6 +37,15 @@ class ParameterSeeder extends Seeder
             ['group_id' => '6 ','name'=> 'Armada', 'created_at' => $now, 'updated_at' => $now],
             ['group_id' => '6 ','name'=> 'Ejercito', 'created_at' => $now, 'updated_at' => $now],
             ['group_id' => '6 ','name'=> 'Aerea', 'created_at' => $now, 'updated_at' => $now],
+            ['group_id' => '7 ','name'=> 'La Paz', 'created_at' => $now, 'updated_at' => $now],
+            ['group_id' => '7 ','name'=> 'Sucre', 'created_at' => $now, 'updated_at' => $now],
+            ['group_id' => '7 ','name'=> 'Santa Cruz', 'created_at' => $now, 'updated_at' => $now],
+            ['group_id' => '8 ','name'=> 'Activo', 'created_at' => $now, 'updated_at' => $now],
+            ['group_id' => '8 ','name'=> 'Pasivo', 'created_at' => $now, 'updated_at' => $now],
+            ['group_id' => '8 ','name'=> 'Beneficiario', 'created_at' => $now, 'updated_at' => $now],
+            ['group_id' => '8 ','name'=> 'Cadete Alumno', 'created_at' => $now, 'updated_at' => $now],
+            ['group_id' => '8 ','name'=> 'Soldado', 'created_at' => $now, 'updated_at' => $now],
+            ['group_id' => '8 ','name'=> 'Otro', 'created_at' => $now, 'updated_at' => $now],
         ]);
     }
 }

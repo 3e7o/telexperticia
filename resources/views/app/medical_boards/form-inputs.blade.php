@@ -13,7 +13,7 @@
     </x-inputs.group>
 
     <x-inputs.group class="form-group col-sm-6">
-        <x-inputs.select name="patient_id" label="Paciente" required>
+        <x-inputs.select class="js-example-basic-single" name="patient_id" label="Paciente" required>
 
             @php $selected = old('patient_id', ($editing ? $medicalBoard->patient_id : '')) @endphp
             <option disabled {{ empty($selected) ? 'selected' : '' }}>Por favor seleccione un paciente</option>
@@ -33,7 +33,7 @@
     </x-inputs.group>
 
     <x-inputs.group class="form-group col-sm-6">
-        <x-inputs.select name="doctor_id" label="Medico Tratante Encargado" required>
+        <x-inputs.select class="js-example-basic-single  w-100" name="doctor_id" label="Medico Tratante Encargado" required>
             @php $selected = old('doctor_id', ($editing ? $medicalBoard->doctor_id : '')) @endphp
             <option disabled {{ empty($selected) ? 'selected' : '' }}>Por favor seleccione un meédico</option>
             @foreach($doctors as $value => $label)

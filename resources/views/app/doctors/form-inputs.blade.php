@@ -63,6 +63,19 @@
         </x-inputs.select>
     </x-inputs.group>
 
+    <x-inputs.group class="col-sm-12 col-lg-6">
+        <x-inputs.select name="regional" label="Regional">
+            @php $selected = old('regional', ($editing ? $doctor->regional : '')) @endphp
+            @foreach ($regionals as  $regional)
+               <?php if(isset($regional)){
+                ?>
+                <option value="{{ ($regional->name) }}" {{ $selected == ($regional->name) ? 'selected' : '' }} >{{ ucfirst($regional->name) }}</option>
+               <?php
+               }?>
+               @endforeach
+        </x-inputs.select>
+    </x-inputs.group>
+
         <div class="col-md-6 offset-3">
           <div class="card">
             <div class="card-body">

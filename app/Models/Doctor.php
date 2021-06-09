@@ -21,6 +21,7 @@ class Doctor extends Model
         'user_id',
         'specialty_id',
         'signature',
+        'regional',
     ];
 
     public $appends = [
@@ -65,5 +66,10 @@ class Doctor extends Model
     public function getFullNameAttribute()
     {
         return "{$this->name} {$this->first_surname} ({$this->specialty->name})";
+    }
+    
+    public function getFullNamesAttribute()
+    {
+        return "{$this->first_surname} {$this->name}";
     }
 }

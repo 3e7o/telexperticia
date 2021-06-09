@@ -22,6 +22,8 @@ class GroupParameterSeeder extends Seeder
         ['name' =>  'Operaciones', 'created_at' => $now, 'updated_at' => $now],
         ['name' =>  'Alergias', 'created_at' => $now, 'updated_at' => $now],
         ['name' =>  'Fuerza', 'created_at' => $now, 'updated_at' => $now],
+        ['name' =>  'Regionales', 'created_at' => $now, 'updated_at' => $now],
+        ['name' =>  'Tipo de Asegurado', 'created_at' => $now, 'updated_at' => $now],
         ]);
     }
 }
