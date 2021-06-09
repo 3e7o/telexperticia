@@ -16,6 +16,7 @@ class CreateRecordsTable extends Migration
 
         Schema::create('records', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('patient_id');
             $table->text('record_familiar')->nullable();
             $table->text('record_clinic')->nullable();
             $table->text('blood_type')->nullable();
@@ -23,6 +24,10 @@ class CreateRecordsTable extends Migration
             $table->unsignedBigInteger('id_user_create')->nullable();
             $table->unsignedBigInteger('id_user_update')->nullable();
             $table->timestamps();
+            $table
+                ->foreign('patient_id')
+                ->references('id')
+                ->on('patients');
         });
 
         Schema::create('vaccines', function (Blueprint $table) {
@@ -87,5 +92,6 @@ class CreateRecordsTable extends Migration
         Schema::dropIfExists('vaccines');
         Schema::dropIfExists('allergies');
         Schema::dropIfExists('operations');
+        Schema::dropForeign('patient_id');
     }
 }
