@@ -99,7 +99,7 @@ class DoctorController extends Controller
         $validated = $request->validated();
 
         $doctor->update($validated);
-        if ($request->hasFile('signature')){
+         if ($request->hasFile('signature')){
             $url=Storage::disk('public')->put('images', $request->file("signature"));
             $doctor->signature = $url;
         }
