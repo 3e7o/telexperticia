@@ -129,7 +129,7 @@ class MedicalBoardController extends Controller
                     'topic'         => $request->name,
                     'start_time'    => $datetime,
                     'duration'      => $request->zoom_duration,
-                    'timezone'      => env('APP_TIMEZONE')
+                    'timezone'      => 'America/La_Paz',
                 ));
                 if($meeting){
                     $meetingId = $meeting->id;

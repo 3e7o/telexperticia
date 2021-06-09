@@ -168,7 +168,7 @@ class ReportController extends Controller
         $fileName = 'Informe - ' . $medicalBoard->code . '.pdf';
         $pdf= PDF::loadView('reports.report-pdf', compact('report', 'medicalBoard', 'patient', 'doctorOwner', 'doctorsSupervisors'))->setPaper('a4');
         $this->activity_log("Descargar informe medico", "reports.download");
-        return $pdf->stream();
+        return $pdf->stream($fileName);
             //->download($fileName);
     }
 
