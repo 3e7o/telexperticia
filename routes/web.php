@@ -29,7 +29,7 @@ use App\Http\Controllers\StatController;
 */
 
 Route::get('/', function () {
-    return view('/login');
+    return view('/home');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
