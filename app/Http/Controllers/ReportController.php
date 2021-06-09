@@ -168,8 +168,8 @@ class ReportController extends Controller
         $this->activity_log("Descargar informe medico", "reports.download");
         return \PDF::loadView('reports.report-pdf', compact('report', 'medicalBoard', 'patient', 'doctorOwner', 'doctorsSupervisors'))
             ->setPaper('a4')
-            ->stream($fileName);
-//            ->download($fileName);
+            //->stream($fileName);
+            ->download($fileName);
     }
 
     public function approve(Report $report)
