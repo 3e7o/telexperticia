@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\MedicalBoard;
 use App\Http\Requests\ReportStoreRequest;
 use App\Http\Requests\ReportUpdateRequest;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
@@ -166,10 +167,10 @@ class ReportController extends Controller
         $doctorsSupervisors = $medicalBoard->doctorsSupervisors;
         $fileName = 'Informe - ' . $medicalBoard->code . '.pdf';
         $this->activity_log("Descargar informe medico", "reports.download");
-        return \PDF::loadView('reports.report-pdf', compact('report', 'medicalBoard', 'patient', 'doctorOwner', 'doctorsSupervisors'))
+        return PDF::loadView('reports.report-pdf', compact('report', 'medicalBoard', 'patient', 'doctorOwner', 'doctorsSupervisors'))
             ->setPaper('a4')
-            //->stream($fileName);
-            ->download($fileName);
+            ->stream($fileName);
+            //->download($fileName);
     }
 
     public function approve(Report $report)
