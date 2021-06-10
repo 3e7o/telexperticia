@@ -21,7 +21,7 @@ class MedicalBoard extends Model
 
     protected $fillable = ['date', 'status', 'patient_id', 'doctor_id', 'open_zoom'];
 
-    protected $searchableFields = [];
+    protected $searchableFields = ['*'];
 
     protected $casts = [
         'date' => 'datetime',
@@ -80,7 +80,7 @@ class MedicalBoard extends Model
 
     public function getCodeAttribute()
     {
-        return str_pad($this->id,3,"0",STR_PAD_LEFT) . ' - ' . $this->created_at->format('Y');
+        return str_pad($this->id,3,"0",STR_PAD_LEFT) . ' - ' . \Carbon\Carbon::now()->format('Y');
     }
 
     public function getIdentificationAttribute()

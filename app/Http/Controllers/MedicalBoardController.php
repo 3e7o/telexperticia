@@ -61,10 +61,7 @@ class MedicalBoardController extends Controller
              }
 
 
-        return view(
-            'app.medical_boards.index',
-            compact('medicalBoards')
-        );
+        return view('app.medical_boards.index', compact('medicalBoards'));
     }
 
     /**

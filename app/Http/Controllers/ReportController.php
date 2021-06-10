@@ -22,6 +22,8 @@ class ReportController extends Controller
 
         $reports = Report::query()
             ->itIsAuthorized()
+            ->groupBy('reports.medical_board_id')
+            ->orderBy('reports.medical_board_id', 'DESC')
             ->get();
         $this->activity_log("Lista de informes medicos", "reports.index");
         return view('app.reports.index', compact('reports'));
