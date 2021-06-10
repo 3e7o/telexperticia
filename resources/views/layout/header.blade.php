@@ -139,7 +139,7 @@
                 <li class="nav-item"><a class="nav-link {{ active_class(['zoom']) }}" href="{{ route('zoom') }}">API Zoom</a></li>
                 @endcan
                 @can('view-any', Spatie\Permission\Models\Role::class)
-                <li class="nav-item"><a class="nav-link {{ active_class(['stats']) }}" href="{{ route('stats') }}">Informacón del Sistema</a></li>
+                <li class="nav-item"><a class="nav-link {{ active_class(['stats']) }}" href="{{ route('stats') }}">Información del Sistema</a></li>
                 @endcan
                 @can('view-any', Spatie\Permission\Models\Role::class)
                 <li class="nav-item"><a class="nav-link {{ active_class(['activeLog']) }}" href="{{ route('activeLog') }}">Registro de Actividades</a></li>

@@ -2,8 +2,8 @@
 @section('title', 'Informes')
 
 @push('plugin-styles')
-  <link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
-  <link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -14,10 +14,11 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                     <div>
-                    <h4 class="mb-3 mb-md-0">@lang('crud.informes.index_title')</h4>
+                        <h4 class="mb-3 mb-md-0">@lang('crud.informes.index_title')</h4>
                     </div>
                     <div class="table-responsive">
-                        <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">
+                        <table id="dataTableExample" class="table dataTable no-footer" role="grid"
+                            aria-describedby="dataTableExample_info">
                             <thead>
                                 <tr>
                                     <th style="display:none;" aria-sort="descending">Fecha</th>
@@ -46,146 +47,95 @@
                                     </td>
                                     <td class="text-center" style="width: 134px;">
                                         @if (($report->medicalBoard)->status === 'Programado')
-                                        
-                                        <div
-                                            role="group"
-                                            aria-label="Row Actions"
-                                            class="btn-group"
-                                        >
-                                            
-                                            
-                                            @php
-                                            if(($report->medicalBoard)->zoom){
-                                            @endphp
-                                                <a
-                                                    href="{{ optional(($report->medicalBoard)->zoom)->start_url ?? '-'}}"
-                                                    target="_blank"
-                                                >
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-outline-primary btn-icon"
-                                                >
-                                                    <i data-feather="video"></i>
-                                                </button>
+
+                                            <div role="group" aria-label="Row Actions" class="btn-group">
+
+                                                @php
+                                                if(($report->medicalBoard)->zoom){
+                                                @endphp
+                                                <a href="{{ optional(($report->medicalBoard)->zoom)->start_url ?? '-'}}"
+                                                    target="_blank">
+                                                    <button type="button" class="btn btn-outline-primary btn-icon">
+                                                        <i data-feather="video"></i>
+                                                    </button>
                                                 </a>
 
-                                            @php
-                                            }else {
-                                            @endphp
-                                                <a
-                                                    href="{{ ($report->medicalBoard)->meet }}"
-                                                    target="_blank"
-                                                >
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-outline-primary btn-icon"
-                                                >
-                                                    <i data-feather="video"></i>
-                                                </button>
+                                                @php
+                                                }else {
+                                                @endphp
+                                                <a href="{{ ($report->medicalBoard)->meet }}" target="_blank">
+                                                    <button type="button" class="btn btn-outline-primary btn-icon">
+                                                        <i data-feather="video"></i>
+                                                    </button>
                                                 </a>
-                                            @php
-                                            }
-                                            @endphp
-                                            
-                                        </div>
-                                        <div
-                                        role="group"
-                                        aria-label="Row Actions"
-                                        class="btn-group"
-                                        >
-                                        @can('update', $report)
-                                        @if ($report->approved=='No aprobado')
-                                            @if ($report->medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
-                                                <a
-                                                    href="{{ route('records.edit', $report) }}"
-                                                >
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-dark btn-icon"
-                                                    >
+                                                @php
+                                                }
+                                                @endphp
+
+                                            </div>
+                                            <div role="group" aria-label="Row Actions" class="btn-group">
+                                                @can('update', $report)
+                                                @if ($report->approved=='No aprobado')
+                                                @if ($report->medicalBoard->doctorOwner->id ===
+                                                optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
+                                                <a href="{{ route('records.edit', $report) }}">
+                                                    <button type="button" class="btn btn-dark btn-icon">
                                                         <i data-feather="book-open"></i>
                                                     </button>
                                                 </a>
-                                            @endif
-                                            @endif
-                                        @endcan
-                                        </div>
+                                                @endif
+                                                @endif
+                                                @endcan
+                                            </div>
                                         @endif
-                                        <div
-                                            role="group"
-                                            aria-label="Row Actions"
-                                            class="btn-group"
-                                        >
-                                            @can('view', $report)
-                                            <a
-                                                href="{{ route('reports.show', $report) }}"
-                                            >
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-primary btn-icon"
-                                                >
-                                                    <i data-feather="eye"></i>
-                                                </button>
-                                            </a>
-                                            @endcan
-                                        </div>
-
-                                            <div
-                                            role="group"
-                                            aria-label="Row Actions"
-                                            class="btn-group"
-                                            >
-                                            @can('update', $report)
-                                            @if ($report->approved=='No aprobado')
-                                                @if ($report->medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
-                                                    <a
-                                                        href="{{ route('reports.edit', $report) }}"
-                                                    >
-                                                        <button
-                                                            type="button"
-                                                            class="btn btn-info btn-icon"
-                                                        >
-                                                            <i data-feather="edit"></i>
-                                                        </button>
-                                                    </a>
-                                                @endif
-                                                @endif
-                                            @endcan
+                                        @if (($report->medicalBoard)->status === 'Programado')
+                                            <div role="group" aria-label="Row Actions" class="btn-group">
+                                                @can('view', $report)
+                                                <a href="{{ route('reports.show', $report) }}">
+                                                    <button type="button" class="btn btn-primary btn-icon">
+                                                        <i data-feather="eye"></i>
+                                                    </button>
+                                                </a>
+                                                @endcan
                                             </div>
 
+                                            <div role="group" aria-label="Row Actions" class="btn-group">
+                                                @can('update', $report)
+                                                @if ($report->approved=='No aprobado')
+                                                @if ($report->medicalBoard->doctorOwner->id ===
+                                                optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
+                                                <a href="{{ route('reports.edit', $report) }}">
+                                                    <button type="button" class="btn btn-info btn-icon">
+                                                        <i data-feather="edit"></i>
+                                                    </button>
+                                                </a>
+                                                @endif
+                                                @endif
+                                                @endcan
+                                            </div>
 
+                                            <div role="group" aria-label="Row Actions" class="btn-group">
+                                                @can('view', $report)
+                                                @if ($report->approved=='Aprobado')
+                                                <a href="{{ route('reports.download', $report) }}" target="_blank">
+                                                    <button type="button" class="btn btn-light btn-icon">
+                                                        <i data-feather="download"></i>
+                                                    </button>
+                                                </a>
+                                                @endif
 
-                                            <div
-                                            role="group"
-                                            aria-label="Row Actions"
-                                            class="btn-group"
-                                            >
-                                            @can('view', $report)
-                                            @if ($report->approved=='Aprobado')
-                                            <a
-                                                href="{{ route('reports.download', $report) }}"
-                                                target="_blank"
-                                            >
-                                                <button
-                                                    type="button"
-                                                    class="btn btn-light btn-icon"
-                                                >
-                                                    <i data-feather="download"></i>
-                                                </button>
-                                            </a>
-                                            @endif
-
-                                            @endcan 
-                                        </div>
+                                                @endcan
+                                            </div>
+                                        @endif
                                     </td>
 
                                 </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="2">
-                                            @lang('crud.common.no_items_found')
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        @lang('crud.common.no_items_found')
+                                    </td>
+                                </tr>
                                 @endforelse
                             </tbody>
                         </table>
@@ -206,4 +156,3 @@
 <script src="{{ asset('assets/js/data-table.js') }}"></script>
 <script src="{{ asset('assets/js/sweet-alert.js') }}"></script>
 @endpush
-
