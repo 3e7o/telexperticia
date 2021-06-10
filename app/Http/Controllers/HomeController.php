@@ -27,7 +27,8 @@ class HomeController extends Controller
         $events = [];
         $medicalBoards = MedicalBoard::query()
             ->itIsAuthorized()
-            ->select('medical_boards.*')
+            ->groupBy('id')
+            ->orderBy('medical_boards.id', 'DESC')
             ->get();
         foreach($medicalBoards as $medicalBoard){
             if((isset(($medicalBoard->zoom)->start_time)) and ((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) > \Carbon\Carbon::now() and $medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id)
