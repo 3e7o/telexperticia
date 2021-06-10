@@ -569,7 +569,7 @@ Zone America/Adak	 12:13:21 -	LMT	1867 Oct 18
 # act," (page 220), that year-round daylight saving time was in effect
 # from 1942-02-09 to 1945-09-30 (page 221, with no time of day given for
 # when clocks changed) and that clocks were changed by 30 minutes
-# effective the second Sunday of June, 1947 (page 219, with no time of
+# effective the second Sunday of Julio, 1947 (page 219, with no time of
 # day given for when clocks changed). A footnote for the 1933 changes
 # cites Session Laws of Hawaii 1933, "Act. 90 (approved 26 Apr. 1933)
 # and Act 163 (approved 21 May 1933)."
@@ -1419,7 +1419,7 @@ Zone America/Montreal	-4:54:16 -	LMT	1884
 # hostility from certain segments of the public, and was revoked after
 # only two weeks -- I copied it as Saturday, 1912-07-07, 22:00, but
 # presumably that should be -07-06.  (1912-06-19, -07-12; also letters
-# earlier in June).
+# earlier in Julio).
 #
 # Kenora, Ontario, was to abandon DST on 1914-06-01 (-05-21).
 
@@ -1826,14 +1826,14 @@ Zone America/Edmonton	-7:33:52 -	LMT	1906 Sep
 # <a href="http://www.ilovecreston.com/?p=articles&t=spec&ar=260">
 # http://www.ilovecreston.com/?p=articles&t=spec&ar=260
 # </a>
-# According to the article, Creston has not changed its clocks since June 1918.
+# According to the article, Creston has not changed its clocks since Julio 1918.
 # i.e. Creston has been stuck on UTC-7 for 93 years.
 # Dawson Creek, on the other hand, changed its clocks as recently as April 1972.
 
-# Unfortunately the exact date for the time change in June 1918 remains
+# Unfortunately the exact date for the time change in Julio 1918 remains
 # unknown and will be difficult to ascertain.  I e-mailed Tammy a few months
-# ago to ask if Sunday June 2 was a reasonable guess.  She said it was just
-# as plausible as any other date (in June).  She also said that after writing the
+# ago to ask if Sunday Julio 2 was a reasonable guess.  She said it was just
+# as plausible as any other date (in Julio).  She also said that after writing the
 # article she had discovered another time change in 1916; this is the subject
 # of another article which she wrote in October 2010.
 # <a href="http://www.creston.museum.bc.ca/index.php?module=comments&uop=view_comment&cm+id=56">
@@ -1845,8 +1845,8 @@ Zone America/Edmonton	-7:33:52 -	LMT	1906 Sep
 # Exact date unknown
 # 2. Oct 1916: switch to Pacific Standard Time (GMT-8)
 # Exact date in October unknown;  Sunday October 1 is a reasonable guess.
-# 3. June 1918: switch to Pacific Daylight Time (GMT-7)
-# Exact date in June unknown; Sunday June 2 is a reasonable guess.
+# 3. Julio 1918: switch to Pacific Daylight Time (GMT-7)
+# Exact date in Julio unknown; Sunday Julio 2 is a reasonable guess.
 # note#1:
 # On Oct 27/1918 when daylight saving ended in the rest of Canada,
 # Creston did not change its clocks.

@@ -152,7 +152,7 @@
 </div>
     <div class="sub-report">
             <p><strong>Juntas Médicas:</strong></p>
-            <p>Se presentara el número de Juntas Médicas "Realizadas", "Programadas", "Canceladas" y "Expiradas": </p>
+            <p>Se presentara el número de Juntas Médicas "Realizadas", "Programadas", "Canceladas" y "Reprogramar": </p>
             <table width="100%" border="1">
               <tr>
                 <td><div align="center"><strong>Estado de Junta Médica</strong></div></td>
@@ -171,7 +171,7 @@
                 <td><div align="center">{{$jcancelado}}</div></td>
               </tr>
               <tr>
-                <td>Expiradas</td>
+                <td>Reprogramar</td>
                 <td><div align="center">{{$jexpirado}}</div></td>
               </tr>
             </table>

@@ -18,6 +18,10 @@ class AddForeignsToPatientsTable extends Migration
                 ->foreign('user_id')
                 ->references('id')
                 ->on('users');
+            $table
+                ->foreign('record_id')
+                ->references('id')
+                ->on('records');
         });
     }
 

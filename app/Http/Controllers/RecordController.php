@@ -79,12 +79,23 @@ class RecordController extends Controller
     public function show(Request $request, Record $record)
     {
         $this->authorize('view', $record);
+        $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
 
-        $selectedAllergies = $record->recordAllergies;
-        $selectedVaccines = $record->recordVaccines;
-        $selectedOperations = $record->recordOperations;
+        $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
 
-        return view('app.records.show', compact('record', 'doctorsSupervisors'));
+        $allergies = Parameter::select('id','name')->where("group_id","=",5)->get();
+
+        $vaccines = Parameter::select('id','name')->where("group_id","=",3)->get();
+
+        $operations = Parameter::select('id','name')->where("group_id","=",4)->get();
+
+        $blood_types = Parameter::select('id','name')->where("group_id","=",1)->get();
+
+        $selectedAllergies = $record->recordAllergies->pluck('id')->toArray();
+        $selectedVaccines = $record->recordVaccines->pluck('id')->toArray();
+        $selectedOperations = $record->recordOperations->pluck('id')->toArray();
+
+        return view('app.records.show', compact('record', 'patients', 'doctors', 'allergies', 'vaccines', 'operations', 'blood_types', 'selectedAllergies','selectedVaccines','selectedOperations'));
     }
 
     /**

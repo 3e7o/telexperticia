@@ -28,6 +28,7 @@ class MedicalBoardFactory extends Factory
             'status' => Arr::random(['Programado', 'Cancelado']),
             'patient_id' => \App\Models\Patient::factory(),
             'doctor_id' => \App\Models\Doctor::factory(),
+            'open_zoom' => 0,
         ];
     }
 }

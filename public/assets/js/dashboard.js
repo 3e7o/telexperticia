@@ -173,14 +173,26 @@ $(function() {
     var date = new Date();
     var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
     $('#dashboardDate').datepicker({
-      format: "dd-MM-yyyy",
+      format: "yyyy-mm-dd",
       todayHighlight: true,
+      language: 'es',
       autoclose: true
+      
     });
     $('#dashboardDate').datepicker('setDate', today);
   }
   // Dashbaord date end
-
+  if($('#dashboardDateEnd').length) {
+    var date = new Date();
+    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    $('#dashboardDateEnd').datepicker({
+      format: "yyyy-mm-dd",
+      todayHighlight: true,
+      language: 'es',
+      autoclose: true
+    });
+    $('#dashboardDateEnd').datepicker('setDate', today);
+  }
   // Flot chart1 start
   if($('#flotChart1').length) {
     $.plot('#flotChart1', [{
@@ -218,7 +230,7 @@ $(function() {
       xaxis: {
         show: true,
         color: 'rgba(0,0,0,0.1)',
-        ticks: [[0, 'Jan'], [20, 'Feb'], [40, 'Mar'], [60, 'Apr'], [80, 'May'], [100, 'June'], [120, 'July'], [140, 'Aug']],
+        ticks: [[0, 'Ene'], [20, 'Feb'], [40, 'Mar'], [60, 'Abr'], [80, 'May'], [100, 'Jun'], [120, 'Jul'], [140, 'Ago']],
         tickColor: gridLineColor,      
         font: {
           size: 13,
@@ -377,6 +389,7 @@ $(function() {
       trailWidth: 1,
       easing: 'easeInOut',
       duration: 1400,
+      language: 'es',
       text: {
         autoStyleContainer: false
       },
@@ -408,8 +421,9 @@ $(function() {
     var monthlySalesChart = document.getElementById('monthly-sales-chart').getContext('2d');
       new Chart(monthlySalesChart, {
         type: 'bar',
+        language: 'es',
         data: {
-          labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+          labels: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
           datasets: [{
             label: 'Sales',
             data: [150,110,90,115,125,160,190,140,100,110,120,120],

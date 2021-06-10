@@ -67,24 +67,6 @@
     </a>
   </li>
   @endif
-@if (Auth::user()->can('view-any', Spatie\Permission\Models\MedicalBoard::class) ||
-    Auth::user()->can('view-any', Spatie\Permission\Models\Report::class))
-        <li class="nav-item {{ active_class(['']) }}">
-            <a href="#" class="nav-link">
-              <i class="link-icon" data-feather="monitor"></i>
-              <span class="menu-title">Consulta</span>
-              <i class="link-arrow"></i>
-            </a>
-            <div class="submenu">
-                <ul class="submenu-item">
-                    @can('view-any', App\Models\MedicalBoard::class)
-                    <li class="category-heading">Historia Clinica<li>
-                    <li class="nav-item"><a class="nav-link {{ active_class(['records']) }}" href="{{ route('records.create') }}">Antecedentes</a></li>
-                    @endcan
-                  </ul>
-            </div>
-          </li>
-@endif
 
 
 @if (Auth::user()->can('view-any', Spatie\Permission\Models\MedicalBoard::class) ||

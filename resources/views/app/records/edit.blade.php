@@ -19,7 +19,7 @@
 @section('content')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb bg-light">
-      <li class="breadcrumb-item"><a href="{{ route('records.index') }}">@lang('crud.antecedentes.index_title')</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('reports.index') }}">@lang('crud.informes.index_title')</a></li>
       <li class="breadcrumb-item active" aria-current="page">@lang('crud.antecedentes.edit_title')</li>
     </ol>
 </nav>

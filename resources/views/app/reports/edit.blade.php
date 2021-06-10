@@ -47,6 +47,7 @@
         </div>
       </div>
     </div>
+    
     <!-- left wrapper end -->
     <!-- middle wrapper start -->
     <div class="col-md-8 col-xl-6 middle-wrapper">

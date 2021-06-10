@@ -23,10 +23,10 @@ class ReportFactory extends Factory
     public function definition()
     {
         return [
-            'record' => $this->faker->text,
-            'evaluation' => $this->faker->text,
-            'diagnosis' => $this->faker->text,
-            'recommendations' => $this->faker->text,
+            'record' => $this->faker->text($maxNbChars = 300),
+            'evaluation' => $this->faker->text($maxNbChars = 300)  ,
+            'diagnosis' => $this->faker->text($maxNbChars = 300)  ,
+            'recommendations' => $this->faker->text($maxNbChars = 300)  ,
             'medical_board_id' => \App\Models\MedicalBoard::inRandomOrder()->first(),
         ];
     }

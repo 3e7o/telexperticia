@@ -25,6 +25,16 @@ class Record extends Model
         return $this->belongsToMany(Parameter::class, 'allergies', 'record_id', 'parameter_id')->withTimestamps();
     }
 
+    public function createRecord($record) : int
+    {
+        $recordCreated = Record::factory()
+        ->create([
+            'record_familiar' => '',
+        ]);
+
+    return $recordCreated->id;
+    }
+
     public function recordVaccines()
     {
         return $this->belongsToMany(Parameter::class, 'vaccines', 'record_id', 'parameter_id')->withTimestamps();

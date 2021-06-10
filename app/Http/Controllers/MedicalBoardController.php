@@ -54,9 +54,9 @@ class MedicalBoardController extends Controller
                 {
                     $medicalBoard->update(['status'=>'Realizado']);
                 }
-                if((isset(($medicalBoard->zoom)->start_time)) and $medicalBoard->status == 'Programado' and ((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) < \Carbon\Carbon::now())
+                if((isset($medicalBoard->date)) and $medicalBoard->status == 'Programado' and ((\Carbon\Carbon::parse($medicalBoard->date))) < \Carbon\Carbon::now())
                 {
-                    $medicalBoard->update(['status'=>'Expirado']);
+                    $medicalBoard->update(['status'=>'Reprogramar']);
                 }
              }
 

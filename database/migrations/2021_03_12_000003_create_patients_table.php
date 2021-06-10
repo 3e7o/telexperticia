@@ -29,6 +29,7 @@ class CreatePatientsTable extends Migration
             $table->string('address')->nullable();
             $table->string('force')->nullable();
 			$table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('record_id');
             $table->unsignedBigInteger('id_user_create')->nullable();
             $table->unsignedBigInteger('id_user_update')->nullable();
             $table->timestamps();

@@ -16,7 +16,7 @@ class CreateMedicalBoardsTable extends Migration
         Schema::create('medical_boards', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->dateTime('date');
-            $table->enum('status', ['Programado', 'Realizado', 'Cancelado', 'Expirado']);
+            $table->enum('status', ['Programado', 'Realizado', 'Cancelado', 'Reprogramar']);
             $table->string('meet');
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('doctor_id');

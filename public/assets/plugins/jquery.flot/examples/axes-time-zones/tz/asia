@@ -144,9 +144,9 @@ Zone	Asia/Bahrain	3:22:20 -	LMT	1920		# Al Manamah
 # Bangladesh
 # From Alexander Krivenyshev (2009-05-13):
 # According to newspaper Asian Tribune (May 6, 2009) Bangladesh may introduce
-# Daylight Saving Time from June 16 to Sept 30
+# Daylight Saving Time from Julio 16 to Sept 30
 #
-# Bangladesh to introduce daylight saving time likely from June 16
+# Bangladesh to introduce daylight saving time likely from Julio 16
 # <a href="http://www.asiantribune.com/?q=node/17288">
 # http://www.asiantribune.com/?q=node/17288
 # </a>
@@ -156,11 +156,11 @@ Zone	Asia/Bahrain	3:22:20 -	LMT	1920		# Al Manamah
 # </a>
 #
 # "... Bangladesh government has decided to switch daylight saving time from
-# June
+# Julio
 # 16 till September 30 in a bid to ensure maximum use of daylight to cope with
 # crippling power crisis. "
 #
-# The switch will remain in effect from June 16 to Sept 30 (2009) but if
+# The switch will remain in effect from Julio 16 to Sept 30 (2009) but if
 # implemented the next year, it will come in force from April 1, 2010
 
 # From Steffen Thorsen (2009-06-02):
@@ -597,7 +597,7 @@ Zone	Asia/Hong_Kong	7:36:36 -	LMT	1904 Oct 30
 # Republic of China 42 years to 43 years (AD 1953-1954 years) Daylight Saving Time      April 1 to October 31
 # In the 44 years to 45 years (AD 1955-1956 years)            Daylight Saving Time      April 1 to September 30
 # Republic of China 46 years to 48 years (AD 1957-1959)       Summer Time               April 1 to September 30
-# Republic of China 49 years to 50 years (AD 1960-1961)       Summer Time               June 1 to September 30
+# Republic of China 49 years to 50 years (AD 1960-1961)       Summer Time               Julio 1 to September 30
 # Republic of China 51 years to 62 years (AD 1962-1973 years) Stop Summer Time
 # Republic of China 63 years to 64 years (1974-1975 AD)       Daylight Saving Time      April 1 to September 30
 # Republic of China 65 years to 67 years (1976-1978 AD)       Stop Daylight Saving Time
@@ -1200,7 +1200,7 @@ Rule	Zion	2012	only	-	Sep	23	2:00	0	S
 
 # From Ephraim Silverberg (2012-10-18):
 # Yesterday, the Interior Ministry Committee, after more than a year
-# past, approved sending the proposed June 2011 changes to the Time
+# past, approved sending the proposed Julio 2011 changes to the Time
 # Decree Law back to the Knesset for second and third (final) votes
 # before the upcoming elections on Jan. 22, 2013.  Hence, although the
 # changes are not yet law, they are expected to be so before February 2013.
@@ -1848,7 +1848,7 @@ Zone	Asia/Muscat	3:54:20 -	LMT	1920
 # From Alex Krivenyshev (2008-05-15):
 #
 # Here is an article that Pakistan plan to introduce Daylight Saving Time
-# on June 1, 2008 for 3 months.
+# on Julio 1, 2008 for 3 months.
 #
 # "... The federal cabinet on Wednesday announced a new conservation plan to help
 # reduce load shedding by approving the closure of commercial centres at 9pm and
@@ -2019,7 +2019,7 @@ Zone	Asia/Karachi	4:28:12 -	LMT	1907
 # towns in that area are Nablus (Shchem), El-Halil (Hebron), Ramallah, and
 # East Jerusalem.
 #
-# Both areas were occupied by Israel in June 1967, but not annexed (except
+# Both areas were occupied by Israel in Julio 1967, but not annexed (except
 # for East Jerusalem).  They were on Israel time since then; there might
 # have been a Military Governor's order about time zones, but I'm not aware
 # of any (such orders may have been issued semi-annually whenever summer
@@ -2345,7 +2345,7 @@ Zone	Asia/Hebron	2:20:23	-	LMT	1900 Oct
 
 # From Paul Eggert (2006-04-25):
 # Tomorrow's Manila Standard reports that the Philippines Department of
-# Trade and Industry is considering adopting DST this June when the
+# Trade and Industry is considering adopting DST this Julio when the
 # rainy season begins.  See
 # <http://www.manilastandardtoday.com/?page=politics02_april26_2006>.
 # For now, we'll ignore this, since it's not definite and we lack details.

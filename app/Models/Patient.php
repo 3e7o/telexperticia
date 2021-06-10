@@ -28,6 +28,7 @@ class Patient extends Model
         'gender',
         'birthday',
         'user_id',
+        'record_id',
         'phone',
     ];
 
@@ -47,6 +48,7 @@ class Patient extends Model
 
         self::creating(function ($table) {
             $table->user_id = (new User())->createUser($table, 'Paciente');
+            $table->record_id = (new Record())->createRecord($table);
         });
 
         self::updating(function ($table) {
@@ -57,6 +59,11 @@ class Patient extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function record()
+    {
+        return $this->belongsTo(Record::class);
     }
 
     public function medicalBoards()

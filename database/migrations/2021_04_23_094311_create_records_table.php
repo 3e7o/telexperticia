@@ -24,10 +24,6 @@ class CreateRecordsTable extends Migration
             $table->unsignedBigInteger('id_user_create')->nullable();
             $table->unsignedBigInteger('id_user_update')->nullable();
             $table->timestamps();
-            $table
-                ->foreign('patient_id')
-                ->references('id')
-                ->on('patients');
         });
 
         Schema::create('vaccines', function (Blueprint $table) {

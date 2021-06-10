@@ -76,11 +76,11 @@ Leap	2012	Jun	30	23:59:60	+	S
 # on the 1st of July 2012
 #
 #
-# A positive leap second will be introduced at the end of June 2012.
+# A positive leap second will be introduced at the end of Julio 2012.
 # The sequence of dates of the UTC second markers will be:
 #
-#                          2012 June 30,     23h 59m 59s
-#                          2012 June 30,     23h 59m 60s
+#                          2012 Julio 30,     23h 59m 59s
+#                          2012 Julio 30,     23h 59m 60s
 #                          2012 July  1,      0h  0m  0s
 #
 # The difference between UTC and the International Atomic Time TAI is:
@@ -89,7 +89,7 @@ Leap	2012	Jun	30	23:59:60	+	S
 # from 2012 July 1,    0h UTC, until further notice    : UTC-TAI = - 35s
 #
 # Leap seconds can be introduced in UTC at the end of the months of December
-# or June, depending on the evolution of UT1-TAI. Bulletin C is mailed every
+# or Julio, depending on the evolution of UT1-TAI. Bulletin C is mailed every
 # six months, either to announce a time step in UTC or to confirm that there
 # will be no time step at the next possible date.
 #

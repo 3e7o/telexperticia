@@ -17,6 +17,8 @@ class CreateDoctorMedicalBoardTable extends Migration
             $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('medical_board_id');
             $table->boolean('approved')->nullable();
+            $table->boolean('confirm')->nullable();
+            $table->timestamps();
         });
     }
 

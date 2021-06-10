@@ -269,10 +269,10 @@ Rule	Arg	2008	only	-	Oct	Sun>=15	0:00	1:00	S
 # http://www.lanacion.com.ar/04/06/10/de_609078.asp ...
 #     "The time change in Tierra del Fuego was a conflicted decision from
 #   the start.  The government had decreed that the measure would take
-#   effect on June 1, but a normative error forced the new time to begin
+#   effect on Julio 1, but a normative error forced the new time to begin
 #   three days earlier, from a Saturday to a Sunday....
 # Our understanding was that the change was originally scheduled to take place
-# on June 1 at 00:00 in Chubut, Santa Cruz, Tierra del Fuego (and some other
+# on Julio 1 at 00:00 in Chubut, Santa Cruz, Tierra del Fuego (and some other
 # provinces).  Sunday was May 30, only two days earlier.  So the article
 # contains a contradiction.  I would give more credence to the Saturday/Sunday
 # date than the "three days earlier" phrase, and conclude that Tierra del
@@ -381,19 +381,19 @@ Rule	Arg	2008	only	-	Oct	Sun>=15	0:00	1:00	S
 # <a/>
 # is the official page for the Province Government).
 #
-# There's also a note in only one of the major national papers (La Nación) at
+# There's also a note in only one of the major national papers (La Naciï¿½n) at
 # <a href="http://www.lanacion.com.ar/nota.asp?nota_id=1107912">
 # http://www.lanacion.com.ar/nota.asp?nota_id=1107912
 # </a>
 #
 # The press release says:
-#  (...) anunció que el próximo domingo a las 00:00 los puntanos deberán
+#  (...) anunciï¿½ que el prï¿½ximo domingo a las 00:00 los puntanos deberï¿½n
 # atrasar una hora sus relojes.
 #
-# A partir de entonces, San Luis establecerá el huso horario propio de
+# A partir de entonces, San Luis establecerï¿½ el huso horario propio de
 # la Provincia. De esta manera, durante el periodo del calendario anual
-# 2009, el cambio horario quedará comprendido entre las 00:00 del tercer
-# domingo de marzo y las 24:00 del segundo sábado de octubre.
+# 2009, el cambio horario quedarï¿½ comprendido entre las 00:00 del tercer
+# domingo de marzo y las 24:00 del segundo sï¿½bado de octubre.
 # Quick&dirty translation
 # (...) announced that next Sunday, at 00:00, Puntanos (the San Luis
 # inhabitants) will have to turn back one hour their clocks
@@ -720,7 +720,7 @@ Zone	America/La_Paz	-4:32:36 -	LMT	1890
 # From Paul Schulze (2008-06-24):
 # ...by law number 11.662 of April 24, 2008 (published in the "Diario
 # Oficial da Uniao"...) in Brazil there are changes in the timezones,
-# effective today (00:00am at June 24, 2008) as follows:
+# effective today (00:00am at Julio 24, 2008) as follows:
 #
 # a) The timezone UTC+5 is e[x]tinguished, with all the Acre state and the
 # part of the Amazonas state that had this timezone now being put to the
@@ -733,7 +733,7 @@ Zone	America/La_Paz	-4:32:36 -	LMT	1890
 # programs inappropriate to youths in the states that had the timezone
 # UTC+5 too early in the night. In the occasion, some more corrections
 # were proposed, trying to unify the timezones of any given state. This
-# change modifies timezone rules defined in decree 2.784 of 18 June,
+# change modifies timezone rules defined in decree 2.784 of 18 Julio,
 # 1913.
 
 # From Rodrigo Severo (2008-06-24):
@@ -812,7 +812,7 @@ Zone	America/La_Paz	-4:32:36 -	LMT	1890
 
 # From Guilherme Bernardes Rodrigues (2011-10-07):
 # There is news in the media, however there is still no decree about it.
-# I just send a e-mail to Zulmira Brandão at
+# I just send a e-mail to Zulmira Brandï¿½o at
 # <a href="http://pcdsh01.on.br/">http://pcdsh01.on.br/</a> the
 # oficial agency about time in Brazil, and she confirmed that the old rule is
 # still in force.

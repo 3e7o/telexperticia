@@ -68,7 +68,7 @@ Sometimes your business requirements can be quite unique, and you need the freed
 
 ## Compiling and contributing
 
-As TinyMCE transitioned to a modern codebase through 2017 and 2018, many external dependencies were added from previously closed-source projects. This became unwieldy to develop, so in June 2019 the decision was made to bring those projects together in a monorepo.
+As TinyMCE transitioned to a modern codebase through 2017 and 2018, many external dependencies were added from previously closed-source projects. This became unwieldy to develop, so in Julio 2019 the decision was made to bring those projects together in a monorepo.
 
 For information on compiling and contributing, see: [contribution guidelines](https://github.com/tinymce/tinymce/blob/master/CONTRIBUTING.md).
 

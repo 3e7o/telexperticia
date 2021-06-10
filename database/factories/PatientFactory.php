@@ -29,10 +29,12 @@ class PatientFactory extends Factory
             'first_surname' => $this->faker->lastName,
             'last_surname' => $this->faker->lastName,
             'email' => $this->faker->email,
-            'address' => $this->faker->address,
-            'force' => Arr::random(['Ejercito', 'Armada', 'Aerea']),
-            'gender' => Arr::random(['Hombre', 'Mujer']),
+            'gender' => Arr::random(['Femenino', 'Masculino']),
             'birthday' => $this->faker->date,
+            'phone' => $this->faker->e164PhoneNumber,
+            'type' => Arr::random(['Activo', 'Pasivo', 'Beneficiario']),
+            'address' => $this->faker->address,
+            'force' => Arr::random(['Ejercito', 'Armada', 'Aerea']),            
             //'username' => $this->birthday->format('ymd').Str::substr($this->first_surname, 0, 1).Str::substr($this->last_surname, 0, 1).Str::substr($this->name, 0, 1),
         ];
     }

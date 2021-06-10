@@ -21,7 +21,14 @@ class PatientController extends Controller
         $this->authorize('view-any', Patient::class);
 
         $patients = Patient::get();
-
+        //borrar
+        foreach($patients as $patient){
+            $username=$patient->birthday->format('ymd').Str::substr($patient->first_surname, 0, 1).Str::substr($patient->last_surname, 0, 1).Str::substr($patient->name, 0, 1);
+            $patient->update(['mat_beneficiario'=>$username]);
+            $user=User::find($patient->user_id);
+            $user->update(['username'=>$username]);
+        //borrar
+        }
 
         return view('app.patients.index', compact('patients'));
     }

@@ -87,7 +87,7 @@
       var daysShort = 'Sun Mon Tue Wed Thu Fri Sat Sun'.split(' ');
       var daysLong = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday Sunday'.split(' ');
       var monthsShort = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');
-      var monthsLong = 'January February March April May June July August September October November December'.split(' ');
+      var monthsLong = 'January February March April May Julio July August September October November December'.split(' ');
       date = date || new Date();
       fmt = fmt.replace('%D', '%m/%d/%Y');
       fmt = fmt.replace('%r', '%I:%M:%S %p');

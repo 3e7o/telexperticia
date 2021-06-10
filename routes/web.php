@@ -46,7 +46,14 @@ Route::prefix('/')
         Route::resource('doctors', DoctorController::class);
         Route::resource('patients', PatientController::class);
         Route::resource('medical-boards', MedicalBoardController::class);
-        Route::resource('reports', ReportController::class);
+        Route::get('reports',[ReportController::class, 'store'])->name('reports.store');
+        Route::get('reports',[ReportController::class, 'index'])->name('reports.index');
+        Route::get('reports/crear',[ReportController::class, 'create'])->name('reports.create');
+        Route::get('reports/{report}',[ReportController::class, 'show'])->name('reports.show')->middleware('password.confirm');
+        Route::get('reports/{report} ',[ReportController::class, 'update'])->name('reports.update');
+        Route::get('reports/{report}/editar',[ReportController::class, 'edit'])->name('reports.edit')->middleware('password.confirm');
+        //Route::resource('reports', ReportController::class);
+        Route::patch('stats', [StatController::class, 'index'])->name('stats');
         Route::get('stats', [StatController::class, 'index'])->name('stats');
         Route::get('stats/download', [StatController::class, 'download'])->name('stats.download');
         Route::get('reports/{report}/download', [ReportController::class, 'download'])->name('reports.download');
