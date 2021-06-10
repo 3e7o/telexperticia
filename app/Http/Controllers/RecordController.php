@@ -78,7 +78,7 @@ class RecordController extends Controller
      */
     public function show(Request $request, Record $record)
     {
-        $this->authorize('view-any', Report::class);
+        
         $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
 
         $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
@@ -106,7 +106,7 @@ class RecordController extends Controller
      */
     public function edit(Request $request, Record $record)
     {
-        $this->authorize('edit', Report::class);
+        
         $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
 
         $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
@@ -135,7 +135,7 @@ class RecordController extends Controller
      */
     public function update(RecordUpdateRequest $request, Record $record)
     {
-        $this->authorize('update', Report::class);
+        
 
         $validated = $request->validated();
 
