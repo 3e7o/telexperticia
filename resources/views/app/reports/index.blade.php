@@ -45,12 +45,15 @@
                                         {{ $report->approved }}
                                     </td>
                                     <td class="text-center" style="width: 134px;">
+                                        @if (($report->medicalBoard)->status === 'Programado')
+                                        
                                         <div
                                             role="group"
                                             aria-label="Row Actions"
                                             class="btn-group"
                                         >
-                                            @if (($report->medicalBoard)->status === 'Programado')
+                                            
+                                            
                                             @php
                                             if(($report->medicalBoard)->zoom){
                                             @endphp
@@ -83,8 +86,31 @@
                                             @php
                                             }
                                             @endphp
-                                            @endif
+                                            
                                         </div>
+                                        <div
+                                        role="group"
+                                        aria-label="Row Actions"
+                                        class="btn-group"
+                                        >
+                                        @can('update', $report)
+                                        @if ($report->approved=='No aprobado')
+                                            @if ($report->medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
+                                                <a
+                                                    href="{{ route('records.edit', $report) }}"
+                                                >
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-dark btn-icon"
+                                                    >
+                                                        <i data-feather="book-open"></i>
+                                                    </button>
+                                                </a>
+                                            @endif
+                                            @endif
+                                        @endcan
+                                        </div>
+                                        @endif
                                         <div
                                             role="group"
                                             aria-label="Row Actions"
@@ -126,6 +152,9 @@
                                                 @endif
                                             @endcan
                                             </div>
+
+
+
                                             <div
                                             role="group"
                                             aria-label="Row Actions"
@@ -146,23 +175,7 @@
                                             </a>
                                             @endif
 
-                                            @endcan @can('delete', $report)
-
-                                            {{-- <form
-                                                action="{{ route('reports.destroy', $report) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('{{ __('crud.common.are_you_sure') }}')"
-                                            >
-                                                @csrf @method('DELETE')
-                                                <button
-                                                    type="submit"
-                                                    class="btn btn-outline-danger ml-1"
-                                                >
-                                                    <i class="icon ion-md-trash"></i>
-                                                </button>
-                                            </form> --}}
-
-                                            @endcan
+                                            @endcan 
                                         </div>
                                     </td>
 

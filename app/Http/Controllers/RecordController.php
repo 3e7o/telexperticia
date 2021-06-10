@@ -29,7 +29,7 @@ class RecordController extends Controller
      */
     public function create(Request $request)
     {
-        $this->authorize('create', RecordController::class);
+        $this->authorize('create', Report::class);
 
         $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
 
@@ -54,7 +54,7 @@ class RecordController extends Controller
      */
     public function store(RecordStoreRequest $request)
     {
-        $this->authorize('store', Record::class);
+        $this->authorize('store', Report::class);
 
         $validated = $request->validated();
 
@@ -78,7 +78,7 @@ class RecordController extends Controller
      */
     public function show(Request $request, Record $record)
     {
-        $this->authorize('view', $record);
+        $this->authorize('view-any', Report::class);
         $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
 
         $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
@@ -106,7 +106,7 @@ class RecordController extends Controller
      */
     public function edit(Request $request, Record $record)
     {
-        $this->authorize('edit', RecordController::class);
+        $this->authorize('edit', Report::class);
         $patients = Patient::select('id', 'name', 'first_surname')->get()->pluck('fullName', 'id');
 
         $doctors = Doctor::select('id', 'name', 'first_surname', 'specialty_id')->get()->pluck('fullName', 'id');
@@ -135,7 +135,7 @@ class RecordController extends Controller
      */
     public function update(RecordUpdateRequest $request, Record $record)
     {
-        $this->authorize('update', $record);
+        $this->authorize('update', Report::class);
 
         $validated = $request->validated();
 

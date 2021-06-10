@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'Editar Junta Médica')
+@section('title', 'Antecedentes')
 
 @push('plugin-styles')
   <link href="{{ asset('assets/plugins/select2/select2.min.css') }}" rel="stylesheet" />
