@@ -15,11 +15,11 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ci');
+            $table->string('ci')->unique();
             $table->string('name');
             $table->string('first_surname');
             $table->string('last_surname');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('regional');
             $table->string('signature', 100)->nullable();
 			$table->unsignedBigInteger('user_id');

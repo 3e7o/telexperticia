@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Luis Pilco',
                 'username' => 'admin',
                 'email' => 'admin@admin.com',
-                'password' => \Hash::make('admin'),
+                'password' => \Hash::make('p@ssw0rd'),
             ]);
         $this->call(PermissionsSeeder::class);
         $this->call(SpecialtySeeder::class);

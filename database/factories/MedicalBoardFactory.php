@@ -24,8 +24,8 @@ class MedicalBoardFactory extends Factory
     public function definition()
     {
         return [
-            'date' => $this->faker->dateTime,
-            'status' => Arr::random(['Programado', 'Cancelado']),
+            'date' => $this->faker->dateTimeBetween($startDate = '2019-03-15 02:00:49', $endDate = 'now', $timezone = 'America/La_Paz'),
+            'status' => Arr::random(['Realizado', 'Cancelado']),
             'patient_id' => \App\Models\Patient::factory(),
             'doctor_id' => \App\Models\Doctor::factory(),
             'open_zoom' => 0,
