@@ -47,7 +47,6 @@
                                     </td>
                                     <td class="text-center" style="width: 134px;">
                                         @if (($report->medicalBoard)->status === 'Programado')
-
                                             <div role="group" aria-label="Row Actions" class="btn-group">
 
                                                 @php
@@ -98,7 +97,7 @@
                                                 </a>
                                                 @endcan
                                             </div>
-
+                                        
                                             <div role="group" aria-label="Row Actions" class="btn-group">
                                                 @can('update', $report)
                                                 @if ($report->approved=='No aprobado')
@@ -113,7 +112,7 @@
                                                 @endif
                                                 @endcan
                                             </div>
-
+                                        @endif
                                             <div role="group" aria-label="Row Actions" class="btn-group">
                                                 @can('view', $report)
                                                 @if ($report->approved=='Aprobado')
@@ -126,7 +125,7 @@
 
                                                 @endcan
                                             </div>
-                                        @endif
+                                        
                                     </td>
 
                                 </tr>
