@@ -35,7 +35,12 @@
                 class="mt-4"
             >
                 @include('app.gparameters.form-inputs')
-
+                <div class="mt-4">
+                  <button type="submit" class="btn btn-primary float-right">
+                      <i class="icon ion-md-save"></i>
+                      @lang('crud.common.update')
+                  </button>
+              </div>
             </x-form>
         </div>
     </div>
