@@ -85,7 +85,7 @@ class ParameterController extends Controller
         $parameter->update($request->all());
 
         return redirect()->route('parameters.index')
-            ->with('success', 'Product updated successfully');
+            ->with('success', 'Parámetro Actualizado');
     }
     /**
      * Remove the specified resource from storage.

@@ -101,7 +101,7 @@ class GroupParameterController extends Controller
         $gparameter->update($request->all());
 
         return redirect()->route('gparameters.index')
-            ->with('success', 'Product updated successfully');
+            ->with('success', 'Grupo de Parámetros Actualizado');
     }
     /**
      * Remove the specified resource from storage.
