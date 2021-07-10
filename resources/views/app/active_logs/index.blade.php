@@ -19,9 +19,11 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTableExample" width="100%" cellspacing="0">
+                <table id="dataTableExample" class="table dataTable no-footer" role="grid"
+                aria-describedby="dataTableExample_info">
                     <thead>
                     <tr>
+                        <th style="display:none;" aria-sort="descending">Fecha</th>
                         <th>Detalle de Actividad</th>
                         <th>Correo</th>
                         <th>Nombre</th>
@@ -32,6 +34,7 @@
                     <tbody>
                     @foreach($activityList as $data)
                         <tr>
+                            <td style="display:none;">{{ $data->created_at ?? '-' }}</td>
                             <td>{{ $data->log_details }}. <strong style="color: mediumvioletred">realizado por: {{ optional($data->users)->username }}</strong></td>
                             <td>{{ optional($data->users)->email }}</td>
                             <td>{{ optional($data->users)->name }}</td>
