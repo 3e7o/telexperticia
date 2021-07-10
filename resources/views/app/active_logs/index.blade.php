@@ -25,6 +25,7 @@
                         <th>Detalle de Actividad</th>
                         <th>Correo</th>
                         <th>Nombre</th>
+                        <th>Dirección IP</th>
                         <th aria-sort="descending">Fecha de Actividad</th>
                     </tr>
                     </thead>
@@ -34,6 +35,7 @@
                             <td>{{ $data->log_details }}. <strong style="color: mediumvioletred">realizado por: {{ optional($data->users)->username }}</strong></td>
                             <td>{{ optional($data->users)->email }}</td>
                             <td>{{ optional($data->users)->name }}</td>
+                            <td>{{ $data->ip_address }}</td>
                             <td>{{ $data->created_at }}</td>
                         </tr>
                     @endforeach

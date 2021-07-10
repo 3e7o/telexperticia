@@ -19,12 +19,11 @@
                 <span class="input-group-addon bg-transparent"><i data-feather="target"
                         class=" text-primary"></i></span>
 
-                <input type="date" class="form-control" name="start_date" value="{{ $filter_start_date }}">
+                <input type="date" class="form-control" name="start_date" value="{{ $filter_start_date }}" required>
             </div>
             <div class="input-group date datepicker dashboard-date mr-2 mb-2 mb-md-0 d-md-none d-xl-flex">
                 <span class="input-group-addon bg-transparent"><i class=" text-primary">Fin</i></span>
-                <input class="form-control" name="end_date" type="date" background="none"
-                    value="{{ $filter_end_date }}">
+                <input class="form-control" name="end_date" type="date" value="{{ $filter_end_date }} " required>
             </div>
             <button type="submit" class="btn btn-outline-info btn-icon-text mr-2 d-none d-md-block">
                 <i class="btn-icon-prepend" data-feather="search"></i>

@@ -3,11 +3,12 @@
 <div class="row">
     <x-inputs.group class="form-group col-sm-6">
         <x-inputs.datetime
+            type="datetime"
             class="form-group"
+            min="2013-01-01"
             name="date"
             label="Fecha"
             value="{{ old('date', ($editing ? optional($medicalBoard->date)->format('Y-m-d\TH:i') : '')) }}"
-            max="255"
             required
         ></x-inputs.datetime>
     </x-inputs.group>

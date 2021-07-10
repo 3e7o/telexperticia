@@ -26,6 +26,7 @@
                                     <th>Matrícula</th>
                                     <th>Especialidad</th>
                                     <th>Estado</th>
+                                    <th>Fecha</th>
                                     <th class="text-center">@lang('crud.common.actions')</th>
                                 </tr>
                             </thead>
@@ -44,6 +45,9 @@
                                     </td>
                                     <td>
                                         {{ $report->approved }}
+                                    </td>
+                                    <td>
+                                        {{ ($report->medicalBoard)->date->format('d/m/Y') }}
                                     </td>
                                     <td class="text-center" style="width: 134px;">
                                         @if (($report->medicalBoard)->status === 'Programado')
@@ -127,7 +131,6 @@
                                             </div>
                                         
                                     </td>
-
                                 </tr>
                                 @empty
                                 <tr>

@@ -34,7 +34,7 @@
                                 <th>Junta Médica</th>
                                 <th>Matrícula</th>
                                 <th>@lang('crud.juntas_medicas.inputs.status')</th>
-
+                                <th>Fecha</th>
                                 <th class="text-center">@lang('crud.common.actions')</th>
 
                             </tr>
@@ -46,6 +46,9 @@
                                 <td>{{ $medicalBoard->code }}</td>
                                 <td>{{ optional($medicalBoard->patient->user)->username ?? '-'}}</td>
                                 <td>{{ $medicalBoard->status ?? '-' }}</td>
+                                <td>
+                                    {{ $medicalBoard->date->format('d/m/Y') }}
+                                </td>
 
                                 <td class="text-center" style="width: 134px;">
                                     <div role="group" aria-label="Row Actions" class="btn-group">

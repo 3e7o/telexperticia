@@ -1,15 +1,16 @@
 $(function() {
-  'use strict';
 
-  if($('#datePickerExample').length) {
-    var date = new Date();
-    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    $('#datePickerExample').datepicker({
-      format: "mm/dd/yyyy",
-      todayHighlight: true,
-      language: 'es',
-      autoclose: true
+  if($('#datetime')) {
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes();
+    var dateTime = date+' '+time;
+    $("#form_datetime").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        autoclose: true,
+        todayBtn: true,
+        startDate: dateTime
     });
-    $('#datePickerExample').datepicker('setDate', today);
+    $('#datetime').datepicker('setDate', dateTime);
   }
 });
