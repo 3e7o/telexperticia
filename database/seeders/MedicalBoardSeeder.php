@@ -18,7 +18,7 @@ class MedicalBoardSeeder extends Seeder
     public function run()
     {
         $medicalBoards = MedicalBoard::factory()
-            ->count(50)
+            ->count(45)
             ->create();
 
         $doctors = Doctor::query()->get()->pluck('id')->toArray();

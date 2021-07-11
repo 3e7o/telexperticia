@@ -31,7 +31,7 @@ class DoctorFactory extends Factory
             'last_surname' => $this->faker->lastName,
             'email' => $this->faker->email,
             'regional' => Arr::random(['La Paz', 'Sucre', 'Santa Cruz', 'Cochabamba']),
-            'signature' => Arr::random(['images/feYIzLMsQ9Rv3JozFPO2Ti7Uoxuu5PtjmFxJ8F0Q.png', 'images/JpLNzIC9B51l2K2GEdQd1RGiTIIq7rOcroZQeA2B.png', 'images/pYtXz2FEBj9LqBuYzkQHnpmGPNSvf96Bdfe1gLGa.png', 'images/sBJMd1tRAbueqHvmbvkiFMaCvU4hHhyh3fUMr2kz.png','images/XaYLLqt924F2lJPO5UGaiPeBXalSZtFK5RCgWn6l.png','images/ZwvDsIcXsEbtZZFBUYzOqkeI6b513aawoehfStSN.png']),
+            'signature' => Arr::random(['images/feYIzLMsQ9Rv3JozFPO2Ti7Uoxuu5PtjmFxJ8F0Q2.png','images/feYIzLMsQ9Rv3JozFPO2Ti7Uoxuu5PtjmFxJ8F01.png','images/feYIzLMsQ9Rv3JozFPO2Ti7Uoxuu5PtjmFxJ8F0Q.png', 'images/JpLNzIC9B51l2K2GEdQd1RGiTIIq7rOcroZQeA2B.png', 'images/pYtXz2FEBj9LqBuYzkQHnpmGPNSvf96Bdfe1gLGa.png', 'images/sBJMd1tRAbueqHvmbvkiFMaCvU4hHhyh3fUMr2kz.png','images/XaYLLqt924F2lJPO5UGaiPeBXalSZtFK5RCgWn6l.png','images/ZwvDsIcXsEbtZZFBUYzOqkeI6b513aawoehfStSN.png']),
             'specialty_id' => \App\Models\Specialty::inRandomOrder()->first()->id,
         ];
     }

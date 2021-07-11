@@ -46,9 +46,13 @@ class StatController extends Controller
             $patients=Patient::get()->count();
             $doctors=Doctor::get()->count();
             $jrealizadas=MedicalBoard::where('status', 'Realizado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
+            $juntas_realizadas=MedicalBoard::where('status', 'Realizado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->get();
             $jprogramado=MedicalBoard::where('status', 'Programado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
+            $juntas_programado=MedicalBoard::where('status', 'Programado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->get();
             $jcancelado=MedicalBoard::where('status', 'Cancelado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
+            $juntas_cancelado=MedicalBoard::where('status', 'Cancelado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->get();
             $jexpirado=MedicalBoard::where('status', 'Reprogramar')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
+            $juntas_expirado=MedicalBoard::where('status', 'Reprogramar')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->get();
             foreach($medicalBoards as $medicalBoard)
             {
                 $medicalBoardId = $medicalBoard->id;
@@ -108,15 +112,38 @@ class StatController extends Controller
 
                 $data["filter_start_date"] = $filter_start_date;
                 $data["filter_end_date"] = $filter_end_date;
-                return view('app.stats.index', compact('paciente_conts','pacientes_juntas','regionales','especialidades','chart', 'patients','doctors','jrealizadas','jprogramado','jcancelado','jexpirado','aprobado','noaprobado','doctor_pacientes'),$data);
+                return view('app.stats.index', compact(
+                    'paciente_conts',
+                    'pacientes_juntas',
+                    'regionales',
+                    'especialidades',
+                    'chart',
+                    'patients',
+                    'doctors',
+                    'jrealizadas',
+                    'jprogramado',
+                    'jcancelado',
+                    'jexpirado',
+                    'aprobado',
+                    'noaprobado',
+                    'doctor_pacientes',
+                    'juntas_realizadas',
+                    'juntas_programado',
+                    'juntas_cancelado',
+                    'juntas_expirado'
+                ),$data);
         }
         $medicalBoards=MedicalBoard::get();
         $patients=Patient::get()->count();
         $doctors=Doctor::get()->count();
         $jrealizadas=MedicalBoard::where('status', 'Realizado')->count();
+        $juntas_realizadas=MedicalBoard::where('status', 'Realizado')->get();
         $jprogramado=MedicalBoard::where('status', 'Programado')->count();
+        $juntas_programado=MedicalBoard::where('status', 'Programado')->get();
         $jcancelado=MedicalBoard::where('status', 'Cancelado')->count();
+        $juntas_cancelado=MedicalBoard::where('status', 'Cancelado')->get();
         $jexpirado=MedicalBoard::where('status', 'Reprogramar')->count();
+        $juntas_expirado=MedicalBoard::where('status', 'Reprogramar')->get();
         foreach($medicalBoards as $medicalBoard)
         {
             $medicalBoardId = $medicalBoard->id;
@@ -176,7 +203,26 @@ class StatController extends Controller
 
         $data["filter_start_date"] = $filter_start_date;
         $data["filter_end_date"] = $filter_end_date;
-        return view('app.stats.index', compact('paciente_conts','pacientes_juntas','regionales','especialidades','chart', 'patients','doctors','jrealizadas','jprogramado','jcancelado','jexpirado','aprobado','noaprobado','doctor_pacientes'),$data);
+        return  view('app.stats.index', compact(
+            'paciente_conts',
+            'pacientes_juntas',
+            'regionales',
+            'especialidades',
+            'chart',
+            'patients',
+            'doctors',
+            'jrealizadas',
+            'jprogramado',
+            'jcancelado',
+            'jexpirado',
+            'aprobado',
+            'noaprobado',
+            'doctor_pacientes',
+            'juntas_realizadas',
+            'juntas_programado',
+            'juntas_cancelado',
+            'juntas_expirado'
+        ),$data);
 
     }
 

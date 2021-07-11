@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PatientStoreRequest extends FormRequest
 {
@@ -24,11 +25,20 @@ class PatientStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'ci' => ['required', 'max:255', 'string'],
+            'ci' => [
+                'required', 
+                'max:255', 
+                'string',
+                Rule::unique('patients')->ignore($this->route('patient'))
+            ],
             'name' => ['required', 'max:255', 'string'],
             'first_surname' => ['required', 'max:255', 'string'],
             'last_surname' => ['required', 'max:255', 'string'],
-            'email' => ['required', 'email'],
+            'email' => [
+                'required', 
+                'email',
+                Rule::unique('patients')->ignore($this->route('patient'))
+            ],
             'force' => ['required', 'max:255', 'string'],
             'birthday' => ['required', 'date', 'date'],
             'gender' => ['required'],
