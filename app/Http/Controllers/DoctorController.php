@@ -52,8 +52,8 @@ class DoctorController extends Controller
         $doctor = Doctor::create($validated);
 
         if ($request->hasFile('signature')){
-            $url=Storage::disk('public')->put('signatures', $request->file("signature"));
-            $doctor->signature = $url;
+            $url=Storage::disk('public')->put('images', $request->file("signature"));
+            $doctor->signature =  "storage/".$url;
         }
         $doctor->save();
         $this->activity_log("Almacenar usuario medico", "doctors.store");
@@ -99,19 +99,18 @@ class DoctorController extends Controller
         $validated = $request->validated();
 
         $doctor->update($validated);
-<<<<<<< HEAD
+
          if ($request->hasFile('signature')){
             $url=Storage::disk('public')->put('images', $request->file("signature"));
-            $doctor->signature = $url;
+            $doctor->signature = "storage/".$url;
         }
+
         $doctor->save();
-=======
->>>>>>> parent of 96ca213 (imagenes)
         $this->activity_log("Actualizar usuario medico", "doctors.update");
         return redirect()
             ->route('doctors.edit', $doctor)
             ->withSuccess(__('crud.common.saved'));
-    }
+        }
 
     /**
      * @param \Illuminate\Http\Request $request
