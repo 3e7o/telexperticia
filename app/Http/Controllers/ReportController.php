@@ -186,7 +186,7 @@ class ReportController extends Controller
                 'approved' => true
             ]);
             $medicalBoard=MedicalBoard::find($medicalBoardId);
-            $medicalBoard->update(['status'=>'Realizado']);
+            $medicalBoard->update(['status'=>'Confirmado']);
             $this->activity_log("Aprobar informe medico", "reports.approve");
         return back();
     }

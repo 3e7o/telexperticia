@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Doctor;
 use App\Models\MedicalBoard;
 use App\Models\Patient;
+use App\Models\Report;
 use App\Models\User;
 use Illuminate\Http\Request;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
@@ -45,8 +46,8 @@ class StatController extends Controller
             $medicalBoards=MedicalBoard::where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date);
             $patients=Patient::get()->count();
             $doctors=Doctor::get()->count();
-            $jrealizadas=MedicalBoard::where('status', 'Realizado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
-            $juntas_realizadas=MedicalBoard::where('status', 'Realizado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->get();
+            $jrealizadas=MedicalBoard::where('status', 'Confirmado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
+            $juntas_realizadas=MedicalBoard::where('status', 'Confirmado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->get();
             $jprogramado=MedicalBoard::where('status', 'Programado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
             $juntas_programado=MedicalBoard::where('status', 'Programado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->get();
             $jcancelado=MedicalBoard::where('status', 'Cancelado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
@@ -110,6 +111,12 @@ class StatController extends Controller
 
                 $paciente_conts=array_count_values($num);
 
+                $reports = Report::query()->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)
+                ->itIsAuthorized()
+                ->groupBy('reports.medical_board_id')
+                ->orderBy('reports.medical_board_id', 'DESC')
+                ->get();
+
                 $data["filter_start_date"] = $filter_start_date;
                 $data["filter_end_date"] = $filter_end_date;
                 return view('app.stats.index', compact(
@@ -130,14 +137,15 @@ class StatController extends Controller
                     'juntas_realizadas',
                     'juntas_programado',
                     'juntas_cancelado',
-                    'juntas_expirado'
+                    'juntas_expirado',
+                    'reports'
                 ),$data);
         }
         $medicalBoards=MedicalBoard::get();
         $patients=Patient::get()->count();
         $doctors=Doctor::get()->count();
-        $jrealizadas=MedicalBoard::where('status', 'Realizado')->count();
-        $juntas_realizadas=MedicalBoard::where('status', 'Realizado')->get();
+        $jrealizadas=MedicalBoard::where('status', 'Confirmado')->count();
+        $juntas_realizadas=MedicalBoard::where('status', 'Confirmado')->get();
         $jprogramado=MedicalBoard::where('status', 'Programado')->count();
         $juntas_programado=MedicalBoard::where('status', 'Programado')->get();
         $jcancelado=MedicalBoard::where('status', 'Cancelado')->count();
@@ -201,9 +209,15 @@ class StatController extends Controller
 
         $paciente_conts=array_count_values($num);
 
+        $reports = Report::query()
+        ->itIsAuthorized()
+        ->groupBy('reports.medical_board_id')
+        ->orderBy('reports.medical_board_id', 'DESC')
+        ->get();
+
         $data["filter_start_date"] = $filter_start_date;
         $data["filter_end_date"] = $filter_end_date;
-        return  view('app.stats.index', compact(
+        return view('app.stats.index', compact(
             'paciente_conts',
             'pacientes_juntas',
             'regionales',
@@ -221,7 +235,8 @@ class StatController extends Controller
             'juntas_realizadas',
             'juntas_programado',
             'juntas_cancelado',
-            'juntas_expirado'
+            'juntas_expirado',
+            'reports'
         ),$data);
 
     }
@@ -236,54 +251,10 @@ class StatController extends Controller
         $aprobado=0;
         $noaprobado=0;
         $esp=[];
-        if($request->isMethod('patch')){
-            $filter_start_date = $request->start_date;
-            $filter_end_date = $request->end_date;        
-            $medicalBoards=MedicalBoard::where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date);
-            $patients=Patient::get()->count();
-            $doctors=Doctor::get()->count();
-            $jrealizadas=MedicalBoard::where('status', 'Realizado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
-            $jprogramado=MedicalBoard::where('status', 'Programado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
-            $jcancelado=MedicalBoard::where('status', 'Cancelado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
-            $jexpirado=MedicalBoard::where('status', 'Reprogramar')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
-            foreach($medicalBoards as $medicalBoard)
-            {
-                $medicalBoardId = $medicalBoard->id;
-                $approved = Collect(DB::table('doctor_medical_board')
-                    ->where('medical_board_id', $medicalBoardId)
-                    //->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)
-                    ->pluck('approved'));
-                $total = $approved->count();
-                $sum = $approved->sum();
-                $total === $sum ? $aprobado++ : $noaprobado++;
-            }
-            $especialistas= DB::table('doctor_medical_board')->pluck('doctor_id');
-            foreach($especialistas as $especilista)
-            {
-                $especilidad=Doctor::find($especilista);
-                $esp[]=$especilidad->specialty->name;
-            }
-    
-            $especialidades=array_count_values($esp);
-    
-            $chart = (new LarapexChart)->donutChart()
-                ->setSubtitle('Total: '.$medicalBoards->count())
-                ->setDataset([$jrealizadas, $jprogramado, $jcancelado, $jexpirado])
-                ->setColors(['#7ee5e5', '#4d8af0','#f77eb9','#fbbc06'])
-                ->setHeight(400)
-                ->setWidth(330)
-                ->setToolbar(true)
-                ->setLabels(['Realizadas', 'Programadas', 'Canceladas', 'Reprogramar']);
-            $data["filter_start_date"] = $filter_start_date;
-            $data["filter_end_date"] = $filter_end_date;
-            return \PDF::loadView('reports.stat-pdf', compact('especialidades','chart', 'patients','doctors','jrealizadas','jprogramado','jcancelado','jexpirado','aprobado','noaprobado'))
-            ->setPaper('a4')
-            ->stream($fileName);
-        }
         $medicalBoards=MedicalBoard::get();
         $patients=Patient::get()->count();
         $doctors=Doctor::get()->count();
-        $jrealizadas=MedicalBoard::where('status', 'Realizado')->count();
+        $jrealizadas=MedicalBoard::where('status', 'Confirmado')->count();
         $jprogramado=MedicalBoard::where('status', 'Programado')->count();
         $jcancelado=MedicalBoard::where('status', 'Cancelado')->count();
         $jexpirado=MedicalBoard::where('status', 'Reprogramar')->count();
@@ -318,7 +289,7 @@ class StatController extends Controller
         $data["filter_start_date"] = $filter_start_date;
         $data["filter_end_date"] = $filter_end_date;
         $fileName = 'Reporte - '.'.pdf';
-        return \PDF::loadView('reports.stat-pdf', compact('especialidades','chart', 'patients','doctors','jrealizadas','jprogramado','jcancelado','jexpirado','aprobado','noaprobado'))
+        return $filter_start_date;\PDF::loadView('reports.stat-pdf', compact('especialidades','chart', 'patients','doctors','jrealizadas','jprogramado','jcancelado','jexpirado','aprobado','noaprobado'))
             ->setPaper('a4')
             ->stream($fileName);
 //            ->download($fileName);

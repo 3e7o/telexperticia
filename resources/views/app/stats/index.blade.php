@@ -16,24 +16,30 @@
             {{ csrf_field() }}
             <div class="d-flex align-items-center flex-wrap text-nowrap">
                 <div class="input-group date datepicker dashboard-date mr-2 mb-2 mb-md-0 d-md-none d-xl-flex">
-                    <span class="input-group-addon bg-transparent"><i data-feather="target"
-                            class=" text-primary"></i></span>
+                    <span class="input-group-addon bg-transparent"><i data-feather="target" class=" text-primary"></i></span>
 
                     <input type="date" class="form-control" name="start_date" value="{{ $filter_start_date }}" required>
                 </div>
                 <div class="input-group date datepicker dashboard-date mr-2 mb-2 mb-md-0 d-md-none d-xl-flex">
                     <span class="input-group-addon bg-transparent"><i class=" text-primary">Fin</i></span>
-                    <input class="form-control" name="end_date" type="date" value="{{ $filter_end_date }} " required>
+                    <input type="date" class="form-control" name="end_date" value="{{ $filter_end_date }} " required>
                 </div>
                 <button type="submit" class="btn btn-outline-info btn-icon-text mr-2 d-none d-md-block">
                     <i class="btn-icon-prepend" data-feather="search"></i>
                     Filtrar
                 </button>
+                @if (empty($filter_start_date))
                 <a class="btn btn-outline-primary btn-icon-text mr-2 mb-2 mb-md-0" href="{{ route('stats.download') }}"
                     target="_blank">
                     <i class="btn-icon-prepend" data-feather="printer"></i>
                     Imprimir
                 </a>
+                @else
+                <button type="submit" class="btn btn-outline-info btn-icon-text mr-2 d-none d-md-block" href="{{ route('stats.download') }}">
+                    <i class="btn-icon-prepend" data-feather="printer"></i>
+                    ImprimirSub
+                </button>  
+                @endif
             </div>
         </form>
     </div>
@@ -312,7 +318,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline mb-2">
-                        <h6 class="card-title mb-0">Grafico de Juntas Médicas</h6>
+                        <h6 class="card-title mb-0">Juntas por pacientes</h6>
                     </div>
                     <div class="table-responsive">
                         <table id="dataTableExample4" class="table dataTable no-footer" role="grid"
@@ -527,23 +533,43 @@
                                 aria-describedby="dataTableExample_info">
                                 <thead>
                                     <tr>
-                                        <th style="display:none;" aria-sort="descending">Fecha</th>
-                                        <th>Junta Médica</th>
-                                        <th>Matrícula</th>
-                                        <th>@lang('crud.juntas_medicas.inputs.status')</th>
-                                        <th>Fecha</th>
+                                    <th style="display:none;" aria-sort="descending">Fecha</th>
+                                    <th>@lang('crud.informes.inputs.medical_board_id')</th>
+                                    <th>Matrícula</th>
+                                    <th>Especialidad</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($juntas_realizadas as $juntas_realizada)
-                                        <tr>
-                                            <td style="display:none;">{{ $juntas_realizada->date ?? '-' }}</td>
-                                            <td>{{ $juntas_realizada->code }}</td>
-                                            <td>{{ optional($juntas_realizada->patient->user)->username ?? '-' }}</td>
-                                            <td>{{ $juntas_realizada->status ?? '-' }}</td>
-                                            <td>{{ $juntas_realizada->date->format('d/m/Y') }}</td>
-                                        </tr>
+                                    @forelse($reports as $report)
+                                    @if ($report->approved == "Aprobado")
+                                    <tr>
+                                        <td style="display:none;">{{ ($report->medicalBoard)->date ?? '-' }}</td>
+                                        <td>
+                                            {{ optional($report->medicalBoard)->code ?? '-' }}
+                                        </td>
+                                        <td>
+                                            {{ optional($report->medicalBoard->patient)->matricula ?? '-' }}
+                                        </td>
+                                        <td>
+                                            {{ optional($report->medicalBoard->doctorOwner->specialty)->name ?? '-' }}
+                                        </td>
+                                        <td>
+                                            {{ $report->approved }}
+                                        </td>
+                                        <td>
+                                            {{ ($report->medicalBoard)->date->format('d/m/Y') }}
+                                        </td>
+                                    </tr>
+                                    @endif
+                                        
                                     @empty
+                                    <tr>
+                                        <td colspan="2">
+                                            @lang('crud.common.no_items_found')
+                                        </td>
+                                    </tr>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -559,30 +585,50 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
                         <div>
-                            <h6 class="card-title mb-0">Informes no Aprobados</h6>
+                            <h6 class="card-title mb-0">Informes Aprobados</h6>
                         </div>
                         <div class="table-responsive">
                             <table id="dataTableExample" class="table dataTable no-footer" role="grid"
                                 aria-describedby="dataTableExample_info">
                                 <thead>
                                     <tr>
-                                        <th style="display:none;" aria-sort="descending">Fecha</th>
-                                        <th>Junta Médica</th>
-                                        <th>Matrícula</th>
-                                        <th>@lang('crud.juntas_medicas.inputs.status')</th>
-                                        <th>Fecha</th>
+                                    <th style="display:none;" aria-sort="descending">Fecha</th>
+                                    <th>@lang('crud.informes.inputs.medical_board_id')</th>
+                                    <th>Matrícula</th>
+                                    <th>Especialidad</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($juntas_realizadas as $juntas_realizada)
-                                        <tr>
-                                            <td style="display:none;">{{ $juntas_realizada->date ?? '-' }}</td>
-                                            <td>{{ $juntas_realizada->code }}</td>
-                                            <td>{{ optional($juntas_realizada->patient->user)->username ?? '-' }}</td>
-                                            <td>{{ $juntas_realizada->status ?? '-' }}</td>
-                                            <td>{{ $juntas_realizada->date->format('d/m/Y') }}</td>
-                                        </tr>
+                                    @forelse($reports as $report)
+                                    @if ($report->approved == "No aprobado")
+                                    <tr>
+                                        <td style="display:none;">{{ ($report->medicalBoard)->date ?? '-' }}</td>
+                                        <td>
+                                            {{ optional($report->medicalBoard)->code ?? '-' }}
+                                        </td>
+                                        <td>
+                                            {{ optional($report->medicalBoard->patient)->matricula ?? '-' }}
+                                        </td>
+                                        <td>
+                                            {{ optional($report->medicalBoard->doctorOwner->specialty)->name ?? '-' }}
+                                        </td>
+                                        <td>
+                                            {{ $report->approved }}
+                                        </td>
+                                        <td>
+                                            {{ ($report->medicalBoard)->date->format('d/m/Y') }}
+                                        </td>
+                                    </tr>
+                                    @endif
+
                                     @empty
+                                    <tr>
+                                        <td colspan="2">
+                                            @lang('crud.common.no_items_found')
+                                        </td>
+                                    </tr>
                                     @endforelse
                                 </tbody>
                             </table>

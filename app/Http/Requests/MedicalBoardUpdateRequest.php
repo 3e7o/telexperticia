@@ -24,11 +24,11 @@ class MedicalBoardUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'date' => ['required', 'date', 'date'],
+            'date' => ['required', 'date'],
             'patient_id' => ['required', 'exists:patients,id'],
             'doctor_id' => ['required', 'exists:doctors,id'],
             'doctors_id' => ['required'],
-            'status' => ['required', 'in:Programado,Realizado,Cancelado'],
+            'status' => ['required', 'in:Programado,Confirmado,Cancelado,Reprogramar'],
             'open_zoom' => ['required', 'in:1,0'],
         ];
     }

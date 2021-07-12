@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MedicalBoardStoreRequest extends FormRequest
@@ -23,12 +24,13 @@ class MedicalBoardStoreRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'date' => ['required', 'date', 'date'],
+            'date' => 'required|after_or_equal:today',
             'patient_id' => ['required', 'exists:patients,id'],
             'doctor_id' => ['required', 'exists:doctors,id'],
             'doctors_id' => ['required'],
-            'status' => ['required', 'in:Programado,Realizado,Cancelado'],
+            'status' => ['required', 'in:Programado,Confirmado,Cancelado,Reprogramar'],
             'open_zoom' => ['required', 'in:1,0'],
         ];
     }

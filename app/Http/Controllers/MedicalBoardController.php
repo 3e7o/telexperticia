@@ -52,7 +52,7 @@ class MedicalBoardController extends Controller
                 $status = $total === $sum ? 'Aprobado' : 'No aprobado';
                 if($status =='Aprobado')
                 {
-                    $medicalBoard->update(['status'=>'Realizado']);
+                    $medicalBoard->update(['status'=>'Confirmado']);
                 }
                 if((isset($medicalBoard->date)) and $medicalBoard->status == 'Programado' and ((\Carbon\Carbon::parse($medicalBoard->date))) < \Carbon\Carbon::now())
                 {

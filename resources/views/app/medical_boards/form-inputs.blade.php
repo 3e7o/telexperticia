@@ -28,7 +28,8 @@
         <x-inputs.select name="status" label="Estado">
             @php $selected = old('status', ($editing ? $medicalBoard->status : '')) @endphp
             <option value="Programado" {{ $selected == 'Programado' ? 'selected' : '' }} >Programado</option>
-            <option value="Realizado" {{ $selected == 'Realizado' ? 'selected' : '' }} >Realizado</option>
+            <option value="Reprogramar" {{ $selected == 'Reprogramar' ? 'selected' : '' }} >Reprogramar</option>
+            <option value="Confirmado" {{ $selected == 'Confirmado' ? 'selected' : '' }} >Confirmado</option>
             <option value="Cancelado" {{ $selected == 'Cancelado' ? 'selected' : '' }} >Cancelado</option>
         </x-inputs.select>
     </x-inputs.group>
