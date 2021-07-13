@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
+        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
 
     ],
 

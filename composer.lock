@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7d107644c8ccaa781f039b071e202254",
+    "content-hash": "72474b15435ef7b6269ca78ad7da0a69",
     "packages": [
         {
             "name": "acaronlex/laravel-calendar",
@@ -59,16 +59,16 @@
         },
         {
             "name": "arielmejiadev/larapex-charts",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ArielMejiaDev/larapex-charts.git",
-                "reference": "7de57e5aed5b0851cf6043376addc838ef5123dd"
+                "reference": "821f9a99c47e51f7306d04c2eeb7c6c3ee9f1e1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ArielMejiaDev/larapex-charts/zipball/7de57e5aed5b0851cf6043376addc838ef5123dd",
-                "reference": "7de57e5aed5b0851cf6043376addc838ef5123dd",
+                "url": "https://api.github.com/repos/ArielMejiaDev/larapex-charts/zipball/821f9a99c47e51f7306d04c2eeb7c6c3ee9f1e1b",
+                "reference": "821f9a99c47e51f7306d04c2eeb7c6c3ee9f1e1b",
                 "shasum": ""
             },
             "require": {
@@ -106,9 +106,9 @@
             "description": "Package to provide easy api to build apex charts on Laravel",
             "support": {
                 "issues": "https://github.com/ArielMejiaDev/larapex-charts/issues",
-                "source": "https://github.com/ArielMejiaDev/larapex-charts/tree/2.1.0"
+                "source": "https://github.com/ArielMejiaDev/larapex-charts/tree/2.1.1"
             },
-            "time": "2021-02-14T19:12:26+00:00"
+            "time": "2021-06-24T16:16:54+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -1017,6 +1017,62 @@
                 }
             ],
             "time": "2021-04-26T11:24:25+00:00"
+        },
+        {
+            "name": "fx3costa/laravelchartjs",
+            "version": "2.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fxcosta/laravel-chartjs.git",
+                "reference": "f6560fa90ad2b12e11959fb5addda045d068f224"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fxcosta/laravel-chartjs/zipball/f6560fa90ad2b12e11959fb5addda045d068f224",
+                "reference": "f6560fa90ad2b12e11959fb5addda045d068f224",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.1|^6.0|^7.0|^8.0",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Fx3costa\\LaravelChartJs\\Providers\\ChartjsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fx3costa\\LaravelChartJs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Felix",
+                    "email": "fx3costa@gmail.com"
+                }
+            ],
+            "description": "Simple package to facilitate and automate the use of charts in Laravel 5.x using Chartjs v2 library",
+            "keywords": [
+                "chart",
+                "chartjs",
+                "fx3costa",
+                "graphics",
+                "laravel5",
+                "reports"
+            ],
+            "support": {
+                "issues": "https://github.com/fxcosta/laravel-chartjs/issues",
+                "source": "https://github.com/fxcosta/laravel-chartjs/tree/2.8.0"
+            },
+            "time": "2020-09-11T14:24:54+00:00"
         },
         {
             "name": "graham-campbell/result-type",

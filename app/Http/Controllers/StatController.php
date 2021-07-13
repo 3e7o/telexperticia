@@ -171,15 +171,20 @@ class StatController extends Controller
         }
 
         $especialidades=array_count_values($esp);
-       
-        $chart = (new LarapexChart)->donutChart()
-            ->setSubtitle('Total: '.$medicalBoards->count())
-            ->setDataset([$jrealizadas, $jprogramado, $jcancelado, $jexpirado])
-            ->setColors(['#7ee5e5', '#4d8af0','#f77eb9','#fbbc06'])
-            ->setHeight(400)
-            ->setWidth(330)
-            ->setToolbar(true)
-            ->setLabels(['Realizadas', 'Programadas', 'Canceladas', 'Reprogramar']);
+        $chart_total = app()->chartjs
+        ->name('pieChartTest')
+        ->type('pie')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels(['Realizadas', 'Programadas', 'Canceladas', 'Reprogramar'])
+        ->datasets([
+            [
+                "label" => "My First dataset",
+                'backgroundColor' => ['#7ACFF5', '#FFDD80', '#E09BCD', '#7889FE', '#82C0E9', '#FF6384'],
+                'hoverBackgroundColor' => ['#7ACFF5', '#FFDD80', '#E09BCD', '#7889FE', '#82C0E9', '#FF6384'],
+                'data' => [$jrealizadas, $jprogramado, $jcancelado, $jexpirado]
+            ]
+        ])
+        ->options([]);
         //Doctores y pacientes atendidos
         $doctor_pacientes=DB::table('medical_boards')
                                 ->join('doctors', 'doctors.id', '=', 'medical_boards.doctor_id')
@@ -200,6 +205,34 @@ class StatController extends Controller
         }
 
         $regionales=array_count_values($reg);
+        $chart_reg = app()->chartjs
+        ->name('barChartTest')
+        ->type('bar')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels(array_keys($regionales))
+        ->datasets([
+            [
+                "label" => "",
+                'backgroundColor' => ['#7ACFF5', '#FFDD80', '#E09BCD', '#7889FE', '#82C0E9', '#FF6384'],
+                'data' => array_values($regionales)
+            ]
+        ])
+        ->optionsRaw([
+            'legend' => [
+                'display' => true,
+                'labels' => false
+            ],
+            'scales' => [
+                'xAxes' => [
+                    [
+                        'stacked' => true,
+                        'gridLines' => [
+                            'display' => true
+                        ]
+                    ]
+                ]
+            ]
+        ]);
 
         $pacientes_numeros= DB::table('medical_boards')->pluck('patient_id');
         foreach($pacientes_numeros as $paciente_numero)
@@ -223,7 +256,8 @@ class StatController extends Controller
             'pacientes_juntas',
             'regionales',
             'especialidades',
-            'chart',
+            'chart_total',
+            'chart_reg',
             'patients',
             'doctors',
             'jrealizadas',

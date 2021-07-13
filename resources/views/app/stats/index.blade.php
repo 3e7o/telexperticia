@@ -161,10 +161,39 @@
         </div>
     </div> <!-- row -->
 
+    <div class="row">
+
+        <div class="col-lg-5 col-xl-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h6 class="card-title mb-0">Total de Juntas Médicas</h6>
+                    </div>
+                    <div style="max-width:100%;height:auto;">
+                        {!! $chart_total->render() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5 col-xl-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-baseline mb-2">
+                        <h6 class="card-title mb-0">Juntas Médicas por Regionales</h6>
+                    </div>
+                    <div style="max-width:100%;height:auto;">
+                        {!! $chart_reg->render() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 
     <div class="row">
-        <div class="col-lg-7 col-xl-8 grid-margin stretch-card">
+        <div class="col-lg-5 col-xl-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline mb-2">
@@ -192,13 +221,15 @@
             </div>
         </div>
 
-        <div class="col-lg-5 col-xl-4 grid-margin stretch-card">
+        <div class="col-lg-5 col-xl-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline mb-2">
                         <h6 class="card-title mb-0">Total de Juntas Médicas</h6>
                     </div>
-                    {!! $chart->container() !!}
+                    <div style="max-width:100%;height:auto;">
+                        {!! $chart_total->render() !!}
+                    </div>
                 </div>
             </div>
         </div>
@@ -655,7 +686,6 @@
         <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
         <script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
         <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
-        {{ $chart->script() }}
         <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script>
         <script src="{{ asset('assets/plugins/jquery.flot/jquery.flot.js') }}"></script>
         <script src="{{ asset('assets/plugins/jquery.flot/jquery.flot.resize.js') }}"></script>
