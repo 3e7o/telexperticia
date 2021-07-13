@@ -35,7 +35,7 @@
                     @foreach($activityList as $data)
                         <tr>
                             <td style="display:none;">{{ $data->created_at ?? '-' }}</td>
-                            <td>{{ $data->log_details }}. <strong style="color: mediumvioletred">realizado por: {{ optional($data->users)->username }}</strong></td>
+                            <td>{{ $data->log_details }}. <strong style="color: mediumvioletred">Confirmado por: {{ optional($data->users)->username }}</strong></td>
                             <td>{{ optional($data->users)->email }}</td>
                             <td>{{ optional($data->users)->name }}</td>
                             <td>{{ $data->ip_address }}</td>

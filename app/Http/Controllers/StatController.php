@@ -82,6 +82,7 @@ class StatController extends Controller
                 ->setWidth(330)
                 ->setToolbar(true)
                 ->setLabels(['Realizadas', 'Programadas', 'Canceladas', 'Reprogramar']);
+                //Doctores y pacientes atendidos
                 $doctor_pacientes=DB::table('medical_boards')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)
                 ->join('doctors', 'doctors.id', '=', 'medical_boards.doctor_id')
                 ->join('patients', 'patients.id', '=', 'medical_boards.patient_id')
@@ -94,7 +95,7 @@ class StatController extends Controller
                 ->select('patients.name','patients.first_surname','patients.last_surname', 'patients.mat_beneficiario',  'medical_boards.date')
                 ->get();
 
-                $regionales=Doctor::get();
+                $regionales=$doctor_pacientes;
                 foreach($regionales as $doctor)
                 {
                 $reg[]=$doctor->regional;
@@ -179,7 +180,7 @@ class StatController extends Controller
             ->setWidth(330)
             ->setToolbar(true)
             ->setLabels(['Realizadas', 'Programadas', 'Canceladas', 'Reprogramar']);
-
+        //Doctores y pacientes atendidos
         $doctor_pacientes=DB::table('medical_boards')
                                 ->join('doctors', 'doctors.id', '=', 'medical_boards.doctor_id')
                                 ->join('patients', 'patients.id', '=', 'medical_boards.patient_id')
@@ -192,7 +193,7 @@ class StatController extends Controller
         ->select('patients.name','patients.first_surname','patients.last_surname', 'patients.mat_beneficiario',  'medical_boards.date')
         ->get();
 
-        $regionales=Doctor::get();
+        $regionales=$doctor_pacientes;
         foreach($regionales as $doctor)
         {
             $reg[]=$doctor->regional;
@@ -251,48 +252,100 @@ class StatController extends Controller
         $aprobado=0;
         $noaprobado=0;
         $esp=[];
-        $medicalBoards=MedicalBoard::get();
-        $patients=Patient::get()->count();
-        $doctors=Doctor::get()->count();
-        $jrealizadas=MedicalBoard::where('status', 'Confirmado')->count();
-        $jprogramado=MedicalBoard::where('status', 'Programado')->count();
-        $jcancelado=MedicalBoard::where('status', 'Cancelado')->count();
-        $jexpirado=MedicalBoard::where('status', 'Reprogramar')->count();
-        foreach($medicalBoards as $medicalBoard)
-        {
-            $medicalBoardId = $medicalBoard->id;
-            $approved = Collect(DB::table('doctor_medical_board')
-                ->where('medical_board_id', $medicalBoardId)
-                ->pluck('approved'));
-            $total = $approved->count();
-            $sum = $approved->sum();
-            $total === $sum ? $aprobado++ : $noaprobado++;
-        }
-        $especialistas= DB::table('doctor_medical_board')->pluck('doctor_id');
-        foreach($especialistas as $especilista)
-        {
-            $especilidad=Doctor::find($especilista);
-            $esp[]=$especilidad->specialty->name;
-        }
+        if(empty($request->start_date) && empty($request->end_date)){
+                $medicalBoards=MedicalBoard::get();
+                $patients=Patient::get()->count();
+                $doctors=Doctor::get()->count();
+                $jrealizadas=MedicalBoard::where('status', 'Confirmado')->count();
+                $jprogramado=MedicalBoard::where('status', 'Programado')->count();
+                $jcancelado=MedicalBoard::where('status', 'Cancelado')->count();
+                $jexpirado=MedicalBoard::where('status', 'Reprogramar')->count();
+                foreach($medicalBoards as $medicalBoard)
+                {
+                    $medicalBoardId = $medicalBoard->id;
+                    $approved = Collect(DB::table('doctor_medical_board')
+                        ->where('medical_board_id', $medicalBoardId)
+                        ->pluck('approved'));
+                    $total = $approved->count();
+                    $sum = $approved->sum();
+                    $total === $sum ? $aprobado++ : $noaprobado++;
+                }
+                $especialistas= DB::table('doctor_medical_board')->pluck('doctor_id');
+                foreach($especialistas as $especilista)
+                {
+                    $especilidad=Doctor::find($especilista);
+                    $esp[]=$especilidad->specialty->name;
+                }
 
-        $especialidades=array_count_values($esp);
+                $especialidades=array_count_values($esp);
 
-        $chart = (new LarapexChart)->donutChart()
-            ->setSubtitle('Total: '.$medicalBoards->count())
-            ->setDataset([$jrealizadas, $jprogramado, $jcancelado, $jexpirado])
-            ->setColors(['#7ee5e5', '#4d8af0','#f77eb9','#fbbc06'])
-            ->setHeight(400)
-            ->setWidth(330)
-            ->setToolbar(true)
-            ->setLabels(['Realizadas', 'Programadas', 'Canceladas', 'Reprogramar']);
+                $chart = (new LarapexChart)->donutChart()
+                    ->setSubtitle('Total: '.$medicalBoards->count())
+                    ->setDataset([$jrealizadas, $jprogramado, $jcancelado, $jexpirado])
+                    ->setColors(['#7ee5e5', '#4d8af0','#f77eb9','#fbbc06'])
+                    ->setHeight(400)
+                    ->setWidth(330)
+                    ->setToolbar(true)
+                    ->setLabels(['Realizadas', 'Programadas', 'Canceladas', 'Reprogramar']);
 
-        $data["filter_start_date"] = $filter_start_date;
-        $data["filter_end_date"] = $filter_end_date;
-        $fileName = 'Reporte - '.'.pdf';
-        return $filter_start_date;\PDF::loadView('reports.stat-pdf', compact('especialidades','chart', 'patients','doctors','jrealizadas','jprogramado','jcancelado','jexpirado','aprobado','noaprobado'))
+                $data["filter_start_date"] = $filter_start_date;
+                $data["filter_end_date"] = $filter_end_date;
+                $fileName = 'Reporte - '.'.pdf';
+                return \PDF::loadView('reports.stat-pdf', compact('especialidades','chart', 'patients','doctors','jrealizadas','jprogramado','jcancelado','jexpirado','aprobado','noaprobado'))
+                    ->setPaper('a4')
+                    ->stream($fileName);
+        //            ->download($fileName);
+            
+        }else{
+            if($request->filter_start_date > $request->filter_end_date){
+                return redirect()->back();
+            }
+            $filter_start_date = $request->start_date;
+            $filter_end_date = $request->end_date;        
+            $medicalBoards=MedicalBoard::where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date);
+            $patients=Patient::get()->count();
+            $doctors=Doctor::get()->count();
+            $jrealizadas=MedicalBoard::where('status', 'Confirmado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
+            $jprogramado=MedicalBoard::where('status', 'Programado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
+            $jcancelado=MedicalBoard::where('status', 'Cancelado')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
+            $jexpirado=MedicalBoard::where('status', 'Reprogramar')->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)->count();
+            foreach($medicalBoards as $medicalBoard)
+            {
+                $medicalBoardId = $medicalBoard->id;
+                $approved = Collect(DB::table('doctor_medical_board')
+                    ->where('medical_board_id', $medicalBoardId)
+                    //->where('date', '>=', $filter_start_date)->where('date', '<', $filter_end_date)
+                    ->pluck('approved'));
+                $total = $approved->count();
+                $sum = $approved->sum();
+                $total === $sum ? $aprobado++ : $noaprobado++;
+            }
+            $especialistas= DB::table('doctor_medical_board')->pluck('doctor_id');
+            foreach($especialistas as $especilista)
+            {
+                $especilidad=Doctor::find($especilista);
+                $esp[]=$especilidad->specialty->name;
+            }
+    
+            $especialidades=array_count_values($esp);
+    
+            $chart = (new LarapexChart)->donutChart()
+                ->setSubtitle('Total: '.$medicalBoards->count())
+                ->setDataset([$jrealizadas, $jprogramado, $jcancelado, $jexpirado])
+                ->setColors(['#7ee5e5', '#4d8af0','#f77eb9','#fbbc06'])
+                ->setHeight(400)
+                ->setWidth(330)
+                ->setToolbar(true)
+                ->setLabels(['Realizadas', 'Programadas', 'Canceladas', 'Reprogramar']);
+            $data["filter_start_date"] = $filter_start_date;
+            $data["filter_end_date"] = $filter_end_date;
+            $fileName = 'Reporte - '.'.pdf';
+            return \PDF::loadView('reports.stat-pdf', compact('especialidades','chart', 'patients','doctors','jrealizadas','jprogramado','jcancelado','jexpirado','aprobado','noaprobado'))
             ->setPaper('a4')
             ->stream($fileName);
-//            ->download($fileName);
+
+        }
+        
     }
 
 }

@@ -11,36 +11,25 @@
         <div>
             <h4 class="mb-3 mb-md-0">Información del Sistema</h4>
         </div>
-        <form method="post" action="">
-            @method('PATCH')
+        <form method="post">
             {{ csrf_field() }}
+            @method('PATCH')
             <div class="d-flex align-items-center flex-wrap text-nowrap">
                 <div class="input-group date datepicker dashboard-date mr-2 mb-2 mb-md-0 d-md-none d-xl-flex">
-                    <span class="input-group-addon bg-transparent"><i data-feather="target" class=" text-primary"></i></span>
+                    <span class="input-group-addon bg-transparent"><i data-feather="target"
+                            class=" text-primary"></i></span>
 
-                    <input type="date" class="form-control" name="start_date" value="{{ $filter_start_date }}" required>
+                    <input type="date" class="form-control" name="start_date" value="{{ $filter_start_date }}">
                 </div>
                 <div class="input-group date datepicker dashboard-date mr-2 mb-2 mb-md-0 d-md-none d-xl-flex">
                     <span class="input-group-addon bg-transparent"><i class=" text-primary">Fin</i></span>
-                    <input type="date" class="form-control" name="end_date" value="{{ $filter_end_date }} " required>
+                    <input class="form-control" name="end_date" type="date" value="{{ $filter_end_date }} ">
                 </div>
-                <button type="submit" class="btn btn-outline-info btn-icon-text mr-2 d-none d-md-block">
-                    <i class="btn-icon-prepend" data-feather="search"></i>
-                    Filtrar
-                </button>
-                @if (empty($filter_start_date))
-                <a class="btn btn-outline-primary btn-icon-text mr-2 mb-2 mb-md-0" href="{{ route('stats.download') }}"
-                    target="_blank">
-                    <i class="btn-icon-prepend" data-feather="printer"></i>
-                    Imprimir
-                </a>
-                @else
-                <button type="submit" class="btn btn-outline-info btn-icon-text mr-2 d-none d-md-block" href="{{ route('stats.download') }}">
-                    <i class="btn-icon-prepend" data-feather="printer"></i>
-                    ImprimirSub
-                </button>  
-                @endif
-            </div>
+            <button type="submit" class="btn btn-outline-info btn-icon-text mr-2 d-none d-md-block">
+                <i class="btn-icon-prepend" data-feather="search"></i>
+                Filtrar
+            </button>
+        </div>
         </form>
     </div>
 
@@ -207,7 +196,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline mb-2">
-                        <h6 class="card-title mb-0">Grafico de Juntas Médicas</h6>
+                        <h6 class="card-title mb-0">Total de Juntas Médicas</h6>
                     </div>
                     {!! $chart->container() !!}
                 </div>
@@ -220,7 +209,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline mb-2">
-                        <h6 class="card-title mb-0">Número de Médicos por Regional</h6>
+                        <h6 class="card-title mb-0">Juntas Médicas por Regional</h6>
 
                     </div>
                     <div class="d-flex flex-column">
@@ -229,7 +218,7 @@
                                 <thead>
                                     <tr>
                                         <th>Regional</th>
-                                        <th>Número de Médicos</th>
+                                        <th>Número de Juntas</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -637,6 +626,28 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+    <form method="post" action="{{ route('stats.download') }}">
+        {{ csrf_field() }}
+        <div class="d-flex align-items-right flex-wrap text-nowrap">
+            <div class="input-group date datepicker dashboard-date mr-2 mb-2 mb-md-0 d-md-none d-xl-flex">
+                <span class="input-group-addon bg-transparent"><i data-feather="target"
+                        class=" text-primary"></i></span>
+
+                <input type="date" class="form-control" name="start_date" value="{{ $filter_start_date }}">
+            </div>
+            <div class="input-group date datepicker dashboard-date mr-2 mb-2 mb-md-0 d-md-none d-xl-flex">
+                <span class="input-group-addon bg-transparent"><i class=" text-primary">Fin</i></span>
+                <input class="form-control" name="end_date" type="date" value="{{ $filter_end_date }} ">
+            </div>
+            <button class="btn btn-outline-primary btn-icon-text mr-2 mb-2 mb-md-0">
+                <i class="btn-icon-prepend" data-feather="printer"></i>
+                Imprimir
+            </button>
+
+        </div>
+    </form>
     </div>
     @endsection
 
