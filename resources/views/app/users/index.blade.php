@@ -26,17 +26,6 @@
                 <div>
                   <h4 class="mb-3 mb-md-0">@lang('crud.usuarios.index_title')</h4>
                     </div>
-                            @can('create', App\Models\User::class)
-                            <div class="d-flex align-items-center flex-wrap text-nowrap">
-                            <a
-                                href="{{ route('users.create') }}"
-                                class="btn btn-primary"
-                            >
-                                <i class="icon ion-md-add"></i>
-                                @lang('crud.common.create')
-                            </a>
-                        </div>
-                        @endcan
                     </div>
         <div class="table-responsive">
             <table id="dataTableExample" class="table dataTable no-footer" role="grid" aria-describedby="dataTableExample_info">

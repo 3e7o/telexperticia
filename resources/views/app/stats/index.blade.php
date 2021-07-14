@@ -341,7 +341,7 @@
         <div class="card">
             <div class="card-body">
                     <div class="d-flex justify-content-between align-items-baseline mb-2">
-                        <h6 class="card-title mb-0">Número de Juntas édicas por pacientes</h6>
+                        <h6 class="card-title mb-0">Número de Juntas Médicas por pacientes</h6>
                     </div>
                     <div class="table-responsive">
                         <table id="pacientes2" class="table dataTable no-footer" role="grid"
