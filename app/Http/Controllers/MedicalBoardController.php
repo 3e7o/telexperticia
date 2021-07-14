@@ -34,7 +34,6 @@ class MedicalBoardController extends Controller
     {
         $this->activity_log("Listar Juntas Medicas", "medical_boards.index");
         $this->authorize('view-any', MedicalBoard::class);
-
         $medicalBoards = MedicalBoard::query()
             ->itIsAuthorized()
             ->groupBy('id')
@@ -59,8 +58,6 @@ class MedicalBoardController extends Controller
                     $medicalBoard->update(['status'=>'Reprogramar']);
                 }
              }
-
-
         return view('app.medical_boards.index', compact('medicalBoards'));
     }
 
@@ -157,14 +154,14 @@ class MedicalBoardController extends Controller
     public function show(Request $request, MedicalBoard $medicalBoard)
     {
         $this->authorize('view', $medicalBoard);
-
+        $doctorE=$medicalBoard->doctor_id;
         $zoom_data = $medicalBoard->zoom;
 
         $doctorsSupervisors = $medicalBoard->doctorsSupervisors->map( function ($doctor) {
             return $doctor->fullName;
         })->implode(', ') . '.';
         $this->activity_log("Ver Junta Medica", "medical_boards.show");
-        return view('app.medical_boards.show', compact('medicalBoard', 'doctorsSupervisors','zoom_data'));
+        return view('app.medical_boards.show', compact('doctorE','medicalBoard', 'doctorsSupervisors','zoom_data'));
     }
 
     /**
@@ -175,7 +172,7 @@ class MedicalBoardController extends Controller
     public function edit(Request $request, MedicalBoard $medicalBoard)
     {
         $this->authorize('update', $medicalBoard);
-
+        $doctorE=$medicalBoard->doctor_id;
         $zoom = $this->zoom_user->find($this->generalsetting->zoom_email);
 
         $zoom_data = $medicalBoard->zoom;
@@ -188,7 +185,7 @@ class MedicalBoardController extends Controller
         $this->activity_log("Editar Junta Medica", "medical_boards.edit");
         return view(
             'app.medical_boards.edit',
-            compact('medicalBoard', 'patients', 'doctors', 'doctorsSelected','zoom','zoom_data')
+            compact('doctorE','medicalBoard', 'patients', 'doctors', 'doctorsSelected','zoom','zoom_data')
         );
     }
 

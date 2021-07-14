@@ -66,8 +66,8 @@
                                             </div>
 
                                             <div role="group" aria-label="Row Actions" class="btn-group">
-                                                @if ($medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id ||
-        auth()->user()->isSuperAdmin())
+                                                @if ($medicalBoard->doctorOwner->id != optional(auth()->user()->doctor)->id ||
+                                                auth()->user()->isSuperAdmin())
                                                     @can('update', $medicalBoard)
                                                         <a href="{{ route('medical-boards.edit', $medicalBoard) }}">
                                                             <button type="button" class="btn btn-info btn-icon">

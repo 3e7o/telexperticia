@@ -77,7 +77,7 @@ class HomeController extends Controller
                     // Add color and link on event
                     [
                         'color' => '#FF3366',
-                        'url' => "/medical-boards/$medicalBoard->id/editar",
+                        'url' => "/medical-boards/$medicalBoard->id",
 
                     ]
                 );
@@ -92,7 +92,7 @@ class HomeController extends Controller
                     // Add color and link on event
                     [
                         'color' => '#FF3366',
-                        'url' => "/medical-boards/$medicalBoard->id",
+                        'url' => "/medical-boards/$medicalBoard->id/editar",
 
                     ]
                 );
