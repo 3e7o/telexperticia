@@ -91,6 +91,12 @@
                     Aprobar
                   </a>
                 </span>
+                <span class="text-right float-right">
+                  <a href="{{ route('reports.noapprove', $report) }}" class="btn btn-danger">
+                    <i class="icon ion-md-checkmark"></i>
+                    Rechazar
+                  </a>
+                </span>
                 @endif
                 @endif
               </h6>

@@ -190,6 +190,22 @@ class ReportController extends Controller
             $this->activity_log("Aprobar informe medico", "reports.approve");
         return back();
     }
+    public function noapprove(Report $report)
+    {
+        $medicalBoardId = $report->medicalBoard->id;
+        $doctorId = auth()->user()->doctor->id;
+
+        DB::table('doctor_medical_board')
+            ->where('doctor_id', $doctorId)
+            ->where('medical_board_id', $medicalBoardId)
+            ->update([
+                'approved' => false
+            ]);
+            $medicalBoard=MedicalBoard::find($medicalBoardId);
+            $medicalBoard->update(['status'=>'Rechazado']);
+            $this->activity_log("No aprobo informe medico", "reports.noapprove");
+        return back();
+    }
     public function activity_log($log_details, $fn){
         $ac = new ActiveController();
         $ac->saveLogData(auth()->user()->id, $log_details, 'ReportController', $fn);

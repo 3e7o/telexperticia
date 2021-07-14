@@ -58,6 +58,7 @@ Route::prefix('/')
         Route::post('stats/download', [StatController::class, 'download'])->name('stats.download');
         Route::get('reports/{report}/download', [ReportController::class, 'download'])->name('reports.download')->middleware('password.confirm');
         Route::get('reports/{report}/approve', [ReportController::class, 'approve'])->name('reports.approve');
+        Route::get('reports/{report}/noapprove', [ReportController::class, 'noapprove'])->name('reports.noapprove');
         Route::resource('users', UserController::class);
 		Route::get('general/', [GeneralSettingController::class, 'general'])->name('general');
         Route::patch('general/{id}/update', [GeneralSettingController::class, 'update_general'])->name('general.update');
