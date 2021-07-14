@@ -18,6 +18,7 @@
             value="{{ old('username', ($editing ? $user->username ?? (optional($user->patient)->matricula) : '')) }}"
             maxlength="255"
             required
+            pattern="[A-Za-z0-9]{5,20}" title="Letras y números. Tamaño mínimo: 5. Tamaño máximo: 20"
         ></x-inputs.text>
     </x-inputs.group>
 
@@ -38,6 +39,7 @@
             placeholder="************"
             maxlength="255"
             :required="!$editing"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Mínimo ocho caracteres, al menos una letra y un número"
         ></x-inputs.password>
     </x-inputs.group>
 

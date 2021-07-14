@@ -64,7 +64,51 @@ class HomeController extends Controller
                 );
             }
          }
+         foreach($medicalBoards as $medicalBoard){
+            if((isset(($medicalBoard->zoom)->start_time)) and ((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) < \Carbon\Carbon::now() and $medicalBoard->doctorOwner->id === optional(auth()->user()->doctor)->id)
+            {
+
+                $events2[] = \Calendar::event(
+                    $medicalBoard->code,
+                    false,
+                    new \DateTime(($medicalBoard->zoom)->start_time),
+                    new \DateTime(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))->addMinutes(($medicalBoard->zoom)->duration))->format('Y-m-d H:i:s')),
+                    1,
+                    // Add color and link on event
+                    [
+                        'color' => '#FF3366',
+                        'url' => "/medical-boards/$medicalBoard->id/editar",
+
+                    ]
+                );
+
+            }elseif((isset(($medicalBoard->zoom)->start_time)) and ((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))) < \Carbon\Carbon::now()){
+                $events2[] = \Calendar::event(
+                    $medicalBoard->code,
+                    false,
+                    new \DateTime(($medicalBoard->zoom)->start_time),
+                    new \DateTime(((\Carbon\Carbon::parse(($medicalBoard->zoom)->start_time))->addMinutes(($medicalBoard->zoom)->duration))->format('Y-m-d H:i:s')),
+                    2,
+                    // Add color and link on event
+                    [
+                        'color' => '#FF3366',
+                        'url' => "/medical-boards/$medicalBoard->id",
+
+                    ]
+                );
+            }
+         }
         $calendar = \Calendar::addEvents($events)->setOptions([
+            'locale' => 'es',
+            'firstDay' => 0,
+            'displayEventTime' => true,
+            'selectable' => true,
+            'initialView' => 'dayGridMonth',
+            'headerToolbar' => [
+                'end' => 'today prev,next dayGridMonth timeGridWeek timeGridDay'
+            ]
+        ]);
+        $calendar = \Calendar::addEvents($events2)->setOptions([
             'locale' => 'es',
             'firstDay' => 0,
             'displayEventTime' => true,

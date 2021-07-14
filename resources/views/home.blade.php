@@ -20,6 +20,7 @@
                 <div id='external-events-listing'>
                   <h6 class="mb-2 text-muted">Eventos</h6>
                   <div class='fc-event'>Junta Programada</div>
+                  <div class='fc-event'>Junta Pasadas</div>
                 </div>
               </div>
           </div>
