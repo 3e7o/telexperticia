@@ -70,7 +70,7 @@
                                                 auth()->user()->isSuperAdmin())
                                                     @can('update', $medicalBoard)
                                                         <a href="{{ route('medical-boards.edit', $medicalBoard) }}">
-                                                            <button type="button" class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="right" title="Editar">>
+                                                            <button type="button" class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="right" title="Editar">
                                                                 <i data-feather="edit"></i>
                                                             </button>
                                                         </a>
