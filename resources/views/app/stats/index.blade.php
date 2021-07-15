@@ -25,7 +25,7 @@
                 <span class="input-group-addon bg-transparent"><i class=" text-primary">Fin</i></span>
                 <input class="form-control" name="end_date" type="date" value="{{ $filter_end_date }} ">
             </div>
-            <button type="submit" class="btn btn-outline-info btn-icon-text mr-2 d-none d-md-block">
+            <button type="submit" class="btn btn-outline-info btn-icon-text mr-2 mb-2 mb-md-0">
                 <i class="btn-icon-prepend" data-feather="search"></i>
                 Filtrar
             </button>
