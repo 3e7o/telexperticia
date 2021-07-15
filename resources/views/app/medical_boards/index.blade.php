@@ -58,7 +58,7 @@
                                             <div role="group" aria-label="Row Actions" class="btn-group">
                                                 @can('view', $medicalBoard)
                                                     <a href="{{ route('medical-boards.show', $medicalBoard) }}">
-                                                        <button type="button" class="btn btn-primary btn-icon">
+                                                        <button type="button" class="btn btn-primary btn-icon" data-toggle="tooltip" data-placement="right" title="Ver">
                                                             <i data-feather="eye"></i>
                                                         </button>
                                                     </a>
@@ -70,7 +70,7 @@
                                                 auth()->user()->isSuperAdmin())
                                                     @can('update', $medicalBoard)
                                                         <a href="{{ route('medical-boards.edit', $medicalBoard) }}">
-                                                            <button type="button" class="btn btn-info btn-icon">
+                                                            <button type="button" class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="right" title="Editar">>
                                                                 <i data-feather="edit"></i>
                                                             </button>
                                                         </a>

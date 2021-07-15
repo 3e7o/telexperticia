@@ -58,7 +58,7 @@
                                                 @endphp
                                                 <a href="{{ optional(($report->medicalBoard)->zoom)->start_url ?? '-'}}"
                                                     target="_blank">
-                                                    <button type="button" class="btn btn-outline-primary btn-icon">
+                                                    <button type="button" class="btn btn-outline-primary btn-icon" data-toggle="tooltip" data-placement="right" title="Zoom">
                                                         <i data-feather="video"></i>
                                                     </button>
                                                 </a>
@@ -67,7 +67,7 @@
                                                 }else {
                                                 @endphp
                                                 <a href="{{ ($report->medicalBoard)->meet }}" target="_blank">
-                                                    <button type="button" class="btn btn-outline-primary btn-icon">
+                                                    <button type="button" class="btn btn-outline-primary btn-icon" data-toggle="tooltip" data-placement="right" title="Meet">
                                                         <i data-feather="video"></i>
                                                     </button>
                                                 </a>
@@ -82,7 +82,7 @@
                                                 @if ($report->medicalBoard->doctorOwner->id ===
                                                 optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
                                                 <a href="{{ route('records.edit', $report) }}">
-                                                    <button type="button" class="btn btn-dark btn-icon">
+                                                    <button type="button" class="btn btn-dark btn-icon " data-toggle="tooltip" data-placement="right" title="Antecedentes">
                                                         <i data-feather="book-open"></i>
                                                     </button>
                                                 </a>
@@ -95,7 +95,7 @@
                                             <div role="group" aria-label="Row Actions" class="btn-group">
                                                 @can('view', $report)
                                                 <a href="{{ route('reports.show', $report) }}">
-                                                    <button type="button" class="btn btn-primary btn-icon">
+                                                    <button type="button" class="btn btn-primary btn-icon" data-toggle="tooltip" data-placement="right" title="Ver">
                                                         <i data-feather="eye"></i>
                                                     </button>
                                                 </a>
@@ -108,7 +108,7 @@
                                                 @if ($report->medicalBoard->doctorOwner->id ===
                                                 optional(auth()->user()->doctor)->id || auth()->user()->isSuperAdmin())
                                                 <a href="{{ route('reports.edit', $report) }}">
-                                                    <button type="button" class="btn btn-info btn-icon">
+                                                    <button type="button" class="btn btn-info btn-icon" data-toggle="tooltip" data-placement="right" title="Editar">
                                                         <i data-feather="edit"></i>
                                                     </button>
                                                 </a>
