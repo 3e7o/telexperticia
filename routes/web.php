@@ -52,7 +52,7 @@ Route::prefix('/')
         Route::get('reports/{report}',[ReportController::class, 'show'])->name('reports.show')->middleware('password.confirm');
         Route::get('reports/{report} ',[ReportController::class, 'update'])->name('reports.update');
         Route::get('reports/{report}/editar',[ReportController::class, 'edit'])->name('reports.edit')->middleware('password.confirm');
-        //Route::resource('reports', ReportController::class);
+        Route::resource('reports', ReportController::class);
         Route::patch('stats', [StatController::class, 'index'])->name('stats');
         Route::get('stats', [StatController::class, 'index'])->name('stats');
         Route::post('stats/download', [StatController::class, 'download'])->name('stats.download');

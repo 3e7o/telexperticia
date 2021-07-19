@@ -75,6 +75,9 @@
                 action="{{ route('reports.update', $report) }}"
                 class="mt-4"
             >
+                @csrf  
+
+                @method('PUT')
                 @include('app.reports.form-inputs')
 
                 <div class="mt-4">
